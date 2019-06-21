@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/ulitol97/TFG-HackingToTheGate.svg?token=UxDmkwz3hDivoWgXEgCh&branch=master)](https://travis-ci.com/ulitol97/TFG-HackingToTheGate)
+
 # Hacking to The Gate
 
 Hacking to The Gate intends to serve as a bridge between game and cybersecurity.
