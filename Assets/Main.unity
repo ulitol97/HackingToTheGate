@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 412255846}
   - component: {fileID: 412255845}
   - component: {fileID: 412255844}
+  - component: {fileID: 412255848}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -197,12 +198,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412255843}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 2, z: -10}
+  m_LocalPosition: {x: -1.98, y: 3.7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 428895702}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &412255848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412255843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8999df74714e849a85ee28faf4786e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 428895702}
+  smoothing: 0.12
 --- !u!1 &428895700
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,10 +297,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.98, y: 1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 412255847}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &428895703
 Rigidbody2D:
@@ -11356,7 +11370,7 @@ Transform:
   - {fileID: 1660429990}
   - {fileID: 1606607246}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1606607245
 GameObject:
