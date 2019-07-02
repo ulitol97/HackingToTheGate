@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game
+namespace Game.Player
 {
 	/// <summary>
 	/// The Player Movement class is in charge of detecting input from the player's controller and transforming it into
