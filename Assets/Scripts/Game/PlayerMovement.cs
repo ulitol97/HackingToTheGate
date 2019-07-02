@@ -47,14 +47,19 @@ namespace Game
 	
 		/// <summary>
 		/// Function called on each frame the PlayerMovement script is present into the game.
-		/// Checks for user controller input to manage future movement operations.
+		/// Checks for user controller input either on the joystick or the D-PAD to manage future movement operations.
 		/// </summary>
 		/// <remarks>GetAxisRaw allows digital input instead of analog input, either the movement signal is sent or not.
 		/// </remarks>
 		void Update () {
-		
-			_change.x = Input.GetAxisRaw("HorizontalPAD");
-			_change.y = Input.GetAxisRaw("VerticalPAD");
+			
+			_change.x = Input.GetAxisRaw("Horizontal");
+			if (_change.x == 0f)
+				_change.x = Input.GetAxisRaw("HorizontalPAD");
+			
+			_change.y = Input.GetAxisRaw("Vertical");
+			if (_change.y == 0f)
+				_change.y = Input.GetAxisRaw("VerticalPAD");
 		}
 
 		/// <summary>
