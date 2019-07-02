@@ -44,11 +44,11 @@ namespace Game.Player
         /// <returns></returns>
         private IEnumerator DrawPlaceName()
         {
-            text.SetActive(true);
+            placeText.gameObject.SetActive(true);
             placeText.text = Globals.Instance.LevelNameTable[SceneManager.GetActiveScene().name];
-            
+            Debug.Log(placeText.text);
             yield return new WaitForSeconds(textDuration);
-            text.SetActive(false);
+            placeText.gameObject.SetActive(false);
         }
     }
 }
