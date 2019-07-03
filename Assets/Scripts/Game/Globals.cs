@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -9,6 +10,16 @@ namespace Game
     /// </summary>
     public class Globals : Singleton<Globals>
     {
+        /// <summary>
+        /// Reload the level that was active when the function was called.
+        /// Meant to be used on player death.
+        /// </summary>
+        public void GameOver()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+
         /// <summary>
         /// Names of the locations found in game. Each name's key is the level they're in.
         /// </summary>
@@ -28,5 +39,7 @@ namespace Game
         {
             {"sword", "Congratulations, a sword! That opens many doors of opportunity..."}, 
         };
+        
+        
     }
 }

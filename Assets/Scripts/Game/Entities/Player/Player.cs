@@ -63,6 +63,12 @@ namespace Game.Entities.Player
 		/// Signal observing players health.
 		/// </summary>
 		public Signal playerHealthSignal;
+		
+		/// <summary>
+		/// Signal observing players death event.
+		/// </summary>
+		public Signal playerDeathSignal;
+
 
 		private const float JoystickTolerance = 0.1f;
 		
@@ -187,7 +193,7 @@ namespace Game.Entities.Player
 			// Player death
 			else
 			{
-				this.gameObject.SetActive(false);
+				playerDeathSignal.Notify();
 			}
 		}
 		
@@ -210,6 +216,11 @@ namespace Game.Entities.Player
 		public void ChangeState(PlayerState state)
 		{
 			currentState = state;
+		}
+
+		public void OnPlayerDeath()
+		{
+			Globals.Instance.GameOver();
 		}
 	}
 }

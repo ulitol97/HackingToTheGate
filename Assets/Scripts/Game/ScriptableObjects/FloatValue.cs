@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.ScriptableObjects
 {
@@ -26,6 +27,36 @@ namespace Game.ScriptableObjects
         /// </summary>
         [HideInInspector] // Not appear in inspector
         public float runtimeValue;
+
+        /// <summary>
+        /// Function called when the FloatValue is enabled to be part of a scene.
+        /// Subscribes the scene manager to the event in <see cref="OnLevelFinishedLoading"/>.
+        /// </summary>
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnLevelFinishedLoading;
+        }
+
+        /// <summary>
+        /// Function called when the FloatValue is disabled from being part of a scene.
+        /// Un-subscribes the scene manager to the event in <see cref="OnLevelFinishedLoading"/>.
+        /// </summary>
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+        }
+
+        /// <summary>
+        /// Event that resets the FloatValue to it's initial value when a new level it's loaded
+        /// if the value was below zero. Meant to reset player's health on game over.
+        /// </summary>
+        private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+        {
+            if (runtimeValue <= 0)
+                runtimeValue = initialValue;
+        }
+
+        
         
         public void OnBeforeSerialize()
         {}

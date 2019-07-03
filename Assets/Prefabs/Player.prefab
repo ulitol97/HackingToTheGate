@@ -331,10 +331,11 @@ GameObject:
   - component: {fileID: 6724978351375878515}
   - component: {fileID: 6724978351375878513}
   - component: {fileID: 6724978351375878526}
-  - component: {fileID: 6724978351375878527}
-  - component: {fileID: 6724978351375878525}
   - component: {fileID: 6724978351375878524}
   - component: {fileID: 1143112737}
+  - component: {fileID: 6724978351375878527}
+  - component: {fileID: 6724978351375878525}
+  - component: {fileID: 3418323980205692050}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -455,37 +456,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.511744, y: 0.27642}
   m_EdgeRadius: 0
---- !u!114 &6724978351375878527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6724978351375878514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 807a101405c2ac444872d8384af084b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  currentState: 0
-  currentHealth: {fileID: 11400000, guid: cdd25ba9b65fb374ba493fd6cdfd5d98, type: 2}
-  playerHealthSignal: {fileID: 11400000, guid: 57a6316fe36f3904bb1954f4f3289b31, type: 2}
---- !u!114 &6724978351375878525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6724978351375878514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b0db2a04fd6541439bef4fcb9dd4724, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  placeText: {fileID: 0}
-  textDuration: 3.5
 --- !u!95 &6724978351375878524
 Animator:
   serializedVersion: 3
@@ -531,3 +501,64 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.59871984, y: 0.95667124}
   m_EdgeRadius: 0
+--- !u!114 &6724978351375878527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724978351375878514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 807a101405c2ac444872d8384af084b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  currentState: 0
+  currentHealth: {fileID: 11400000, guid: cdd25ba9b65fb374ba493fd6cdfd5d98, type: 2}
+  playerHealthSignal: {fileID: 11400000, guid: 57a6316fe36f3904bb1954f4f3289b31, type: 2}
+  playerDeathSignal: {fileID: 11400000, guid: d4f4efbfc9988e441b0addbc71c5142a, type: 2}
+--- !u!114 &6724978351375878525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724978351375878514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0db2a04fd6541439bef4fcb9dd4724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  placeText: {fileID: 0}
+  textDuration: 3.5
+--- !u!114 &3418323980205692050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724978351375878514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c21498ccc65a634f950bcda114c0f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: d4f4efbfc9988e441b0addbc71c5142a, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6724978351375878527}
+        m_MethodName: OnPlayerDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
