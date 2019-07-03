@@ -28,19 +28,23 @@ namespace Game.Enemies
         /// <param name="other">Collider object that initiated contact.</param>
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("Enemy"))
+            Rigidbody2D otherBody = other.GetComponent<Rigidbody2D>();
+            if (otherBody != null)
             {
-                Rigidbody2D otherBody = other.GetComponent<Rigidbody2D>();
-                if (otherBody != null)
+                if (other.gameObject.CompareTag("Enemy"))
                 {
+                    // Update enemy state
+                    other.GetComponent<Enemy>().currentState = Enemy.EnemyState.Stagger;
+                    
                     Vector2 distance = otherBody.transform.position - transform.position;
                     // Apply multiplying factor
                     distance = distance.normalized * thrust;
-                    
+                
                     otherBody.AddForce(distance, ForceMode2D.Impulse);
-                    
-                    // Start knockback disable
+                
+                    // Knockback disable
                     StartCoroutine(EndKnock(otherBody));
+                    
                 }
             }
         }
@@ -55,9 +59,16 @@ namespace Game.Enemies
         {
             if (other != null)
             {
-                yield return new  WaitForSeconds(knockTime);
-                other.velocity = Vector2.zero;
+                if (other.gameObject.CompareTag("Enemy"))
+                {
+                    yield return new  WaitForSeconds(knockTime);
+                    other.velocity = Vector2.zero;
+                
+                    // Reset enemy state.
+                    other.GetComponent<Enemy>().currentState = Enemy.EnemyState.Idle;
+                }
             }
+            
         }
     }
 }

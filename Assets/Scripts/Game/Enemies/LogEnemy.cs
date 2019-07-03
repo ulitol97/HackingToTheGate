@@ -40,6 +40,7 @@ namespace Game.Enemies
         /// </summary>
         private void Start()
         {
+            currentState = EnemyState.Idle;
             target = GameObject.FindWithTag("Player").transform;
             _enemyRigidBody = GetComponent<Rigidbody2D>();
         }
@@ -48,27 +49,36 @@ namespace Game.Enemies
         /// Function called on each frame the Enemy script is present into the game.
         /// Checks for the target's position.
         /// </summary>
-        private void Update()
+        private void FixedUpdate()
         {
-            CheckDistance();
+            switch (currentState)
+            {
+                case EnemyState.Idle:
+                case EnemyState.Walk:
+                    CheckDistance();
+                    break;
+            }
         }
 
         /// <summary>
         /// Computes the distance between the enemy and its target (<see cref="target"/>)
         /// and updates the enemy's position in case the target is in the chase radius but not in the
-        /// attack radius.
+        /// attack radius and the enemy is not staggered.
         /// </summary>
         private void CheckDistance()
         {
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
             
             // Approach but never more than attack radius.
-            if (distanceToTarget <= chaseRadius && distanceToTarget > attackRadius)
+            if (distanceToTarget <= chaseRadius && distanceToTarget > attackRadius
+                && (currentState == EnemyState.Idle || currentState == EnemyState.Walk) 
+                && currentState != EnemyState.Stagger)
             {
                 Vector3 movement = Vector3.MoveTowards(transform.position, 
                     target.position, moveSpeed * Time.deltaTime);
                 
                 _enemyRigidBody.MovePosition(movement);
+                ChangeState(EnemyState.Walk);
             }
         }
 

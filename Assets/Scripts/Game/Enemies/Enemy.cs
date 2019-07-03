@@ -11,6 +11,23 @@ namespace Game.Enemies
         public int baseAttack;
         public float moveSpeed;
         
+        /// <summary>
+        /// Enum structure holding the enemy possible states.
+        /// </summary>
+        public enum EnemyState
+        {
+            Idle,
+            Walk,
+            Attack,
+            Stagger
+        }
+
+        /// <summary>
+        /// Current state of the enemy.
+        /// </summary>
+        public EnemyState currentState;
+        
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -21,6 +38,11 @@ namespace Game.Enemies
         void Update()
         {
         
+        }
+
+        public void ChangeState(EnemyState state)
+        {
+            currentState = state;
         }
     }
 }
