@@ -10,7 +10,7 @@ namespace Game
     public class CameraMovement : MonoBehaviour
     {
         /// <summary>
-        /// Transform property (position and rotation) of the game element the camera should follow.
+        /// Transform object containing the coordinates the camera should follow.
         /// </summary>
         public Transform target;
 
