@@ -43,9 +43,10 @@ namespace Game.Player
 		/// </summary>
 		public enum  PlayerState
 		{
+			Idle,
 			Walk,
 			Attack,
-			Interact
+			Staggered
 		}
 
 		/// <summary>
@@ -89,11 +90,12 @@ namespace Game.Player
 				_change.y = Input.GetAxisRaw("VerticalPAD");
 
 			// Check attack input
-			if (Input.GetButtonDown("Attack") && currentState != PlayerState.Attack)
+			if (Input.GetButtonDown("Attack") && currentState != PlayerState.Attack
+			    && currentState != PlayerState.Staggered)
 			{
 				StartCoroutine(Attack());
 			}
-			else if  (currentState == PlayerState.Walk)
+			else if  (currentState == PlayerState.Idle || currentState == PlayerState.Walk)
 			{
 				UpdateAnimationAndMove();
 			}
@@ -157,6 +159,37 @@ namespace Game.Player
 		{
 			_playerAnimator.SetFloat(AnimatorMoveX, _change.x);
 			_playerAnimator.SetFloat(AnimatorMoveY, _change.y);
+		}
+		
+		
+		/// <summary>
+		/// Arranges the end of knockback logic.
+		/// </summary>
+		/// <param name="knockTime"></param>
+		public void Knock(float knockTime)
+		{
+			StartCoroutine(EndKnock(knockTime));
+		}
+		
+		/// <summary>
+		/// Co routine in charge of stopping the knockback effect on the knocked back game enemies
+		/// after a certain time has passed by.
+		/// </summary>
+		/// <param name="knockTime">Time before stopping the knockback force.</param>
+		/// <returns></returns>
+		private IEnumerator EndKnock( float knockTime)
+		{
+			if (_playerRigidBody != null)
+			{
+				yield return new  WaitForSeconds(knockTime);
+				_playerRigidBody.velocity = Vector2.zero;
+				currentState = PlayerState.Idle;
+			}
+		}
+		
+		public void ChangeState(PlayerState state)
+		{
+			currentState = state;
 		}
 	}
 }

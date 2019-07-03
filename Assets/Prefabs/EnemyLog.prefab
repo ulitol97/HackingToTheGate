@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4883399914365973154}
   - component: {fileID: 4883399914365973155}
   - component: {fileID: 4883399914365973152}
+  - component: {fileID: 2378186079251413804}
   m_Layer: 0
   m_Name: EnemyLog
   m_TagString: Enemy
@@ -165,7 +166,22 @@ MonoBehaviour:
   enemyName: Log
   baseAttack: 1
   moveSpeed: 2
+  currentState: 0
   target: {fileID: 0}
   homePosition: {fileID: 0}
   chaseRadius: 4
   attackRadius: 2
+--- !u!114 &2378186079251413804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883399914365973166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 769d03df7734b2e4ba24fae23ef089fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrust: 4
+  knockTime: 0.15

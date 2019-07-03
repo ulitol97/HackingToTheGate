@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Game.Enemies
 {
@@ -19,7 +20,7 @@ namespace Game.Enemies
             Idle,
             Walk,
             Attack,
-            Stagger
+            Staggered
         }
 
         /// <summary>
@@ -38,6 +39,35 @@ namespace Game.Enemies
         void Update()
         {
         
+        }
+
+        /// <summary>
+        /// Arranges the end of knockback logic.
+        /// </summary>
+        /// <param name="rigidBody"></param>
+        /// <param name="knockTime"></param>
+        public void Knock(Rigidbody2D rigidBody, float knockTime)
+        {
+            StartCoroutine(EndKnock(rigidBody, knockTime));
+        }
+
+        /// <summary>
+        /// Co routine in charge of stopping the knockback effect on the knocked back game enemies
+        /// after a certain time has passed by.
+        /// </summary>
+        /// <param name="rigidBody">Body of the knocked back element to be managed.</param>
+        /// <param name="knockTime">Time before stopping the knockback force.</param>
+        /// <returns></returns>
+        private IEnumerator EndKnock(Rigidbody2D rigidBody, float knockTime)
+        {
+            if (rigidBody != null)
+            {
+                yield return new  WaitForSeconds(knockTime);
+                rigidBody.velocity = Vector2.zero;
+            
+                // Reset enemy state.
+                currentState = EnemyState.Idle;
+            }
         }
 
         public void ChangeState(EnemyState state)

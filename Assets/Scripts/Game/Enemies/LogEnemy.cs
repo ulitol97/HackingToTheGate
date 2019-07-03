@@ -72,7 +72,7 @@ namespace Game.Enemies
             // Approach but never more than attack radius.
             if (distanceToTarget <= chaseRadius && distanceToTarget > attackRadius
                 && (currentState == EnemyState.Idle || currentState == EnemyState.Walk) 
-                && currentState != EnemyState.Stagger)
+                && currentState != EnemyState.Staggered)
             {
                 Vector3 movement = Vector3.MoveTowards(transform.position, 
                     target.position, moveSpeed * Time.deltaTime);
