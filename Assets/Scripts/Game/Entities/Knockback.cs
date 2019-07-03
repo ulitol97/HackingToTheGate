@@ -49,21 +49,20 @@ namespace Game.Entities
                     hitBody.AddForce(distance, ForceMode2D.Impulse);
                     
                     // If hit enemy hurt box
-                    if (other.gameObject.CompareTag("Enemy"))
+                    if (other.gameObject.CompareTag("Enemy") && other.isTrigger)
                     {
                         // Update state and end knockback logic.
                         other.GetComponent<Enemy>().ChangeState(Enemy.EnemyState.Staggered);
                         other.GetComponent<Enemy>().Knock(hitBody, knockTime, damage.initialValue);
                     }
-                    else
+                    // If player not already staggered
+                    else if (other.GetComponent<Player.Player>().currentState != Player.Player.PlayerState.Staggered)
                     {
-                        if (other.GetComponent<PlayerMovement>().currentState != PlayerMovement.PlayerState.Staggered)
-                        {
-                            // Update state and end knockback logic.
-                            other.GetComponent<PlayerMovement>().ChangeState(PlayerMovement.PlayerState.Staggered);
-                            other.GetComponent<PlayerMovement>().Knock(knockTime);
-                        }
+                        // Update state and end knockback logic.
+                        other.GetComponent<Player.Player>().ChangeState(Player.Player.PlayerState.Staggered);
+                        other.GetComponent<Player.Player>().Knock(knockTime, damage.initialValue);
                     }
+                    
                 }
             }
             

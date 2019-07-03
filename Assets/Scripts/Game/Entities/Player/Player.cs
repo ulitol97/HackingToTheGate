@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections;
+using Game.ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Entities.Player
 {
 	/// <summary>
-	/// The Player Movement class is in charge of detecting input from the player's controller and transforming it into
+	/// The Player class is in charge of detecting input from the player's controller and transforming it into
 	/// player movement and attack actions.
 	/// </summary>
-	public class PlayerMovement : MonoBehaviour
+	public class Player : MonoBehaviour
 	{
-
 		/// <summary>
 		/// A multiplying factor to the player's character speed.
 		/// </summary>
@@ -53,12 +53,21 @@ namespace Game.Entities.Player
 		/// Current state of the player character.
 		/// </summary>
 		public PlayerState currentState;
+		
+		/// <summary>
+		/// FloatValue storing the player's initial current health.
+		/// </summary>
+		public FloatValue currentHealth;
 
+		/// <summary>
+		/// Signal observing players health.
+		/// </summary>
+		public Signal playerHealthSignal;
 
 		private const float JoystickTolerance = 0.1f;
 		
 		/// <summary>
-		/// Function called when the PlayerMovement script is loaded into the game.
+		/// Function called when the Player script is loaded into the game.
 		/// Sets up the character current state and all references to the Unity components modified on runtime.
 		/// </summary>
 		private void Start ()
@@ -73,7 +82,7 @@ namespace Game.Entities.Player
 		}
 	
 		/// <summary>
-		/// Function called on each frame the PlayerMovement script is present into the game.
+		/// Function called on each frame the Player script is present into the game.
 		/// Checks for user controller input either on the joystick or the D-PAD to manage future player operations.
 		/// </summary>
 		/// <remarks>GetAxisRaw allows digital input instead of analog input, either the movement signal is sent or not.
@@ -163,12 +172,23 @@ namespace Game.Entities.Player
 		
 		
 		/// <summary>
-		/// Arranges the end of knockback logic.
+		/// Applies damage to player and arranges the end of knockback logic if the player has
+		/// health left.
 		/// </summary>
 		/// <param name="knockTime"></param>
-		public void Knock(float knockTime)
+		public void Knock(float knockTime, float damage)
 		{
-			StartCoroutine(EndKnock(knockTime));
+			currentHealth.runtimeValue -= damage;
+			playerHealthSignal.Notify();
+			if (currentHealth.runtimeValue > 0)
+			{
+				StartCoroutine(EndKnock(knockTime));
+			}
+			// Player death
+			else
+			{
+				this.gameObject.SetActive(false);
+			}
 		}
 		
 		/// <summary>
