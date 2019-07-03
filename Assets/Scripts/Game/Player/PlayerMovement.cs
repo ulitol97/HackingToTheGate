@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace Game.Player
 {
 	/// <summary>
 	/// The Player Movement class is in charge of detecting input from the player's controller and transforming it into
-	/// player movement actions.
+	/// player movement and attack actions.
 	/// </summary>
 	public class PlayerMovement : MonoBehaviour
 	{
@@ -34,42 +36,89 @@ namespace Game.Player
 		private static readonly int AnimatorMoveX = Animator.StringToHash("moveX");
 		private static readonly int AnimatorMoveY = Animator.StringToHash("moveY");
 		private static readonly int AnimatorMoving = Animator.StringToHash("moving");
+		private static readonly int AnimatorAttacking = Animator.StringToHash("attacking");
 
 		/// <summary>
-		/// Function called when the PlayerMovement script is loaded into the game.
-		/// Sets up all references to the Unity components modified on runtime.
+		/// Enum structure holding the main character possible states.
 		/// </summary>
-		void Start ()
+		public enum  PlayerState
 		{
+			Walk,
+			Attack,
+			Interact
+		}
+
+		/// <summary>
+		/// Current state of the player character.
+		/// </summary>
+		public PlayerState currentState;
+
+
+		private const float JoystickTolerance = 0.1f;
+		
+		/// <summary>
+		/// Function called when the PlayerMovement script is loaded into the game.
+		/// Sets up the character current state and all references to the Unity components modified on runtime.
+		/// </summary>
+		private void Start ()
+		{
+			currentState = PlayerState.Walk;
 			_playerAnimator = GetComponent<Animator>();
 			_playerRigidBody = GetComponent<Rigidbody2D>();
+			
+			// Start the animator with the character facing down.
+			_playerAnimator.SetFloat(AnimatorMoveX, 0);
+			_playerAnimator.SetFloat(AnimatorMoveY, -1);
 		}
 	
 		/// <summary>
 		/// Function called on each frame the PlayerMovement script is present into the game.
-		/// Checks for user controller input either on the joystick or the D-PAD to manage future movement operations.
+		/// Checks for user controller input either on the joystick or the D-PAD to manage future player operations.
 		/// </summary>
 		/// <remarks>GetAxisRaw allows digital input instead of analog input, either the movement signal is sent or not.
 		/// </remarks>
-		void Update () {
+		private void Update () {
 			
+			// Check player input
 			_change.x = Input.GetAxisRaw("Horizontal");
-			if (_change.x == 0f)
+			if (Math.Abs(_change.x) < JoystickTolerance)
 				_change.x = Input.GetAxisRaw("HorizontalPAD");
 			
 			_change.y = Input.GetAxisRaw("Vertical");
-			if (_change.y == 0f)
+			if (Math.Abs(_change.y) < JoystickTolerance)
 				_change.y = Input.GetAxisRaw("VerticalPAD");
+
+			// Check attack input
+			if (Input.GetButtonDown("Attack") && currentState != PlayerState.Attack)
+			{
+				StartCoroutine(Attack());
+			}
+			else if  (currentState == PlayerState.Walk)
+			{
+				UpdateAnimationAndMove();
+			}
 		}
 
 		/// <summary>
 		/// Function called after each game update to handle physics events if user input was detected.
+		/// Resets next movement orders the next movement.
 		/// </summary>
 		private void FixedUpdate()
 		{
+			_change = Vector2.zero;
 			UpdateAnimationAndMove();
 		}
-	
+
+		private IEnumerator Attack()
+		{
+			_playerAnimator.SetTrigger(AnimatorAttacking);
+			currentState = PlayerState.Attack;
+			yield return null; // Wait one frame
+//			_playerAnimator.SetTrigger(AnimatorAttacking);
+			yield return new WaitForSeconds(0.3f); // Wait for length of the animation
+			currentState = PlayerState.Walk;
+		}
+
 		/// <summary>
 		/// Function summoned each physics frame update.
 		/// Invokes the characters moving and animation logic:
@@ -80,6 +129,7 @@ namespace Game.Player
 		{
 			if (_change != Vector2.zero)
 			{
+				Debug.Log("Move");
 				_playerAnimator.SetBool(AnimatorMoving, true);
 				MoveCharacter();
 				AnimateCharacter();

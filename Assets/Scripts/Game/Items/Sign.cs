@@ -36,7 +36,7 @@ namespace Game.Items
         /// </summary>
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0) && _playerInRange)
+            if (Input.GetButtonDown("Interact") && _playerInRange)
             {
                 ToggleSignText();
             }
