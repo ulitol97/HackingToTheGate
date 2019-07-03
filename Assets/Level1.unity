@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.754717, g: 0.21003917, b: 0.21003917, a: 1}
+  m_Color: {r: 0.09433961, g: 0.075204685, b: 0.075204685, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9300,6 +9300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1859464918}
+  - component: {fileID: 1859464919}
   m_Layer: 5
   m_Name: OnlineStatus
   m_TagString: Untagged
@@ -9327,6 +9328,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1859464919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859464917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db66ee64569e104d9c27b1c60c1646d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disconnected: {r: 1, g: 0, b: 0, a: 1}
+  connected: {r: 0.04585886, g: 1, b: 0, a: 1}
+  connectionCircle: {fileID: 390512292}
 --- !u!1 &1885363038
 GameObject:
   m_ObjectHideFlags: 0
@@ -9557,6 +9573,7 @@ GameObject:
   - component: {fileID: 1977263040}
   - component: {fileID: 1977263039}
   - component: {fileID: 1977263041}
+  - component: {fileID: 1977263042}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -9640,6 +9657,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1831053585}
         m_MethodName: UpdateHearts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1977263042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977263037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c21498ccc65a634f950bcda114c0f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 91831c15b891f204b8b28f16d8863511, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1859464919}
+        m_MethodName: UpdateOnlineStatus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
