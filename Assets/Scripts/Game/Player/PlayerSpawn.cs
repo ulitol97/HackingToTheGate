@@ -7,7 +7,7 @@ namespace Game.Player
 {
     /// <summary>
     /// The PlayerSpawn class handles game logic that should happen whenever a Player
-    /// element is spawned in game, that is, at the beggining of each level.
+    /// element is spawned in game, that is, at the beginning of each level.
     /// </summary>
     public class PlayerSpawn : MonoBehaviour
     {
@@ -41,7 +41,6 @@ namespace Game.Player
         /// Activates the game object holding the name of the level. Gets the name of the current level and
         /// displays it for an amount of time (<see cref="textDuration"/>) before removing it.
         /// </summary>
-        /// <returns></returns>
         private IEnumerator DrawPlaceName()
         {
             placeText.gameObject.SetActive(true);

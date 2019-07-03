@@ -113,8 +113,7 @@ namespace Game.Player
 		{
 			_playerAnimator.SetTrigger(AnimatorAttacking);
 			currentState = PlayerState.Attack;
-			yield return null; // Wait one frame
-//			_playerAnimator.SetTrigger(AnimatorAttacking);
+			yield return new WaitForFixedUpdate(); // Wait one frame
 			yield return new WaitForSeconds(0.3f); // Wait for length of the animation
 			currentState = PlayerState.Walk;
 		}
@@ -129,7 +128,6 @@ namespace Game.Player
 		{
 			if (_change != Vector2.zero)
 			{
-				Debug.Log("Move");
 				_playerAnimator.SetBool(AnimatorMoving, true);
 				MoveCharacter();
 				AnimateCharacter();

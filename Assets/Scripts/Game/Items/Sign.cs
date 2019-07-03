@@ -62,7 +62,6 @@ namespace Game.Items
         /// If the object colliding with the sign is the player, marks that the player is in range.
         /// </summary>
         /// <param name="other">Collider object that initiated contact.</param>
-        /// <exception cref="NotImplementedException"></exception>
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
