@@ -9,6 +9,11 @@ namespace Game.Enemies
     public class LogEnemy : Enemy
     {
         /// <summary>
+        /// RigidBody containing the enemy's body for physics handling.
+        /// </summary>
+        private Rigidbody2D _enemyRigidBody;
+        
+        /// <summary>
         /// Transform object containing the coordinates the enemy should follow.
         /// </summary>
         public Transform target;
@@ -36,6 +41,7 @@ namespace Game.Enemies
         private void Start()
         {
             target = GameObject.FindWithTag("Player").transform;
+            _enemyRigidBody = GetComponent<Rigidbody2D>();
         }
 
         /// <summary>
@@ -59,8 +65,10 @@ namespace Game.Enemies
             // Approach but never more than attack radius.
             if (distanceToTarget <= chaseRadius && distanceToTarget > attackRadius)
             {
-                transform.position = Vector3.MoveTowards(transform.position, 
+                Vector3 movement = Vector3.MoveTowards(transform.position, 
                     target.position, moveSpeed * Time.deltaTime);
+                
+                _enemyRigidBody.MovePosition(movement);
             }
         }
 

@@ -33,8 +33,6 @@ namespace Game.Enemies
                 Rigidbody2D otherBody = other.GetComponent<Rigidbody2D>();
                 if (otherBody != null)
                 {
-                    // Allow applying forces
-                    otherBody.isKinematic = false;
                     Vector2 distance = otherBody.transform.position - transform.position;
                     // Apply multiplying factor
                     distance = distance.normalized * thrust;
@@ -58,18 +56,8 @@ namespace Game.Enemies
             if (other != null)
             {
                 yield return new  WaitForSeconds(knockTime);
-                StopKnockBack(other);
+                other.velocity = Vector2.zero;
             }
-        }
-
-        /// <summary>
-        /// Resets a game element's body speed and disables its capability to be moved.
-        /// </summary>
-        /// <param name="other">Body of the knocked back element to be stopped.</param>
-        private void StopKnockBack(Rigidbody2D other)
-        {
-            other.velocity = Vector2.zero;
-            other.isKinematic = true;
         }
     }
 }
