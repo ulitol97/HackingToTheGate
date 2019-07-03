@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Enemies
+namespace Game.Entities.Enemies
 {
     /// <summary>
     /// The LogEnemy class is in charge of handling all the logic related to Log enemies

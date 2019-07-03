@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Game.ScriptableObjects;
 using UnityEngine;
 
-namespace Game.Enemies
+namespace Game.Entities.Enemies
 {
     public class Enemy : MonoBehaviour
     {

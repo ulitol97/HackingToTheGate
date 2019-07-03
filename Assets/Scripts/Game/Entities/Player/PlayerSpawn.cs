@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Game.Player
+namespace Game.Entities.Player
 {
     /// <summary>
     /// The PlayerSpawn class handles game logic that should happen whenever a Player

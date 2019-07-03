@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Game.Player
+namespace Game.Entities.Player
 {
 	/// <summary>
 	/// The Player Movement class is in charge of detecting input from the player's controller and transforming it into

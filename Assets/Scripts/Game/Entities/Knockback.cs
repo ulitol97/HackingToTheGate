@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using Game.Entities.Enemies;
+using Game.Entities.Player;
 using Game.Items;
-using Game.Player;
 using Game.ScriptableObjects;
 using UnityEngine;
 
-namespace Game.Enemies
+namespace Game.Entities
 {
     /// <summary>
     /// The Knockback class use's Unity's RigidBody components to apply knockback forces
@@ -49,7 +49,7 @@ namespace Game.Enemies
                     hitBody.AddForce(distance, ForceMode2D.Impulse);
                     
                     // If hit enemy hurt box
-                    if (other.gameObject.CompareTag("Enemy") && other.isTrigger)
+                    if (other.gameObject.CompareTag("Enemy"))
                     {
                         // Update state and end knockback logic.
                         other.GetComponent<Enemy>().ChangeState(Enemy.EnemyState.Staggered);
@@ -57,9 +57,12 @@ namespace Game.Enemies
                     }
                     else
                     {
-                        // Update state and end knockback logic.
-                        other.GetComponent<PlayerMovement>().ChangeState(PlayerMovement.PlayerState.Staggered);
-                        other.GetComponent<PlayerMovement>().Knock(knockTime);
+                        if (other.GetComponent<PlayerMovement>().currentState != PlayerMovement.PlayerState.Staggered)
+                        {
+                            // Update state and end knockback logic.
+                            other.GetComponent<PlayerMovement>().ChangeState(PlayerMovement.PlayerState.Staggered);
+                            other.GetComponent<PlayerMovement>().Knock(knockTime);
+                        }
                     }
                 }
             }

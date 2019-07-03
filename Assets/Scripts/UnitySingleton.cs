@@ -2,6 +2,7 @@
 
 /// <summary>
 /// Base class to be inherited in order to create singletons that perform with Unity MonoBehaviour.
+/// It allows singletons to exists between game scenes.
 /// </summary>
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
