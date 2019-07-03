@@ -37,6 +37,7 @@ namespace Game
         /// </summary>
         public readonly Dictionary<string, string> TipsTable = new Dictionary<string, string>
         {
+            {"placeholder", "\"Player\": Nothing to read here..."}, 
             {"sword", "Congratulations, a sword! That opens many doors of opportunity..."}, 
         };
         

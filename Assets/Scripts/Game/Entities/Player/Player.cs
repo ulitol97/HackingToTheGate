@@ -38,6 +38,8 @@ namespace Game.Entities.Player
 		private static readonly int AnimatorMoving = Animator.StringToHash("moving");
 		private static readonly int AnimatorAttacking = Animator.StringToHash("attacking");
 
+		public int playerInitialDirectionX;
+		public int playerInitialDirectionY;
 		/// <summary>
 		/// Enum structure holding the main character possible states.
 		/// </summary>
@@ -82,9 +84,9 @@ namespace Game.Entities.Player
 			_playerAnimator = GetComponent<Animator>();
 			_playerRigidBody = GetComponent<Rigidbody2D>();
 			
-			// Start the animator with the character facing down.
-			_playerAnimator.SetFloat(AnimatorMoveX, 0);
-			_playerAnimator.SetFloat(AnimatorMoveY, -1);
+			// Start the animator with the character facing where needed.
+			_playerAnimator.SetFloat(AnimatorMoveX, playerInitialDirectionX);
+			_playerAnimator.SetFloat(AnimatorMoveY, playerInitialDirectionY);
 		}
 	
 		/// <summary>

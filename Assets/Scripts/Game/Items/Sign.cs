@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +42,7 @@ namespace Game.Items
                 ToggleSignText();
             }
         }
-
+        
         /// <summary>
         /// If the sign's text is being displayed, it is hidden.
         /// If the sign's text is no hidden
@@ -52,8 +53,20 @@ namespace Game.Items
                 dialogBox.SetActive(false);
             else
             {
-                dialogText.text = Globals.Instance.TipsTable[dialogKey];
-                dialogBox.SetActive(true);
+                var text = "";
+                try
+                {
+                    text = Globals.Instance.TipsTable[dialogKey];
+                }
+                catch
+                {
+                    text = Globals.Instance.TipsTable["placeholder"];
+                }
+                finally
+                {
+                    dialogText.text = text;
+                    dialogBox.SetActive(true);
+                }
             }
         }
 
