@@ -9111,6 +9111,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4883399914365973152, guid: 704ff9235ba20c94c9602d4652fa6d33,
+        type: 3}
+      propertyPath: maxHealth
+      value: 
+      objectReference: {fileID: 11400000, guid: 84c166bcfb95d2944be043a02c8d6e8d,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 704ff9235ba20c94c9602d4652fa6d33, type: 3}
 --- !u!1001 &6724978350947034278
@@ -9190,6 +9196,26 @@ PrefabInstance:
       propertyPath: placeText
       value: 
       objectReference: {fileID: 775627898}
+    - target: {fileID: 1329858749, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
+      propertyPath: damage
+      value: 
+      objectReference: {fileID: 11400000, guid: c7c9599a476d61d4b9eadb2e6656e35f,
+        type: 2}
+    - target: {fileID: 722538441, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
+      propertyPath: damage
+      value: 
+      objectReference: {fileID: 11400000, guid: c7c9599a476d61d4b9eadb2e6656e35f,
+        type: 2}
+    - target: {fileID: 728287933, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
+      propertyPath: damage
+      value: 
+      objectReference: {fileID: 11400000, guid: c7c9599a476d61d4b9eadb2e6656e35f,
+        type: 2}
+    - target: {fileID: 576978567, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
+      propertyPath: damage
+      value: 
+      objectReference: {fileID: 11400000, guid: c7c9599a476d61d4b9eadb2e6656e35f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
 --- !u!1001 &7057399154647406919

@@ -165,8 +165,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2
   enemyName: Log
+  maxHealth: {fileID: 0}
   baseAttack: 1
-  moveSpeed: 2
+  moveSpeed: 1.75
   currentState: 0
   target: {fileID: 0}
   homePosition: {fileID: 0}
@@ -184,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769d03df7734b2e4ba24fae23ef089fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1.5
+  thrust: 0.9
   knockTime: 0.2
 --- !u!61 &865262965
 BoxCollider2D:

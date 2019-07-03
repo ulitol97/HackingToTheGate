@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Game.Items;
 using Game.Player;
+using Game.ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Enemies
@@ -23,6 +24,11 @@ namespace Game.Enemies
         public float knockTime;
 
         /// <summary>
+        /// Damage inflicted by the knockback
+        /// </summary>
+        public FloatValue damage;
+        
+        /// <summary>
         /// Checks for start-collision events affecting the game element attached to this scrip and
         /// triggers the corresponding logic of the object that collided with the attack.
         /// If the enemy entered the collision, it is knocked back proportionally to the distance to the player.
@@ -42,11 +48,12 @@ namespace Game.Enemies
                     distance = distance.normalized * thrust;
                     hitBody.AddForce(distance, ForceMode2D.Impulse);
                     
-                    if (other.gameObject.CompareTag("Enemy"))
+                    // If hit enemy hurt box
+                    if (other.gameObject.CompareTag("Enemy") && other.isTrigger)
                     {
                         // Update state and end knockback logic.
                         other.GetComponent<Enemy>().ChangeState(Enemy.EnemyState.Staggered);
-                        other.GetComponent<Enemy>().Knock(hitBody, knockTime);
+                        other.GetComponent<Enemy>().Knock(hitBody, knockTime, damage.initialValue);
                     }
                     else
                     {

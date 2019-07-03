@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using Game.ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Enemies
@@ -6,9 +8,10 @@ namespace Game.Enemies
     public class Enemy : MonoBehaviour
     {
 
-        public int health;
+        public float health;
         public string enemyName;
 
+        public FloatValue maxHealth;
         public int baseAttack;
         public float moveSpeed;
         
@@ -27,28 +30,45 @@ namespace Game.Enemies
         /// Current state of the enemy.
         /// </summary>
         public EnemyState currentState;
-        
-        
+
+        private void Awake()
+        {
+            health = maxHealth.initialValue;
+        }
+
         // Start is called before the first frame update
-        void Start()
+        private void Start()
+        {
+        }
+
+        // Update is called once per frame
+        private void Update()
         {
         
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+       /// <summary>
+       /// Reduces the health of an enemy and eliminates it if it goes below 0.
+       /// </summary>
+       /// <param name="damage">Amount of health to be reduced.</param>
+       private void TakeDamage(float damage)
+       {
+           this.health -= damage;
+           if (health <= 0)
+           {
+               this.gameObject.SetActive(false);
+           }
+       }
 
         /// <summary>
         /// Arranges the end of knockback logic.
         /// </summary>
         /// <param name="rigidBody"></param>
         /// <param name="knockTime"></param>
-        public void Knock(Rigidbody2D rigidBody, float knockTime)
+        public void Knock(Rigidbody2D rigidBody, float knockTime, float damage)
         {
             StartCoroutine(EndKnock(rigidBody, knockTime));
+            TakeDamage(damage);
         }
 
         /// <summary>
