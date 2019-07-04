@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   context: {fileID: 11400000, guid: c6c365bfaf412fb409279befa7e706e0, type: 2}
-  content: {fileID: 11400000, guid: e7b1e43958b115243a923f3d4f15216b, type: 2}
+  content: {fileID: 11400000, guid: 6ca92fea08f66b34b9c70ba4a617a42c, type: 2}
   playerInventory: {fileID: 11400000, guid: 623969f4e3dd7b14eb6c69a2569ffc2c, type: 2}
   isOpen: 0
   receiveItem: {fileID: 11400000, guid: 69ec69d73cad2194fb276a4f4aa1c9a3, type: 2}

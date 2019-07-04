@@ -58,6 +58,7 @@ namespace Game.Entities.Player
 			Walk,
 			Attack,
 			Interact,
+			RemoteTerminal,
 			Staggered
 		}
 
@@ -102,6 +103,11 @@ namespace Game.Entities.Player
 		public Signal playerHealthSignal;
 		
 		/// <summary>
+		/// Signal observing players usage of the remote terminal.
+		/// </summary>
+		public Signal playerRemoteTerminalSignal;
+		
+		/// <summary>
 		/// Signal observing players death event.
 		/// </summary>
 		public Signal playerDeathSignal;
@@ -135,7 +141,7 @@ namespace Game.Entities.Player
 		private void Update () {
 			
 			// Do not read input for movement while interacting.
-			if(currentState == PlayerState.Interact)
+			if(currentState == PlayerState.Interact || currentState == PlayerState.RemoteTerminal)
 				return;
 			
 			CheckPlayerInput();
@@ -144,9 +150,16 @@ namespace Game.Entities.Player
 		private void CheckPlayerInput()
 		{
 			// Check remote terminal input
-			if (Input.GetButtonDown("RemoteTerminal"))
+			if (Input.GetButtonDown("RemoteTerminal") && hasTerminal)
 			{
-				// SIGNAL...
+				if (currentState != PlayerState.RemoteTerminal)
+				{
+					currentState = PlayerState.RemoteTerminal;
+				}
+				else
+					currentState = PlayerState.Walk;
+				
+				playerRemoteTerminalSignal.Notify();
 			}
 			
 			// Check movement input
@@ -232,13 +245,14 @@ namespace Game.Entities.Player
 			_playerAnimator.SetFloat(AnimatorMoveX, _change.x);
 			_playerAnimator.SetFloat(AnimatorMoveY, _change.y);
 		}
-		
-		
+
+
 		/// <summary>
 		/// Applies damage to player and arranges the end of knockback logic if the player has
 		/// health left.
 		/// </summary>
 		/// <param name="knockTime"></param>
+		/// <param name="damage">Damage inflicted to the player when knocked back.</param>
 		public void Knock(float knockTime, float damage)
 		{
 			currentHealth.runtimeValue -= damage;

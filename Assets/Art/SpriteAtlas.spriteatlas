@@ -42,12 +42,13 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 40c3af929c3ab694792ddee1e870c941, type: 3}
-    totalSpriteSurfaceArea: 1438825
+    totalSpriteSurfaceArea: 1482825
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: db7b9b705ee9f8144a4dd8b4496b20a3, type: 3}
   - {fileID: 21300000, guid: ee891b3128cd6cd40a5c56d04937a4b2, type: 3}
+  - {fileID: 21300000, guid: dcf217024ffa09347818c5ea3b8acd22, type: 3}
   - {fileID: 21300000, guid: 5d47c8d2e63ad7045ab204ab55e40746, type: 3}
   - {fileID: 21300000, guid: 10eac1959c4f7954cadf64a563c26dfa, type: 3}
   - {fileID: 21300000, guid: 3b584de5db1999144a3be1938df573d5, type: 3}
@@ -1829,6 +1830,7 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - NPC_test
   - example_v1.1
+  - disconnected-logo
   - examples
   - font
   - key

@@ -714,8 +714,10 @@ MonoBehaviour:
   receivedItemSprite: {fileID: 848450619}
   startingPosition: {fileID: 11400000, guid: b32bcd35803bd084ba2be3ddc63a1a0e, type: 2}
   hasSword: {fileID: 11400000, guid: 0179e717981bef942bd67702c892ad3d, type: 2}
-  hasTerminal: {fileID: 0}
+  hasTerminal: {fileID: 11400000, guid: a1b5817acaaeb1746a37cce0353c3702, type: 2}
   playerHealthSignal: {fileID: 11400000, guid: 57a6316fe36f3904bb1954f4f3289b31, type: 2}
+  playerRemoteTerminalSignal: {fileID: 11400000, guid: af11c35bced60374d88ab0d93723debd,
+    type: 2}
   playerDeathSignal: {fileID: 11400000, guid: d4f4efbfc9988e441b0addbc71c5142a, type: 2}
 --- !u!114 &6724978351375878525
 MonoBehaviour:

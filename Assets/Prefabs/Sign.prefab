@@ -149,4 +149,4 @@ MonoBehaviour:
   context: {fileID: 11400000, guid: c6c365bfaf412fb409279befa7e706e0, type: 2}
   dialogBox: {fileID: 0}
   dialogText: {fileID: 0}
-  dialogKey: sword
+  dialogKey: warning
