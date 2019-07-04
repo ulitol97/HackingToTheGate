@@ -2,13 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Props
+namespace Game.Props.Interactable
 {
     /// <summary>
     /// The Sign class represents an in-game Sign the player can approach and read.
     /// It holds some text to be shown to the player when interacted with.
     /// </summary>
-    public class Sign : MonoBehaviour
+    public class Sign : Interactable
     {
         /// <summary>
         /// UI element containing the dialog template image.
@@ -25,21 +25,14 @@ namespace Game.Props
         /// </summary>
         public string dialogKey;
 
-        /// <summary>
-        /// Boolean flag marked true if the player is in range to interact with the sign.
-        /// </summary>
-        private bool _playerInRange;
 
-        public Signal context;
-        
-        
         /// <summary>
         /// Function called on each frame the Sign the script is attached to is present into the game.
         /// Checks for user controller input and if the player is close enough to interact with the sign contents.
         /// </summary>
         private void Update()
         {
-            if (Input.GetButtonDown("Interact") && _playerInRange)
+            if (Input.GetButtonDown("Interact") && PlayerInRange)
             {
                 ToggleSignText();
             }
@@ -71,36 +64,21 @@ namespace Game.Props
                 }
             }
         }
-
+        
         /// <summary>
-        /// Checks for collision events between the sign and other objects with collision capabilities.
-        /// If the object colliding with the sign is the player, marks that the player is in range and signals the
-        /// player that an interactive object is close.
-        /// </summary>
-        /// <param name="other">Collider object that initiated contact.</param>
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("Player") && !other.isTrigger)
-            {
-                _playerInRange = true;
-                context.Notify();
-            }
-
-        }
-
-        /// <summary>
-        /// Checks for end of collision events between the sign and other with objects collision capabilities.
-        /// If the object that stopped colliding with the sign is the player, marks that the player is out of range
-        /// and signals the player that no interactive object is close.
+        /// Checks for end of collision events between the object and other with objects collision capabilities.
+        /// If the object that stopped colliding with the sign is the player, marks that the player is out
+        /// of range and signals the player that no interactive object is close and makes the sign dialog
+        /// disapperar.
         /// </summary>
         /// <param name="other">Collider object that finished contact.</param>
-        private void OnTriggerExit2D(Collider2D other)
+        protected override void OnTriggerExit2D(Collider2D other)
         {
             if (other.CompareTag("Player") && !other.isTrigger)
             {
                 context.Notify();
                 
-                _playerInRange = false;
+                PlayerInRange = false;
                 dialogBox.SetActive(false);
             }
         }
