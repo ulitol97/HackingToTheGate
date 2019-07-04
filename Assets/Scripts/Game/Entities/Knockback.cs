@@ -48,8 +48,8 @@ namespace Game.Entities
                     distance = distance.normalized * thrust;
                     hitBody.AddForce(distance, ForceMode2D.Impulse);
                     
-                    // If hit enemy hurt box
-                    if (other.gameObject.CompareTag("Enemy") && other.isTrigger)
+                    // If a non enemy hits an enemy hurt box 
+                    if (other.gameObject.CompareTag("Enemy") && other.isTrigger && !CompareTag("Enemy"))
                     {
                         // Update state and end knockback logic.
                         other.GetComponent<Enemy>().ChangeState(Enemy.EnemyState.Staggered);
@@ -62,7 +62,6 @@ namespace Game.Entities
                         other.GetComponent<Player.Player>().ChangeState(Player.Player.PlayerState.Staggered);
                         other.GetComponent<Player.Player>().Knock(knockTime, damage.initialValue);
                     }
-                    
                 }
             }
             
