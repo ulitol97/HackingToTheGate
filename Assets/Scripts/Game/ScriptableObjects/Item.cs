@@ -27,5 +27,10 @@ namespace Game.ScriptableObjects
         /// Boolean flag marking if the item is a key or not.
         /// </summary>
         public bool isKey;
+        
+        /// <summary>
+        /// Boolean flag marking if the item is a sword or not.
+        /// </summary>
+        public bool isSword;
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.ScriptableObjects;
+using UnityEngine;
 
 namespace Game.Entities.Enemies
 {
@@ -33,6 +34,12 @@ namespace Game.Entities.Enemies
         /// further than its attack radius.
         /// </summary>
         public float attackRadius;
+        
+        /// <summary>
+        /// Distance that must be reached between the enemy and a location point for the enemy
+        /// to consider the point as visited.
+        /// </summary>
+        public FloatValue distanceTolerance;
 
         /// <summary>
         /// Unity Animator component in charge of animating the enemy sprite to simulate actions.
@@ -84,6 +91,7 @@ namespace Game.Entities.Enemies
         protected virtual void CheckDistance()
         {
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
+            float distanceToHome = Vector3.Distance(transform.position, homePosition.position);
             
             // Approach but never more than attack radius.
             if (distanceToTarget <= chaseRadius && distanceToTarget > attackRadius)
@@ -102,9 +110,24 @@ namespace Game.Entities.Enemies
                     EnemyAnimator.SetBool(AnimatorWakeUp, true);
                 }
             }
+            // If not chasing the payer, check if home.
             else if (distanceToTarget > attackRadius)
             {
-                EnemyAnimator.SetBool(AnimatorWakeUp, false);
+                // Move home
+                if (distanceToHome > distanceTolerance.initialValue)
+                {
+                    Debug.Log(distanceToHome);
+                    Vector3 movement = Vector3.MoveTowards(transform.position,
+                        homePosition.position, moveSpeed * Time.deltaTime);
+
+                    ChangeAnim(movement - transform.position);
+                    EnemyRigidBody.MovePosition(movement);
+                }
+                // Sleep
+                else
+                {
+                    EnemyAnimator.SetBool(AnimatorWakeUp, false);
+                }
             }
         }
         /// <summary>

@@ -34,6 +34,11 @@ namespace Game.ScriptableObjects
         /// </summary>
         [HideInInspector] // Not appear in inspector
         public int keysRuntimeValue;
+
+        /// <summary>
+        /// Represents whether the player has acquired a sword or not. A boolean value is used as a global variable.
+        /// </summary>
+        public BooleanValue hasSword;
         
         /// <summary>
         /// Adds an item to the inventory list of items (<see cref="items"/>) if it is
@@ -44,6 +49,8 @@ namespace Game.ScriptableObjects
         {
             if (item.isKey)
                 keysRuntimeValue++;
+            else if (item.isSword)
+                hasSword.runtimeValue = true;
             else if (!items.Contains(item))
                 items.Add(item);
         }

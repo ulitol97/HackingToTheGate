@@ -23,12 +23,7 @@ namespace Game.Entities.Enemies
         /// Current target location to patrol to.
         /// </summary>
         public Transform currentGoal;
-
-        /// <summary>
-        /// Distance that must be reached between the enemy and a patrol point for the enemy
-        /// to consider the patrol point as visited.
-        /// </summary>
-        public FloatValue distanceTolerance;
+        
 
         protected override void Start()
         {

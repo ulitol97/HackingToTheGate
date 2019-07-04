@@ -619,7 +619,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 8523ef5af531b964eb8a9b14b68834b5, type: 2}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!61 &6724978351375878526
@@ -706,13 +706,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  playerInitialDirectionX: 0
-  playerInitialDirectionY: -1
+  playerInitialDirectionX: -1
+  playerInitialDirectionY: 0
   currentState: 0
   currentHealth: {fileID: 11400000, guid: cdd25ba9b65fb374ba493fd6cdfd5d98, type: 2}
   playerInventory: {fileID: 11400000, guid: 623969f4e3dd7b14eb6c69a2569ffc2c, type: 2}
   receivedItemSprite: {fileID: 848450619}
   startingPosition: {fileID: 11400000, guid: b32bcd35803bd084ba2be3ddc63a1a0e, type: 2}
+  hasSword: {fileID: 11400000, guid: 0179e717981bef942bd67702c892ad3d, type: 2}
   playerHealthSignal: {fileID: 11400000, guid: 57a6316fe36f3904bb1954f4f3289b31, type: 2}
   playerDeathSignal: {fileID: 11400000, guid: d4f4efbfc9988e441b0addbc71c5142a, type: 2}
 --- !u!114 &6724978351375878525

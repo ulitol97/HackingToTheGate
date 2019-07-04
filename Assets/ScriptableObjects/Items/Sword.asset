@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1047f3217b53b4c48bce4c154b6f5538, type: 3}
-  m_Name: PatrolDistanceTolerance
+  m_Script: {fileID: 11500000, guid: 8b5806e4565634d429e5c49a06e9e12e, type: 3}
+  m_Name: Sword
   m_EditorClassIdentifier: 
-  initialValue: 0.21
-  runtimeValue: 0.21
+  itemSprite: {fileID: 21300000, guid: df3ebcecadf079d49be9eab83cd8b5ed, type: 3}
+  itemDescription: A rusty sword... That may help scape this place
+  isKey: 0
+  isSword: 1

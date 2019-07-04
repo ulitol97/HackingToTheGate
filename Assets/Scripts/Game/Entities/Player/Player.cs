@@ -87,6 +87,11 @@ namespace Game.Entities.Player
 		public Vector2Value startingPosition;
 		
 		/// <summary>
+		/// Represents whether the player has acquired a sword or not.
+		/// </summary>
+		public BooleanValue hasSword;
+		
+		/// <summary>
 		/// Signal observing players health.
 		/// </summary>
 		public Signal playerHealthSignal;
@@ -141,7 +146,8 @@ namespace Game.Entities.Player
 			if (Input.GetButtonDown("Attack") && currentState != PlayerState.Attack
 			    && currentState != PlayerState.Staggered)
 			{
-				StartCoroutine(Attack());
+				if (hasSword.runtimeValue)
+					StartCoroutine(Attack());
 			}
 			else if  (currentState == PlayerState.Idle || currentState == PlayerState.Walk)
 			{

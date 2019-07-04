@@ -26,6 +26,7 @@ namespace Game
         /// <remarks>Readonly since it shouldn't be modified.</remarks>
         public readonly Dictionary<string, string> LevelNameTable = new Dictionary<string, string>
         {
+            {"Level0", "Nayru Ruins"}, 
             {"Level1", "Nayru Dungeon - Basement 2"}, 
             {"Level2", "Nayru Dungeon - Basement 1"}, 
             {"Level3", "Nayru Castle"}, 
@@ -37,7 +38,8 @@ namespace Game
         /// </summary>
         public readonly Dictionary<string, string> TipsTable = new Dictionary<string, string>
         {
-            {"placeholder", "\"Player\": Nothing to read here..."}, 
+            {"placeholder", "\"Player\": Nothing to read here..."},
+            {"warning", "If only I had not awakened the guards..."},
             {"sword", "Congratulations, a sword! That opens many doors of opportunity..."}, 
         };
         
