@@ -1,6 +1,6 @@
 ﻿using Game.Entities.Enemies;
 using Game.Entities.Player;
-using Game.Items;
+using Game.Props;
 using Game.ScriptableObjects;
 using UnityEngine;
 

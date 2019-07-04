@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Game.Items
+namespace Game.Props
 {
     /// <summary>
     /// The Pot class represents an in-game pot object the player can approach and interact with.

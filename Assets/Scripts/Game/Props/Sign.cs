@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Game.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Items
+namespace Game.Props
 {
     /// <summary>
     /// The Sign class represents an in-game Sign the player can approach and read.
@@ -31,6 +30,10 @@ namespace Game.Items
         /// </summary>
         private bool _playerInRange;
 
+        public Signal contextOn;
+        public Signal contextOff;
+        
+        
         /// <summary>
         /// Function called on each frame the Sign the script is attached to is present into the game.
         /// Checks for user controller input and if the player is close enough to interact with the sign contents.
@@ -72,7 +75,8 @@ namespace Game.Items
 
         /// <summary>
         /// Checks for collision events between the sign and other objects with collision capabilities.
-        /// If the object colliding with the sign is the player, marks that the player is in range.
+        /// If the object colliding with the sign is the player, marks that the player is in range and signals the
+        /// player that an interactive object is close.
         /// </summary>
         /// <param name="other">Collider object that initiated contact.</param>
         private void OnTriggerEnter2D(Collider2D other)
@@ -80,19 +84,23 @@ namespace Game.Items
             if (other.CompareTag("Player"))
             {
                 _playerInRange = true;
+                contextOn.Notify();
             }
 
         }
 
         /// <summary>
         /// Checks for end of collision events between the sign and other with objects collision capabilities.
-        /// If the object that stopped colliding with the sign is the player, marks that the player is out of range.
+        /// If the object that stopped colliding with the sign is the player, marks that the player is out of range
+        /// and signals the player that no interactive object is close.
         /// </summary>
         /// <param name="other">Collider object that finished contact.</param>
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
+                contextOff.Notify();
+                
                 _playerInRange = false;
                 dialogBox.SetActive(false);
             }

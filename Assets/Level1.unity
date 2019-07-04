@@ -6812,22 +6812,6 @@ PrefabInstance:
       propertyPath: placeText
       value: 
       objectReference: {fileID: 775627898}
-    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
-        type: 3}
-      propertyPath: playerInitialDirectionX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
-        type: 3}
-      propertyPath: playerInitialDirectionY
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
-        type: 3}
-      propertyPath: startingPosition
-      value: 
-      objectReference: {fileID: 11400000, guid: b32bcd35803bd084ba2be3ddc63a1a0e,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
 --- !u!1001 &7057399154647406919
@@ -6905,5 +6889,15 @@ PrefabInstance:
       propertyPath: dialogText
       value: 
       objectReference: {fileID: 1885363040}
+    - target: {fileID: 958615886, guid: 83d118f2e30fca44fad3624633bdd36d, type: 3}
+      propertyPath: contextOn
+      value: 
+      objectReference: {fileID: 11400000, guid: 85f1a95e0584df348851360b68a8cdd0,
+        type: 2}
+    - target: {fileID: 958615886, guid: 83d118f2e30fca44fad3624633bdd36d, type: 3}
+      propertyPath: contextOff
+      value: 
+      objectReference: {fileID: 11400000, guid: c6c365bfaf412fb409279befa7e706e0,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83d118f2e30fca44fad3624633bdd36d, type: 3}

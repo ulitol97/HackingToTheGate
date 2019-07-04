@@ -677,6 +677,16 @@ PrefabInstance:
       propertyPath: dialogKey
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 958615886, guid: 83d118f2e30fca44fad3624633bdd36d, type: 3}
+      propertyPath: contextOn
+      value: 
+      objectReference: {fileID: 11400000, guid: 85f1a95e0584df348851360b68a8cdd0,
+        type: 2}
+    - target: {fileID: 958615886, guid: 83d118f2e30fca44fad3624633bdd36d, type: 3}
+      propertyPath: contextOff
+      value: 
+      objectReference: {fileID: 11400000, guid: c6c365bfaf412fb409279befa7e706e0,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83d118f2e30fca44fad3624633bdd36d, type: 3}
 --- !u!1001 &1090392656
