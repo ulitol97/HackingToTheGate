@@ -266,6 +266,11 @@ MonoBehaviour:
   playerPosition: {x: 6.96, y: -5.72}
   playerLocationStorage: {fileID: 11400000, guid: b32bcd35803bd084ba2be3ddc63a1a0e,
     type: 2}
+  fadeInPanel: {fileID: 2114256338324102486, guid: e983df802d156ee48a015e3adb5443cb,
+    type: 3}
+  fadeOutPanel: {fileID: 6734610437738592863, guid: 74c7ec75d7e763b4b85fb1b54b4b1044,
+    type: 3}
+  fadeWait: {fileID: 11400000, guid: 29cade915bb7ddd4bac28cf1dff8dd69, type: 2}
 --- !u!114 &775627898 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3889058030337167648, guid: 5b3a4c8b7e67b8448bf00b3bb4381049,
