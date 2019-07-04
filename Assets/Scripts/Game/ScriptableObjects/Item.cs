@@ -32,5 +32,10 @@ namespace Game.ScriptableObjects
         /// Boolean flag marking if the item is a sword or not.
         /// </summary>
         public bool isSword;
+        
+        /// <summary>
+        /// Boolean flag marking if the item that allows to use the in-game terminal or not.
+        /// </summary>
+        public bool isTerminal;
     }
 }

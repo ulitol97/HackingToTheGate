@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 11400000, guid: aa161bc97cef9b041b555dfbc3fa0f58, type: 2}
-  currentItem: {fileID: 11400000, guid: aa161bc97cef9b041b555dfbc3fa0f58, type: 2}
+  - {fileID: 0}
+  currentItem: {fileID: 0}
   keysInitialValue: 0
   keysRuntimeValue: 0
   hasSword: {fileID: 11400000, guid: 0179e717981bef942bd67702c892ad3d, type: 2}
+  hasTerminal: {fileID: 11400000, guid: a1b5817acaaeb1746a37cce0353c3702, type: 2}

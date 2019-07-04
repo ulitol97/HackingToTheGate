@@ -41,8 +41,14 @@ namespace Game.ScriptableObjects
         public BooleanValue hasSword;
         
         /// <summary>
-        /// Adds an item to the inventory list of items (<see cref="items"/>) if it is
-        /// not present already and updates the number of keys.
+        /// Represents whether the player has acquired the remote terminal or not.
+        /// A boolean value is used as a global variable.
+        /// </summary>
+        public BooleanValue hasTerminal;
+        
+        /// <summary>
+        /// Adds an item to the inventory list of items (<see cref="items"/>) after checking if it is an special
+        /// type of item. Only adds it if is not present already and updates the number of keys.
         /// </summary>
         /// <param name="item"></param>
         public void AddItem(Item item)
@@ -51,6 +57,8 @@ namespace Game.ScriptableObjects
                 keysRuntimeValue++;
             else if (item.isSword)
                 hasSword.runtimeValue = true;
+            else if (item.isTerminal)
+                hasTerminal.runtimeValue = true;
             else if (!items.Contains(item))
                 items.Add(item);
         }

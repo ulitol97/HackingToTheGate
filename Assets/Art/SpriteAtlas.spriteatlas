@@ -42,7 +42,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 40c3af929c3ab694792ddee1e870c941, type: 3}
-    totalSpriteSurfaceArea: 1438569
+    totalSpriteSurfaceArea: 1438825
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -1599,6 +1599,7 @@ SpriteAtlas:
   - {fileID: 21300482, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300480, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300696, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
+  - {fileID: 21300000, guid: 0753ab8f2f5b3be4b87b69707e88a50e, type: 3}
   - {fileID: 21300016, guid: 559950bf4aefcc94a80f60580629e56c, type: 3}
   - {fileID: 21300018, guid: 559950bf4aefcc94a80f60580629e56c, type: 3}
   - {fileID: 21300012, guid: 559950bf4aefcc94a80f60580629e56c, type: 3}
@@ -3379,6 +3380,7 @@ SpriteAtlas:
   - tiles_dungeon_v1.1_241
   - tiles_dungeon_v1.1_240
   - tiles_dungeon_v1.1_348
+  - terminal_2
   - chara_hero_8
   - chara_hero_9
   - chara_hero_6

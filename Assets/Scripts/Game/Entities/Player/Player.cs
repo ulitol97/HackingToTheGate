@@ -92,6 +92,11 @@ namespace Game.Entities.Player
 		public BooleanValue hasSword;
 		
 		/// <summary>
+		/// Represents whether the player has acquired the remote terminal or not.
+		/// </summary>
+		public BooleanValue hasTerminal;
+		
+		/// <summary>
 		/// Signal observing players health.
 		/// </summary>
 		public Signal playerHealthSignal;
@@ -133,7 +138,18 @@ namespace Game.Entities.Player
 			if(currentState == PlayerState.Interact)
 				return;
 			
-			// Check player input
+			CheckPlayerInput();
+		}
+
+		private void CheckPlayerInput()
+		{
+			// Check remote terminal input
+			if (Input.GetButtonDown("RemoteTerminal"))
+			{
+				// SIGNAL...
+			}
+			
+			// Check movement input
 			_change.x = Input.GetAxisRaw("Horizontal");
 			if (Math.Abs(_change.x) < JoystickTolerance)
 				_change.x = Input.GetAxisRaw("HorizontalPAD");
@@ -141,10 +157,10 @@ namespace Game.Entities.Player
 			_change.y = Input.GetAxisRaw("Vertical");
 			if (Math.Abs(_change.y) < JoystickTolerance)
 				_change.y = Input.GetAxisRaw("VerticalPAD");
-
+			
 			// Check attack input
 			if (Input.GetButtonDown("Attack") && currentState != PlayerState.Attack
-			    && currentState != PlayerState.Staggered)
+			                                  && currentState != PlayerState.Staggered)
 			{
 				if (hasSword.runtimeValue)
 					StartCoroutine(Attack());

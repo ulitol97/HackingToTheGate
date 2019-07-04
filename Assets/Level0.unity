@@ -63763,6 +63763,12 @@ PrefabInstance:
       propertyPath: placeText
       value: 
       objectReference: {fileID: 775627898}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: hasTerminal
+      value: 
+      objectReference: {fileID: 11400000, guid: a1b5817acaaeb1746a37cce0353c3702,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
 --- !u!1001 &6956516376438206311
