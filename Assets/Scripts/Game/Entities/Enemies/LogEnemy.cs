@@ -116,7 +116,6 @@ namespace Game.Entities.Enemies
                 // Move home
                 if (distanceToHome > distanceTolerance.initialValue)
                 {
-                    Debug.Log(distanceToHome);
                     Vector3 movement = Vector3.MoveTowards(transform.position,
                         homePosition.position, moveSpeed * Time.deltaTime);
 

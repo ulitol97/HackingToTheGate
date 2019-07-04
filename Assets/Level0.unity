@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetScene: Level1
-  playerPosition: {x: 6.96, y: -5.72}
+  playerPosition: {x: 9.5, y: -11.2}
   playerLocationStorage: {fileID: 11400000, guid: b32bcd35803bd084ba2be3ddc63a1a0e,
     type: 2}
   fadeInPanel: {fileID: 2114256338324102486, guid: e983df802d156ee48a015e3adb5443cb,
@@ -63607,7 +63607,7 @@ PrefabInstance:
     - target: {fileID: 4869317681179362375, guid: d28542c95c965ae40a94a0c639eefd88,
         type: 3}
       propertyPath: m_Name
-      value: SceneTransition
+      value: SceneTransition (Level1)
       objectReference: {fileID: 0}
     - target: {fileID: 4869317681179362374, guid: d28542c95c965ae40a94a0c639eefd88,
         type: 3}
