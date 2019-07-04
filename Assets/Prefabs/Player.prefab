@@ -417,7 +417,6 @@ GameObject:
   - component: {fileID: 7502340981619147015}
   - component: {fileID: 3418323980205692050}
   - component: {fileID: 297126347252174033}
-  - component: {fileID: 3110346270835167475}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -632,6 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contextClue: {fileID: 576102481}
+  contextActive: 0
 --- !u!114 &3418323980205692050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,41 +673,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c21498ccc65a634f950bcda114c0f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 85f1a95e0584df348851360b68a8cdd0, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7502340981619147015}
-        m_MethodName: Enable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &3110346270835167475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6724978351375878514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c21498ccc65a634f950bcda114c0f6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   signal: {fileID: 11400000, guid: c6c365bfaf412fb409279befa7e706e0, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7502340981619147015}
-        m_MethodName: Disable
+        m_MethodName: ChangeContext
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -30,8 +30,7 @@ namespace Game.Props
         /// </summary>
         private bool _playerInRange;
 
-        public Signal contextOn;
-        public Signal contextOff;
+        public Signal context;
         
         
         /// <summary>
@@ -81,10 +80,10 @@ namespace Game.Props
         /// <param name="other">Collider object that initiated contact.</param>
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && !other.isTrigger)
             {
                 _playerInRange = true;
-                contextOn.Notify();
+                context.Notify();
             }
 
         }
@@ -97,9 +96,9 @@ namespace Game.Props
         /// <param name="other">Collider object that finished contact.</param>
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && !other.isTrigger)
             {
-                contextOff.Notify();
+                context.Notify();
                 
                 _playerInRange = false;
                 dialogBox.SetActive(false);

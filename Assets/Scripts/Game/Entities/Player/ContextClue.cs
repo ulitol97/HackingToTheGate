@@ -7,14 +7,16 @@ namespace Game.Entities.Player
     {
         public GameObject contextClue;
 
-        public void Enable()
-        {
-            contextClue.SetActive(true);
-        }
+        public bool contextActive;
 
-        public void Disable()
+        public void ChangeContext()
         {
-            contextClue.SetActive(false);
+            contextActive = !contextActive;
+            
+            if (contextActive)
+                contextClue.SetActive(true);
+            else
+                contextClue.SetActive(false);
         }
     }
 }
