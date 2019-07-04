@@ -38,7 +38,15 @@ namespace Game.Entities.Player
 		private static readonly int AnimatorMoving = Animator.StringToHash("moving");
 		private static readonly int AnimatorAttacking = Animator.StringToHash("attacking");
 
+		/// <summary>
+		/// Initial direction the player is facing when spawned (X axis).
+		/// </summary>
 		public int playerInitialDirectionX;
+		
+		/// <summary>
+		/// Initial direction the player is facing when spawned (X axis).
+		/// </summary>
+		
 		public int playerInitialDirectionY;
 		/// <summary>
 		/// Enum structure holding the main character possible states.
@@ -61,6 +69,12 @@ namespace Game.Entities.Player
 		/// </summary>
 		public FloatValue currentHealth;
 
+
+		/// <summary>
+		/// Vector value storing the coordinates where the player should be when spawned.
+		/// </summary>
+		public Vector2Value startingPosition;
+		
 		/// <summary>
 		/// Signal observing players health.
 		/// </summary>
@@ -87,6 +101,9 @@ namespace Game.Entities.Player
 			// Start the animator with the character facing where needed.
 			_playerAnimator.SetFloat(AnimatorMoveX, playerInitialDirectionX);
 			_playerAnimator.SetFloat(AnimatorMoveY, playerInitialDirectionY);
+			
+			// Place the player where needed for believable transitions.
+			transform.position = startingPosition.initialValue;
 		}
 	
 		/// <summary>

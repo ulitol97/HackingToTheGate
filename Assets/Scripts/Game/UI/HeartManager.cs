@@ -52,7 +52,8 @@ namespace Game.UI
             for (int i = 0; i < heartContainers.initialValue; i++)
             {
                 hearts[i].gameObject.SetActive(true);
-                hearts[i].sprite = fullHeart;
+                UpdateHearts();
+//                hearts[i].sprite = fullHeart;
             }
         }
 
