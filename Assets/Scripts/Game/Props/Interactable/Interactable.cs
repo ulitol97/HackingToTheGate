@@ -7,7 +7,7 @@ namespace Game.Props.Interactable
     /// The interactable class acts as a parent to all objects that may trigger an
     /// interaction with the player.
     /// </summary>
-    public class Interactable : MonoBehaviour
+    public abstract class Interactable : MonoBehaviour
     {
         
         /// <summary>
