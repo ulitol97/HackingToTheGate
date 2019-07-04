@@ -11,7 +11,7 @@ namespace Game.Entities.Enemies
         /// <summary>
         /// RigidBody containing the enemy's body for physics handling.
         /// </summary>
-        private Rigidbody2D _enemyRigidBody;
+        protected Rigidbody2D EnemyRigidBody;
         
         /// <summary>
         /// Transform object containing the coordinates the enemy should follow.
@@ -38,8 +38,8 @@ namespace Game.Entities.Enemies
         /// Unity Animator component in charge of animating the enemy sprite to simulate actions.
         /// </summary>
         /// <remarks>The animator attributes are cached below for quicker access</remarks>
-        private Animator _enemyAnimator;
-        private static readonly int AnimatorWakeUp = Animator.StringToHash("wakeUp");
+        protected Animator EnemyAnimator;
+        protected static readonly int AnimatorWakeUp = Animator.StringToHash("wakeUp");
         private static readonly int AnimatorMoveX = Animator.StringToHash("moveX");
         private static readonly int AnimatorMoveY = Animator.StringToHash("moveY");
 
@@ -47,14 +47,16 @@ namespace Game.Entities.Enemies
         /// Function called when the Enemy script is loaded into the game.
         /// Sets up the enemy's current state, target and references to the Unity components modified on runtime.
         /// </summary>
-        private void Start()
+        protected virtual void Start()
         {
             currentState = EnemyState.Idle;
-            _enemyRigidBody = GetComponent<Rigidbody2D>();
-            _enemyAnimator = GetComponent<Animator>();
+            EnemyRigidBody = GetComponent<Rigidbody2D>();
+            EnemyAnimator = GetComponent<Animator>();
             
             target = GameObject.FindWithTag("Player").transform;
             
+            // Start awake.
+            EnemyAnimator.SetBool(AnimatorWakeUp, true);
         }
 
         /// <summary>
@@ -79,7 +81,7 @@ namespace Game.Entities.Enemies
         /// </summary>
         /// <remarks>It also handles the animations in case the enemy wakes up or
         /// goes to sleep.</remarks>
-        private void CheckDistance()
+        protected virtual void CheckDistance()
         {
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
             
@@ -91,30 +93,29 @@ namespace Game.Entities.Enemies
                 {
                     Vector3 movement = Vector3.MoveTowards(transform.position, 
                         target.position, moveSpeed * Time.deltaTime);
-                
-                
+                    
                     ChangeAnim(movement - transform.position);
-                    _enemyRigidBody.MovePosition(movement);
+                    EnemyRigidBody.MovePosition(movement);
                 
                     // Walk and wake up animation if needed.
                     ChangeState(EnemyState.Walk);
-                    _enemyAnimator.SetBool(AnimatorWakeUp, true);
+                    EnemyAnimator.SetBool(AnimatorWakeUp, true);
                 }
             }
             else if (distanceToTarget > attackRadius)
             {
-                _enemyAnimator.SetBool(AnimatorWakeUp, false);
+                EnemyAnimator.SetBool(AnimatorWakeUp, false);
             }
         }
         /// <summary>
         /// Function managing the animation the enemy should make regarding it's moving direction.
         /// </summary>
         /// <param name="direction"></param>
-        private void ChangeAnim(Vector2 direction)
+        protected void ChangeAnim(Vector2 direction)
         {
             direction = direction.normalized;
-            _enemyAnimator.SetFloat(AnimatorMoveX, direction.x);
-            _enemyAnimator.SetFloat(AnimatorMoveY, direction.y);
+            EnemyAnimator.SetFloat(AnimatorMoveX, direction.x);
+            EnemyAnimator.SetFloat(AnimatorMoveY, direction.y);
         }
 
     }

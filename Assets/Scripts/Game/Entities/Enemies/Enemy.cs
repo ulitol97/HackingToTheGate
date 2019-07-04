@@ -21,7 +21,6 @@ namespace Game.Entities.Enemies
         {
             Idle,
             Walk,
-            Attack,
             Staggered
         }
 
@@ -35,18 +34,7 @@ namespace Game.Entities.Enemies
             health = maxHealth.initialValue;
         }
 
-        // Start is called before the first frame update
-        private void Start()
-        {
-        }
-
-        // Update is called once per frame
-        private void Update()
-        {
-        
-        }
-
-       /// <summary>
+        /// <summary>
        /// Reduces the health of an enemy and eliminates it if it goes below 0.
        /// </summary>
        /// <param name="damage">Amount of health to be reduced.</param>
