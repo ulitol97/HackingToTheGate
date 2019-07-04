@@ -1,4 +1,5 @@
-﻿using Game.ScriptableObjects;
+﻿using System;
+using Game.ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Props.Interactable
@@ -26,7 +27,7 @@ namespace Game.Props.Interactable
         /// player that an interactive object is close.
         /// </summary>
         /// <param name="other">Collider object that initiated contact.</param>
-        protected  virtual void OnTriggerEnter2D(Collider2D other)
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player") && !other.isTrigger)
             {

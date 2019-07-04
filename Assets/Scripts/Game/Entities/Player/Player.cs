@@ -37,6 +37,7 @@ namespace Game.Entities.Player
 		private static readonly int AnimatorMoveY = Animator.StringToHash("moveY");
 		private static readonly int AnimatorMoving = Animator.StringToHash("moving");
 		private static readonly int AnimatorAttacking = Animator.StringToHash("attacking");
+		private static readonly int AnimatorItem = Animator.StringToHash("receiveItem");
 
 		/// <summary>
 		/// Initial direction the player is facing when spawned (X axis).
@@ -56,6 +57,7 @@ namespace Game.Entities.Player
 			Idle,
 			Walk,
 			Attack,
+			Interact,
 			Staggered
 		}
 
@@ -69,6 +71,15 @@ namespace Game.Entities.Player
 		/// </summary>
 		public FloatValue currentHealth;
 
+		/// <summary>
+		/// Persistence object representing the player's inventory.
+		/// </summary>
+		public Inventory playerInventory;
+
+		/// <summary>
+		/// Sprite renderer in charge of rendering an item received by hte player.
+		/// </summary>
+		public SpriteRenderer receivedItemSprite;
 
 		/// <summary>
 		/// Vector value storing the coordinates where the player should be when spawned.
@@ -84,7 +95,6 @@ namespace Game.Entities.Player
 		/// Signal observing players death event.
 		/// </summary>
 		public Signal playerDeathSignal;
-
 
 		private const float JoystickTolerance = 0.1f;
 		
@@ -113,6 +123,10 @@ namespace Game.Entities.Player
 		/// <remarks>GetAxisRaw allows digital input instead of analog input, either the movement signal is sent or not.
 		/// </remarks>
 		private void Update () {
+			
+			// Do not read input for movement while interacting.
+			if(currentState == PlayerState.Interact)
+				return;
 			
 			// Check player input
 			_change.x = Input.GetAxisRaw("Horizontal");
@@ -151,7 +165,9 @@ namespace Game.Entities.Player
 			currentState = PlayerState.Attack;
 			yield return new WaitForFixedUpdate(); // Wait one frame
 			yield return new WaitForSeconds(0.3f); // Wait for length of the animation
-			currentState = PlayerState.Walk;
+			
+			if (currentState != PlayerState.Interact)
+				currentState = PlayerState.Walk;
 		}
 
 		/// <summary>
@@ -232,6 +248,29 @@ namespace Game.Entities.Player
 			}
 		}
 		
+		/// <summary>
+		/// Function handling the player animator when an item is received.
+		/// Sets the player state machine and changes the current item sprite.
+		/// </summary>
+		public void ReceiveItem()
+		{
+			if (playerInventory.currentItem != null)
+			{
+				if (currentState != PlayerState.Interact)
+				{
+					currentState = PlayerState.Interact;
+					_playerAnimator.SetBool(AnimatorItem, true);
+					receivedItemSprite.sprite = playerInventory.currentItem.itemSprite;
+				}
+				else
+				{
+					_playerAnimator.SetBool(AnimatorItem, false);
+					currentState = PlayerState.Idle;
+					receivedItemSprite.sprite = null;
+				}
+			}
+		}
+		
 		public void ChangeState(PlayerState state)
 		{
 			currentState = state;
@@ -241,5 +280,6 @@ namespace Game.Entities.Player
 		{
 			Globals.Instance.GameOver();
 		}
+		
 	}
 }

@@ -56,8 +56,9 @@ namespace Game.Entities
                         other.GetComponent<Enemy>().Knock(hitBody, knockTime, damage.initialValue);
                     }
                     // If player not already staggered
-                    else if (other.GetComponent<Player.Player>().currentState != Player.Player.PlayerState.Staggered)
+                    else if (other.gameObject.CompareTag("Player") )
                     {
+                        if (other.GetComponent<Player.Player>().currentState != Player.Player.PlayerState.Staggered)
                         // Update state and end knockback logic.
                         other.GetComponent<Player.Player>().ChangeState(Player.Player.PlayerState.Staggered);
                         other.GetComponent<Player.Player>().Knock(knockTime, damage.initialValue);
