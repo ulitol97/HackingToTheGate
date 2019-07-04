@@ -45,35 +45,10 @@ namespace Remote_Terminal
         /// </summary>
         private void Awake()
         {
-            StartCoroutine(RegisterOntoObservers());
-            
             // Initialize remote desktop sprite with sprite by default.
             SetUpImageRenderer();
         }
-        
-        /// <summary>
-        /// Waits for the observed subjects to come online and proceeds to register into their observers list.
-        /// </summary>
-        private IEnumerator RegisterOntoObservers()
-        {
-//            // Register first on player. Having an existing player guarantees an existing VncManager
-////            yield return new WaitUntil (() => GameManager.GetInstance().Player != null);
-////            GameManager.GetInstance().Player.Attach(this);
-//
-//            yield return new WaitUntil (() => VncManager.Instance != null);
-//            VncManager.Instance.Attach(this);
-//            
-//            UpdateObserver();
-//
-////            GameManager.GetInstance().BottomText.text = 
-////                (_statusOnline) ? "Remote terminal ONLINE" : "Remote terminal OFFLINE";
-////            
-////            GameManager.GetInstance().BottomText.color = 
-////                (_statusOnline) ? Color.white : Color.red;
-            yield return null;
 
-        }
-        
         /// <summary>
         /// Function called on each frame the RemoteDesktopUI is present into the game.
         /// Polls the state of the object to determine if it should show remote desktop images or not.
@@ -104,8 +79,6 @@ namespace Remote_Terminal
         /// </summary>
         public void UpdateObserver()
         {
-            Debug.Log("UPDATE SCREEN MANAGER STATUS");
-
             // Invert if it has to be shown on screen.
             _statusOnScreen = !_statusOnScreen;
             
@@ -120,8 +93,7 @@ namespace Remote_Terminal
             
 
             // Deactivate game element if terminal mode is not toggled
-//            _imageRenderer.enabled = _statusOnScreen;
-            _imageRenderer.gameObject.SetActive(_statusOnScreen);
+            _imageRenderer.enabled = _statusOnScreen;
         }
     }
 }

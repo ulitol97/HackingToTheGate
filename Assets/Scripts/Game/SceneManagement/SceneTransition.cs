@@ -71,7 +71,7 @@ namespace Game.SceneManagement
         {
             if (fadeOutPanel != null)
             {
-                GameObject panelOut = Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity);
+                Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity);
             }
             
             yield return new WaitForSeconds(fadeWait.runtimeValue);

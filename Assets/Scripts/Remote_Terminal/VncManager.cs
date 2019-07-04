@@ -288,7 +288,6 @@ namespace Remote_Terminal
         /// </summary>
         private void ConnectToHost()
         {
-            Debug.Log("Attempting to connect to host...");
             bool connect = true;
             try
             {
@@ -492,11 +491,9 @@ namespace Remote_Terminal
         {
             while (_rd != null) // Run as long as there's a remote  desktop component active
             {
-                Debug.Log("Checking remote desktop socket status: " + VncConnected);
                 serverStatusSignal.Notify();
                 if (!ConnectionStatus)
                 {
-                    Debug.Log("Attempting to reconnect...");
                     // Cancel any pending refreshing actions.
                     CancelScreenRefresh();
                     // Notify all observers about the disconnection

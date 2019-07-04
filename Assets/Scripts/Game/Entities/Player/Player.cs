@@ -141,7 +141,7 @@ namespace Game.Entities.Player
 		private void Update () {
 			
 			// Do not read input for movement while interacting.
-			if(currentState == PlayerState.Interact || currentState == PlayerState.RemoteTerminal)
+			if(currentState == PlayerState.Interact)
 				return;
 			
 			CheckPlayerInput();
@@ -150,7 +150,7 @@ namespace Game.Entities.Player
 		private void CheckPlayerInput()
 		{
 			// Check remote terminal input
-			if (Input.GetButtonDown("RemoteTerminal") && hasTerminal)
+			if (Input.GetButtonDown("RemoteTerminal") && hasTerminal.runtimeValue)
 			{
 				if (currentState != PlayerState.RemoteTerminal)
 				{
@@ -162,6 +162,10 @@ namespace Game.Entities.Player
 				playerRemoteTerminalSignal.Notify();
 			}
 			
+			// If in remote terminal mode, do not check for movement or attack.
+			if (currentState == PlayerState.RemoteTerminal)
+				return;
+
 			// Check movement input
 			_change.x = Input.GetAxisRaw("Horizontal");
 			if (Math.Abs(_change.x) < JoystickTolerance)

@@ -79,8 +79,6 @@ namespace Remote_Terminal
         /// </summary>
         private void Awake()
         {
-            StartCoroutine(RegisterOntoObservers());
-
             // Store the valid keys that will be checked in memory for future iteration.
            _keyCodes = new List<KeyCode>();
             foreach (KeyCode vKey in Enum.GetValues(typeof(KeyCode)))
@@ -88,23 +86,6 @@ namespace Remote_Terminal
                 if (vKey > MinKeycode && vKey < MaxKeycode)
                     _keyCodes.Add(vKey);
             }
-        }
-        
-        /// <summary>
-        /// Waits for the observed subjects to come online and proceeds to register into their observers list.
-        /// </summary>
-        private IEnumerator RegisterOntoObservers()
-        {
-//            yield return new WaitUntil (() => VncManager.Instance != null);
-//            VncManager.Instance.Attach(this);
-//
-////            yield return new WaitUntil (() => GameManager.GetInstance().Player != null);
-////            GameManager.GetInstance().Player.Attach(this);
-//            
-//            UpdateObserver();
-
-            yield return null;
-
         }
 
         /// <summary>
@@ -132,7 +113,7 @@ namespace Remote_Terminal
                 
             }
             
-            // Process 1 key up and 1 key down max per frame and avoid Unity AltGr bug.
+            // Process 1 key up and 1 key down max per frame and avoid Unity AltGr bugging behavior.
             Timing.RunCoroutine(SendKeyStroke(keyCodeDown, true));
             Timing.RunCoroutine(SendKeyStroke(keyCodeUp, false));
             
@@ -144,8 +125,8 @@ namespace Remote_Terminal
         /// </summary>
         public void UpdateObserver()
         {
-            Debug.Log("UPDATE KEYBOARD MANAGER STATUS");
             _statusOnline = VncManager.Instance.ConnectionStatus;
+            _statusOnScreen = !_statusOnScreen;
         }
 
         
@@ -178,12 +159,12 @@ namespace Remote_Terminal
         /// <param name="pressed">True if the key stroke is a key press, false if it is a key release.
         /// This is used to determine the state of the Caps Lock.</param>
         /// <returns>True if the key press/release corresponds to a modifier key, false otherwise.</returns>
-        private bool CheckForModifiers(KeyCode keyCode, bool pressed)
+        private void CheckForModifiers(KeyCode keyCode, bool pressed)
         {
             if (keyCode == KeyCode.CapsLock && pressed)
             {
                 _capsLockModifier = !_capsLockModifier;
-                return true;
+                return;
             }
 
             switch (keyCode)
@@ -191,14 +172,11 @@ namespace Remote_Terminal
                 case KeyCode.LeftShift:
                 case KeyCode.RightShift:
                     _shiftModifier = !_shiftModifier;
-                    return true;
+                    break;
                
                 case (KeyCode.AltGr):
                     _altGrModifier = !_altGrModifier;
-                    return true;
-                
-                default:
-                    return false;
+                    break;
             }
         }
         
@@ -349,11 +327,6 @@ namespace Remote_Terminal
             {KeyCode.LeftControl, 0xffe3},
             {KeyCode.RightAlt, 0xffea},
             {KeyCode.LeftAlt, 0xffe9},
-//            {KeyCode.RightShift, 0xffe2}, // Shift modifiers are managed manually by the Keyboard Manager
-//            {KeyCode.LeftShift, 0xffe1}, // Shift modifiers are managed manually by the Keyboard Manager
-//            {KeyCode.AltGr, 0xfe03}, // AltGr modifier is managed manually from the Keyboard Manager
-//            {KeyCode.Quote, 0xfe51}, // Should send acute accent but send Control due to Unity bug.
-//            {KeyCode.Semicolon, 0xfe50}, // Should send grave accent but send Control due to Unity bug.
 
         };
         
@@ -424,9 +397,6 @@ namespace Remote_Terminal
             {KeyCode.Alpha2, 0x40}, // At @
             {KeyCode.Alpha3, 0x23}, // Hash #
             {KeyCode.Alpha4, 0x7e}, // Tilde ~
-//            {KeyCode.Alpha5, 0x20ac}, // Euro €
-//            {KeyCode.E, 0x20ac}, // Euro €
-//            {KeyCode.Alpha6, 0xac}, // Not ¬
             {KeyCode.Semicolon, 0x5b}, // Left square bracket [
             {KeyCode.Equals, 0x5d}, // Right square bracket ]
             {KeyCode.Quote, 0x7b}, // Left square bracket {
