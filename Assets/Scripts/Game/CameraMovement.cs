@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Game
@@ -22,6 +22,13 @@ namespace Game
         public float smoothing;
 
         /// <summary>
+        /// Reference to the animator managing camera animations.
+        /// </summary>
+        private Animator _animator;
+        private static readonly int AnimatorKickScreen = Animator.StringToHash("kickScreen");
+
+        
+        /// <summary>
         /// Vector containing the X and Y highest values the camera position can take.
         /// </summary>
         public Vector2 maxBoundaries;
@@ -30,6 +37,16 @@ namespace Game
         /// Vector containing the X and Y lowest values the camera position can take. 
         /// </summary>
         public Vector2 minBoundaries;
+
+
+        /// <summary>
+        /// Function called when the CameraMovement script is loaded into the game.
+        /// Sets up the camera references to the Unity components modified on runtime.
+        /// </summary>
+        private void Start()
+        {
+            _animator = GetComponent<Animator>();
+        }
 
         /// <summary>
         /// Function called on each frame the CameraMovement script is present into the game.
@@ -49,11 +66,14 @@ namespace Game
         /// </summary>
         private void FollowTarget()
         {
-            if (transform.position != target.position)
+            var targetTransformPos = target.position;
+            var currentTransformPos = transform.position;
+            if (currentTransformPos != targetTransformPos)
             {
-                Vector3 targetPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
+                Vector3 targetPosition = new Vector3(targetTransformPos.x, targetTransformPos.y, currentTransformPos.z);
                 CheckCameraBoundaries(ref targetPosition);
-                transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
+                currentTransformPos = Vector3.Lerp(currentTransformPos, targetPosition, smoothing);
+                transform.position = currentTransformPos;
             }
         }
 
@@ -67,6 +87,26 @@ namespace Game
         {
             targetPosition.x = Mathf.Clamp(targetPosition.x, minBoundaries.x, maxBoundaries.x);
             targetPosition.y = Mathf.Clamp(targetPosition.y, minBoundaries.y, maxBoundaries.y);
+        }
+
+        /// <summary>
+        /// Changes the animator parameters to create a camera kick effect when player damaged.
+        /// Triggered from a Unity Event observer.
+        /// </summary>
+        public void CameraKick()
+        {
+            _animator.SetBool(AnimatorKickScreen, true);
+            StartCoroutine(EndKick());
+        }
+
+        /// <summary>
+        /// Resets the camera animator to prepare for a next screen kick.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator EndKick()
+        {
+            yield return null; // Wait a frame
+            _animator.SetBool(AnimatorKickScreen, false);
         }
     }
 }
