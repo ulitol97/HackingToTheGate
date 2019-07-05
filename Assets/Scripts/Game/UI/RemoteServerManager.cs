@@ -1,4 +1,6 @@
-﻿using Remote_Terminal;
+﻿using System;
+using Game.ScriptableObjects;
+using Remote_Terminal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,14 +25,19 @@ namespace Game.UI
         /// Image UI element holding the image template of the connection status on UI.
         /// </summary>
         public Image connectionCircle;
+        
+        private void Start()
+        {
+            UpdateOnlineStatus();
+        }
 
         /// <summary>
         /// Update the color of the UI regarding on the remote server availability.
         /// </summary>
         public void UpdateOnlineStatus()
         {
-            connectionCircle.color = VncManager.Instance.ConnectionStatus ? connectedColor : disconnectedColor;
+            if (VncManager.GetInstance(true) != null)
+                connectionCircle.color = VncManager.GetInstance(true).ConnectionStatus ? connectedColor : disconnectedColor;
         }
-
     }
 }

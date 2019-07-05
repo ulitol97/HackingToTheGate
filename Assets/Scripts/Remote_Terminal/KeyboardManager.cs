@@ -125,7 +125,8 @@ namespace Remote_Terminal
         /// </summary>
         public void UpdateObserver()
         {
-            _statusOnline = VncManager.Instance.ConnectionStatus;
+            if (VncManager.GetInstance(true) != null)
+                _statusOnline = VncManager.GetInstance(true).ConnectionStatus;
             _statusOnScreen = !_statusOnScreen;
         }
 
@@ -146,7 +147,8 @@ namespace Remote_Terminal
             uint virtualKey = VirtualKeyFromKey(keyCode);
 
             // Send the key stroke to server, marking it as a press or release
-            VncManager.Instance.SendKeyToServer(virtualKey, pressed);
+            if (VncManager.GetInstance(true) != null)
+                VncManager.GetInstance(true).SendKeyToServer(virtualKey, pressed);
 
             yield return new float();
         }

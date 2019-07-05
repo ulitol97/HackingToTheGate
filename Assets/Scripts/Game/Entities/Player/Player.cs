@@ -150,7 +150,8 @@ namespace Game.Entities.Player
 		private void CheckPlayerInput()
 		{
 			// Check remote terminal input
-			if (Input.GetButtonDown("RemoteTerminal") && hasTerminal.runtimeValue)
+			if (Input.GetButtonDown("RemoteTerminal") && hasTerminal.runtimeValue
+			    && currentState != PlayerState.Attack)
 			{
 				if (currentState != PlayerState.RemoteTerminal)
 				{

@@ -110,11 +110,6 @@ namespace Remote_Terminal
         [SerializeField] [DefaultValue("")]
         private string vncPassword;
 
-        /// <summary>
-        /// Manager in charge of handling the key strokes exchange during the connection to the remote host.
-        /// </summary>
-        private KeyboardManager _keyboardManager;
-
         // Bitmap handling
         
         /// <summary>
@@ -143,6 +138,13 @@ namespace Remote_Terminal
         /// </summary>
         private const int MinConnectionInterval = 8;
 
+        // Keyboard operations
+        
+        /// <summary>
+        /// Manager in charge of handling the keyboard events send to the remote host.
+        /// </summary>
+        public KeyboardManager keyboardManager;
+        
         // Threading
 
         /// <summary>
@@ -169,37 +171,6 @@ namespace Remote_Terminal
         /// Signal observing changes in the connection status of the server.
         /// </summary>
         public Signal serverStatusSignal;
-            
-//
-//        private List<IObserver> _observers;
-//        
-//        public List<IObserver> Observers
-//        {
-//            get { return _observers ?? (_observers = new List<IObserver>()); }
-//            set { _observers = value; }
-//        }
-//        
-//        public void Attach(IObserver observer)
-//        {
-//            if (!Observers.Contains(observer))
-//                Observers.Add(observer);
-//        }
-//
-//        public void Detach(IObserver observer)
-//        {
-//            
-//            if (Observers.Contains(observer))
-//                Observers.Remove(observer);
-//        }
-//
-//        public void Notify()
-//        {
-//            Debug.Log(Observers.Count);
-//            foreach (IObserver observer in Observers)
-//                observer.UpdateObserver();
-//        }
-
-        
 
         // Getters / Setters
         
@@ -237,7 +208,7 @@ namespace Remote_Terminal
         /// </summary>
         private bool SshConnected
         {
-            get { return SshManager.GetInstance() != null && SshManager.GetInstance().Connected; }
+            get { return SshManager.Instance != null && SshManager.Instance.Connected; }
         }
         
         /// <summary>
@@ -268,15 +239,26 @@ namespace Remote_Terminal
 
         /// <summary>
         /// Function called when the VncManager is inserted into the game.
-        /// Sets up all the SSH and VNC clients involved in the connection and begins the image refresh loop.
+        /// Checks if an VncManager is running already. If it is not, sets up all the SSH and VNC clients involved
+        /// in the connection and begins the image refresh loop.
         /// </summary>
         private void Awake()
         {
+            // Set to not destroy between scenes.
+            if (GameObject.FindGameObjectsWithTag("RemoteServer").Length > 1)
+                Destroy(gameObject);
+            else
+                DontDestroyOnLoad(gameObject);
+
             if (checkConnectionInterval < MinConnectionInterval)
                 checkConnectionInterval = MinConnectionInterval;
+            
+            _sshManager = SshManager.Instance;
+            
+        }
 
-            // Force KeyboardManager initialization.
-            _keyboardManager = KeyboardManager.Instance;
+        private void Start()
+        {
             ConnectToHost();
         }
 
@@ -361,10 +343,10 @@ namespace Remote_Terminal
 
             // If no key path has been specified, don't try to connect this way.
             if (sshConnectViaKey && !sshKeyPath.Equals(""))
-                _sshManager = SshManager.GetInstance(vncHost, this.sshPort, sshUserName, sshKeyPath, sshKeyPassphrase);
+                _sshManager.SetUpManager(vncHost, this.sshPort, sshUserName, sshKeyPath, sshKeyPassphrase);
 
             else
-                _sshManager = SshManager.GetInstance(vncHost, this.sshPort, sshUserName, sshPassword);
+                _sshManager.SetUpManager(vncHost, this.sshPort, sshUserName, sshPassword);
 
             _sshManager.ForwardPort(Localhost, vncPort, vncHost, vncPort);
             _sshManager.Connect();
@@ -475,7 +457,7 @@ namespace Remote_Terminal
         /// <param name="pressed">True if the key stroke is a key press, false if it is a key release.</param>
         public void SendKeyToServer(uint vKey, bool pressed)
         {
-            if (vKey != 0x00 && Instance.RemoteDesktop != null)
+            if (vKey != 0x00 && GetInstance(true).RemoteDesktop != null)
                 RemoteDesktop.VncClient.WriteKeyboardEvent(vKey, pressed);
         }
 

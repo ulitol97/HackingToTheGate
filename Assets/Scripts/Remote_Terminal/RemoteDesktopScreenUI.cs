@@ -58,7 +58,7 @@ namespace Remote_Terminal
             if (!_statusOnline || !_statusOnScreen)
                 return;
 
-            _imageRenderer.sprite = VncManager.Instance.RemoteDesktopSprite;
+            _imageRenderer.sprite = VncManager.GetInstance(true).RemoteDesktopSprite;
         }
         
         
@@ -83,13 +83,17 @@ namespace Remote_Terminal
             _statusOnScreen = !_statusOnScreen;
             
             // Update status regarding the client status
-            _statusOnline = VncManager.Instance.ConnectionStatus;
+            if (VncManager.GetInstance(true) != null)
+                _statusOnline = VncManager.GetInstance(true).ConnectionStatus;
 
             // Put placeholder image in case of disconnection.
             if (!_statusOnline)
+            {
                 _imageRenderer.sprite = defaultSprite;
-            else
-                _imageRenderer.sprite = VncManager.Instance.RemoteDesktopSprite;
+
+            }
+            else if (VncManager.GetInstance(true) != null)
+                _imageRenderer.sprite = VncManager.GetInstance(true).RemoteDesktopSprite;
             
 
             // Deactivate game element if terminal mode is not toggled

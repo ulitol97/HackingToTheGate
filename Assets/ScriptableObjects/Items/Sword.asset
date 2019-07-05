@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: df3ebcecadf079d49be9eab83cd8b5ed, type: 3}
-  itemDescription: A rusty sword... That may help scape this place
+  itemDescription: A rusty sword... That may help scape this place (press X to attack
+    with your sword)
   isKey: 0
   isSword: 1
+  isTerminal: 0

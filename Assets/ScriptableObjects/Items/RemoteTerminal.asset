@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: RemoteTerminal
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 0753ab8f2f5b3be4b87b69707e88a50e, type: 3}
-  itemDescription: A remote terminal device! Should I give it a try?
+  itemDescription: A remote terminal device! Should I give it a try? (press L1 or
+    R1 to toggle terminal mode and take over a remote computer!)
   isKey: 0
   isSword: 0
   isTerminal: 1

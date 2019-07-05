@@ -9,7 +9,7 @@ namespace Remote_Terminal
     /// protocol, cyphering the data shared between and server in the process.
     /// As a singleton, a maximum of one instance of this class will be managed by the game.
     /// </summary>
-    public class SshManager
+    public class SshManager : Singleton<SshManager>
     {
         /// <summary>
         /// Holds the current and only simultaneous instance of the SshManager in use by the game.
@@ -33,31 +33,42 @@ namespace Remote_Terminal
 
         public bool Connected
         {
-            get { return _client.IsConnected; }
+            get
+            {
+                return _client != null && _client.IsConnected;
+            }
         }
-        
-        public static SshManager GetInstance()
-        {
-            return _instance;
-        }
+
+        private string _ip;
+        private int _port = 22;
+        private string _username = "";
+        private string _password = "";
+        private string _keyFileName = "";
+        private string _passPhrase = "";
         
         /// <summary>
-        /// Creates, configures and returns a new singleton instance of the SshManager if none has been created,
-        /// or returns the currently existing one.
+        /// Configures the instance of the SshManager.
         /// </summary>
         /// <param name="ip">Address of the target host</param>
         /// <param name="port">Port in which the host is listening for connections</param>
         /// <param name="username">Username used for authentication</param>
         /// <param name="password">Password used for authentication</param>
         /// <returns>A new SshManager instance or the currently existing singleton instance.</returns>
-        public static SshManager GetInstance(string ip, int port, string username, string password)
+        public void SetUpManager(string ip, int port, string username, string password)
         {
-            return _instance ?? (_instance = new SshManager(ip, port, username, password));
+            Instance._ip = ip;
+            Instance._port = port;
+            Instance._username = username;
+            Instance._password = password;
+            
+            var conn = new ConnectionInfo(_ip, _port, _username, 
+                new PasswordAuthenticationMethod(_username, _password));
+            
+            _client = new SshClient (conn);
         }
         
         /// <summary>
-        /// Creates, configures and returns a new singleton instance of the SshManager if none has been created,
-        /// or returns the currently existing one.
+        /// Configures the instance of the SshManager.
         /// </summary>
         /// <param name="ip">Address of the target host</param>
         /// <param name="port">Port in which the host is listening for connections</param>
@@ -65,47 +76,22 @@ namespace Remote_Terminal
         /// <param name="keyFileName">Route of the file containing the key used for authentication</param>
         /// <param name="passPhrase">Passphrase (if any) used to secure the key used for authentication</param>
         /// <returns>A new SshManager instance or the currently existing singleton instance.</returns>
-        public static SshManager GetInstance(string ip, int port, string username, string keyFileName, 
+        public void SetUpManager(string ip, int port, string username, string keyFileName, 
             string passPhrase)
         {
-            return _instance ?? (_instance = new SshManager(ip, port, username, keyFileName, passPhrase));
-        }
-
-        /// <summary>
-        /// Creates a new SshClient holding a user and a password for authentication.
-        /// </summary>
-        /// <remarks>Made private to prevent non-singleton constructor use.</remarks>
-        /// <param name="ip">Address of the target host</param>
-        /// <param name="port">Port in which the host is listening for connections</param>
-        /// <param name="username">Username used for authentication</param>
-        /// <param name="password">Password used for authentication</param>
-        private SshManager(string ip, int port, string username, string password)
-        {
-            // Initialize SSH connection info for the client
-            var conn = new ConnectionInfo(ip, port, username, new PasswordAuthenticationMethod(username, password));
+            Instance._ip = ip;
+            Instance._port = port;
+            Instance._username = username;
+            Instance._keyFileName = keyFileName;
+            Instance._passPhrase = passPhrase;
+            
+            var conn = new ConnectionInfo(_ip, _port, _username, 
+                new PrivateKeyAuthenticationMethod(_username, 
+                    new PrivateKeyFile(_keyFileName, _passPhrase)));
 
             _client = new SshClient (conn);
         }
         
-        
-        /// <summary>
-        /// Creates a new SshClient holding a user and a private key for authentication.
-        /// </summary>
-        /// <remarks>Made private to prevent non-singleton constructor use.</remarks>
-        /// <param name="ip">Address of the target host</param>
-        /// <param name="port">Port in which the host is listening for connections</param>
-        /// <param name="username">Username used for authentication</param>
-        /// <param name="keyFileName">Route of the file containing the key used for authentication</param>
-        /// <param name="passPhrase">Passphrase (if any) used to secure the key used for authentication</param>
-        private SshManager(string ip, int port, string username, string keyFileName, string passPhrase)
-        {
-            // Initialize SSH connection info for the client
-            var conn = new ConnectionInfo(ip, port, username, new PrivateKeyAuthenticationMethod(username, 
-                new PrivateKeyFile(keyFileName, passPhrase)));
-
-            _client = new SshClient (conn);
-        }
-
         /// <summary>
         /// Adds the ability to port tunnel/forward to the SshClient.
         /// </summary>
@@ -168,8 +154,6 @@ namespace Remote_Terminal
             
             if (_client != null)
                 _client.Dispose();
-
-            _instance = null;
         }
     }
 }

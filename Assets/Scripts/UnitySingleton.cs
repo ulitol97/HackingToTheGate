@@ -19,40 +19,54 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     /// </summary>
     public static T Instance
     {
-        get
+        get { return GetInstance(false); }
+    }
+
+    public static T GetInstance(bool ignoreShuttingDown)
+    {
+        if (_mShuttingDown )
         {
-            if (_mShuttingDown)
+            if (ignoreShuttingDown)
+                return _mInstance;
+            Debug.LogWarning("Devuelvo NULL");
+            return null;
+        }
+        
+        lock (_mLock)
+        {
+            if (_mInstance == null)
             {
-                Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
-                                 "' already destroyed. Returning null.");
-                return null;
-            }
+                // Search for existing instance.
+                _mInstance = (T)FindObjectOfType(typeof(T));
  
-            lock (_mLock)
-            {
+                // Create new instance if one doesn't already exist.
                 if (_mInstance == null)
                 {
-                    // Search for existing instance.
-                    _mInstance = (T)FindObjectOfType(typeof(T));
+                    // Need to create a new GameObject to attach the singleton to.
+                    var singletonObject = new GameObject();
+                    _mInstance = singletonObject.AddComponent<T>();
+                    singletonObject.name = typeof(T) + " (Singleton)";
  
-                    // Create new instance if one doesn't already exist.
-                    if (_mInstance == null)
-                    {
-                        // Need to create a new GameObject to attach the singleton to.
-                        var singletonObject = new GameObject();
-                        _mInstance = singletonObject.AddComponent<T>();
-                        singletonObject.name = typeof(T) + " (Singleton)";
- 
-                        // Make instance persistent.
-                        DontDestroyOnLoad(singletonObject);
-                    }
+                    // Make instance persistent.
+                    DontDestroyOnLoad(singletonObject);
                 }
- 
-                return _mInstance;
             }
+ 
+            return _mInstance;
         }
     }
-    
+
+//    static T GetInstance(bool ignoreShuttingDown)
+//    {
+//        if (!ignoreShuttingDown)
+//            return Instance;
+//        else
+//        {
+//            
+//        }
+//
+//    }
+
     /// <summary>
     /// On the event of having the GameObject set for destruction in-game,
     /// mark it to prevent its access from external code.

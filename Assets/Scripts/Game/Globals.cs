@@ -40,7 +40,6 @@ namespace Game
         {
             {"placeholder", "\"Player\": Nothing to read here..."},
             {"warning", "If only I had not awakened the guards..."},
-            {"sword", "Congratulations, a sword! That opens many doors of opportunity..."}, 
         };
         
         
