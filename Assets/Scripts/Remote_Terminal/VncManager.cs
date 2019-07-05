@@ -512,7 +512,7 @@ namespace Remote_Terminal
                 _rd = null;
             }
             if (SshConnected)
-                _sshManager.Dispose();
+                SshManager.GetInstance(true).Dispose();
         }
         
         /// <summary>

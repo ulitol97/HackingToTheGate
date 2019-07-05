@@ -21,10 +21,11 @@ namespace Game.Props.Interactable
         /// </summary>
         public Inventory playerInventory;
         
+        
         /// <summary>
-        /// Represents whether the chest is already open or not.
+        /// Stores if the chest was opened for persistence.
         /// </summary>
-        public bool isOpen;
+        public BooleanValue persistenceOpen;
 
         /// <summary>
         /// Signal in charge of observing if the player received an object form the chest.
@@ -45,8 +46,8 @@ namespace Game.Props.Interactable
         /// Reference to the chest's animator to handle open animation.
         /// </summary>
         private Animator _chestAnimator;
-        private static readonly int Open = Animator.StringToHash("open");
-
+        private static readonly int AnimatorOpen = Animator.StringToHash("open");
+        
         /// <summary>
         /// Function called when the chest is inserted into the game.
         /// Sets up references for later use.
@@ -54,6 +55,7 @@ namespace Game.Props.Interactable
         private void Start()
         {
             _chestAnimator = GetComponent<Animator>();
+            _chestAnimator.SetBool(AnimatorOpen, persistenceOpen.runtimeValue);
         }
 
         
@@ -65,7 +67,7 @@ namespace Game.Props.Interactable
         {
             if (Input.GetButtonDown("Interact") && PlayerInRange)
             {
-                if (!isOpen)
+                if (!persistenceOpen.runtimeValue)
                     OpenChest();
                 else
                     OnOpenedChest();
@@ -75,7 +77,7 @@ namespace Game.Props.Interactable
         /// <summary>
         /// Manages the logic when the chest is opened by the player.
         /// Activates the dialog and re-arranges the player's inventory, for that, it raises a signal
-        /// to the player and set the chest to already open (<see cref="isOpen"/>).
+        /// to the player and set the chest to already open (<see cref="persistenceOpen"/>).
         /// </summary>
         private void OpenChest()
         {
@@ -91,8 +93,8 @@ namespace Game.Props.Interactable
             // Disable context clue on top of player.
             context.Notify();
 
-            isOpen = true;
-            _chestAnimator.SetBool(Open, true);
+            persistenceOpen.runtimeValue = true;
+            _chestAnimator.SetBool(AnimatorOpen, true);
 
         }
 
@@ -116,7 +118,7 @@ namespace Game.Props.Interactable
         /// <param name="other">Collider object that initiated contact.</param>
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !other.isTrigger && !isOpen)
+            if (other.CompareTag("Player") && !other.isTrigger && !persistenceOpen.runtimeValue)
             {
                 PlayerInRange = true;
                 context.Notify();
@@ -132,7 +134,7 @@ namespace Game.Props.Interactable
         /// <param name="other">Collider object that finished contact.</param>
         protected override void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !other.isTrigger && !isOpen)
+            if (other.CompareTag("Player") && !other.isTrigger && !persistenceOpen.runtimeValue)
             {
                 context.Notify();
                 PlayerInRange = false;

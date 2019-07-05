@@ -29,7 +29,7 @@ namespace Game.Entities.Enemies
         public GameObject deathEffect;
         
         /// <summary>
-        /// Enum structure holding the enemy possible states.
+        /// Enum structure holding the enemy possible states, like a state machine.
         /// </summary>
         public enum EnemyState
         {
@@ -73,7 +73,7 @@ namespace Game.Entities.Enemies
                 GameObject enemyDeathEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
                 
                 // Destroy effect after a sec.
-                Destroy(enemyDeathEffect, 1);
+                Destroy(enemyDeathEffect, 1f);
             }
         }
 
