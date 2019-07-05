@@ -214,9 +214,9 @@ MonoBehaviour:
   homePosition: {fileID: 0}
   chaseRadius: 2.5
   attackRadius: 0.75
+  distanceTolerance: {fileID: 11400000, guid: d588b598386283c48beb21a70735cace, type: 2}
   path:
   - {fileID: 0}
   - {fileID: 0}
   currentPoint: 0
   currentGoal: {fileID: 0}
-  distanceTolerance: {fileID: 11400000, guid: d588b598386283c48beb21a70735cace, type: 2}
