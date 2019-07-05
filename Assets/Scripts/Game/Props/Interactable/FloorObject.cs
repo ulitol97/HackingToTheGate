@@ -83,7 +83,7 @@ public class FloorObject : MonoBehaviour
         receiveItem.Notify();
 
         isPickedUp = true;
-        _spriteRenderer.sprite = null;
+        _spriteRenderer.enabled = false;
         
     }
     
