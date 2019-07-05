@@ -30,8 +30,9 @@ namespace Game.Props.Interactable
 
         /// <summary>
         /// Boolean representing whether the door is open or not.
+        /// A BooleanValue helps keep this value across scenes.
         /// </summary>
-        public bool isOpen;
+        public BooleanValue isOpen;
 
         /// <summary>
         /// Reference to the player's inventory, used to check for player's keys.
@@ -65,6 +66,10 @@ namespace Game.Props.Interactable
             _spriteRenderer = parent.GetComponent<SpriteRenderer>();
             _physicsCollider = parent.GetComponent<BoxCollider2D>();
             _contextualCollider = GetComponent<BoxCollider2D>();
+            
+            // If already opened before destroy door
+            if (isOpen.runtimeValue)
+                Destroy(parent.gameObject);
         }
 
         /// <summary>
@@ -96,7 +101,7 @@ namespace Game.Props.Interactable
             _spriteRenderer.enabled = false;
             _physicsCollider.enabled = false;
             _contextualCollider.enabled = false;
-            isOpen = true;
+            isOpen.runtimeValue = true;
 
         }
 

@@ -31,7 +31,7 @@ namespace Game
             {"Level3", "Nayru Castle"}, 
             {"Level4", "Nayru Castle - Overworld"}, 
         };
-        
+
         /// <summary>
         /// Tips given by the different dialogs and signs the player may find.
         /// </summary>
@@ -39,8 +39,10 @@ namespace Game
         {
             {"placeholder", "\"Player\": Nothing to read here..."},
             {"warning", "If only I had not awakened the guards..."},
+            {
+                "login", "Nice terminal! You better know  the IP of the network camera 02 of" +
+                         " the Medicine faculty if you want to use it ;)"
+            }
         };
-        
-        
     }
 }

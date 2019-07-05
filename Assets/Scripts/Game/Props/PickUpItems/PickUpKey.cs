@@ -7,7 +7,7 @@ namespace Game.Props.PickUpItems
         
        protected override void Start()
         {
-            SpriteRenderer = GetComponent<SpriteRenderer>();
+            base.Start();
             SpriteRenderer.sprite = content.itemSprite;
         }
         
@@ -15,7 +15,7 @@ namespace Game.Props.PickUpItems
         {
             if (PlayerInRange)
             {
-                if (!IsPickedUp)
+                if (!isPickedUp.runtimeValue)
                     PickUp();
 
                 else if (Input.GetButtonDown("Interact"))

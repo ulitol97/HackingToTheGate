@@ -28,9 +28,9 @@ namespace Game.Props.PickUpItems
         protected bool PlayerInRange;
     
         /// <summary>
-        /// Represents whether the object is already picked up or not.
+        /// Represents whether the object is already picked up or not. Persists in a Boolean value.
         /// </summary>
-        protected bool IsPickedUp;
+        public BooleanValue isPickedUp;
 
     
         /// <summary>
@@ -49,6 +49,11 @@ namespace Game.Props.PickUpItems
         protected virtual void Start()
         {
             SpriteRenderer = GetComponent<SpriteRenderer>();
+            
+            // If it was picked up before, disable.
+            if (isPickedUp.runtimeValue)
+                Destroy(gameObject);
+            
         }
     
         /// <summary>
@@ -64,7 +69,7 @@ namespace Game.Props.PickUpItems
         {
             if (PlayerInRange)
             {
-                if (!IsPickedUp)
+                if (!isPickedUp.runtimeValue)
                     PickUp();
             }
         }
@@ -75,7 +80,7 @@ namespace Game.Props.PickUpItems
         public virtual void PickUp()
         {
             receiveItem.Notify();
-            IsPickedUp = true;
+            isPickedUp.runtimeValue = true;
             SpriteRenderer.enabled = false;
         }
     
