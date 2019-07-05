@@ -35,14 +35,18 @@ namespace Game
         /// <summary>
         /// Tips given by the different dialogs and signs the player may find.
         /// </summary>
-        public readonly Dictionary<string, string> TipsTable = new Dictionary<string, string>
+        public readonly Dictionary<string, string> SignMessagesTable = new Dictionary<string, string>
         {
             {"placeholder", "\"Player\": Nothing to read here..."},
             {"warning", "DO NOT DISTURB THE BASEMENT WORKERS!"},
-            {
-                "login", "Nice terminal! You better know  the IP of the network camera 02 of" +
+            {"tip0", "Nice terminal! You better know  the IP of the network camera 02 of" +
                          " the Medicine faculty if you want to use it ;)"
-            }
+            },
+            {"tip1", "If you can't figure out something, maybe the answer is not " +
+                     "in this dungeon but elsewhere..."
+            },
+            {"tip2", "Mauricio hash cat on shadowfile entry."},
+            {"tip3", "Did you get any cool secret nformation form mauricio?"}
         };
     }
 }

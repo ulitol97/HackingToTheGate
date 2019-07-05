@@ -50,11 +50,11 @@ namespace Game.Props.Interactable
                 var text = "";
                 try
                 {
-                    text = Globals.Instance.TipsTable[dialogKey];
+                    text = Globals.Instance.SignMessagesTable[dialogKey];
                 }
                 catch
                 {
-                    text = Globals.Instance.TipsTable["placeholder"];
+                    text = Globals.Instance.SignMessagesTable["placeholder"];
                 }
                 finally
                 {
