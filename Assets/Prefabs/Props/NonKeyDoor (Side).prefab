@@ -1,21 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &8972332201006732554
+--- !u!114 &828902650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4802289534449006882}
+  m_GameObject: {fileID: 6684261710838675810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4f769cbaa20a9b4e883577a248893da, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efb3f83666dc774fbc7b6a8587293ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  context: {fileID: 11400000, guid: e0e759611bbed884cb8f786f590a1cd9, type: 2}
+  context: {fileID: 11400000, guid: c6c365bfaf412fb409279befa7e706e0, type: 2}
   isOpen: {fileID: 0}
-  playerInventory: {fileID: 11400000, guid: 623969f4e3dd7b14eb6c69a2569ffc2c, type: 2}
---- !u!1001 &1356113772685530729
+--- !u!1001 &916357410209109545
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -25,7 +24,7 @@ PrefabInstance:
     - target: {fileID: 5797481451629733287, guid: eb0c1ccbfc1335e4bb5a17f60680feaf,
         type: 3}
       propertyPath: m_Name
-      value: KeyDoor (Side) Variant
+      value: NonKeyDoor (Side)
       objectReference: {fileID: 0}
     - target: {fileID: 5797481451629733285, guid: eb0c1ccbfc1335e4bb5a17f60680feaf,
         type: 3}
@@ -106,9 +105,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7950474932446659427, guid: eb0c1ccbfc1335e4bb5a17f60680feaf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb0c1ccbfc1335e4bb5a17f60680feaf, type: 3}
---- !u!1 &4802289534449006882 stripped
+--- !u!1 &6684261710838675810 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5797481451264356171, guid: eb0c1ccbfc1335e4bb5a17f60680feaf,
     type: 3}
-  m_PrefabInstance: {fileID: 1356113772685530729}
+  m_PrefabInstance: {fileID: 916357410209109545}
   m_PrefabAsset: {fileID: 0}
