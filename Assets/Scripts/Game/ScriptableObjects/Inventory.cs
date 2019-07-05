@@ -63,6 +63,14 @@ namespace Game.ScriptableObjects
                 items.Add(item);
         }
 
+        /// <summary>
+        /// Subtract a key from player's inventory.
+        /// </summary>
+        public void SubtractKey()
+        {
+            keysRuntimeValue = Mathf.Max(0, keysRuntimeValue - 1);
+        }
+
         public void OnBeforeSerialize()
         {}
 

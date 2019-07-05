@@ -7,12 +7,26 @@ namespace Game.Entities.Enemies
     public class Enemy : MonoBehaviour
     {
 
+        /// <summary>
+        /// Runtime health of the enemy.
+        /// </summary>
         public float health;
-        public string enemyName;
 
+        /// <summary>
+        /// Value storing the max health a certain type of enemy must have.
+        /// The value is a FloatValue in order to be shared across scenes.
+        /// </summary>
         public FloatValue maxHealth;
-        public int baseAttack;
+
+        /// <summary>
+        /// Multiplying factor determining the movement speed of the enemy.
+        /// </summary>
         public float moveSpeed;
+
+        /// <summary>
+        /// Game object instantiated when an enemy dies. Used for visual death effect.
+        /// </summary>
+        public GameObject deathEffect;
         
         /// <summary>
         /// Enum structure holding the enemy possible states.
@@ -43,9 +57,25 @@ namespace Game.Entities.Enemies
            health -= damage;
            if (health <= 0)
            {
+               OnDeath();
                gameObject.SetActive(false);
            }
        }
+
+        /// <summary>
+        /// Handle the logic events that happen when an enemy dies.
+        /// </summary>
+        private void OnDeath()
+        {
+            // If a death effect has been defined...
+            if (deathEffect != null)
+            {
+                GameObject enemyDeathEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+                
+                // Destroy effect after a sec.
+                Destroy(enemyDeathEffect, 1);
+            }
+        }
 
         /// <summary>
         /// Arranges the end of knockback logic.

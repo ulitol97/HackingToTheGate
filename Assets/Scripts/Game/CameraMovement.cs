@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 namespace Game
@@ -103,8 +103,7 @@ namespace Game
         /// Resets the camera animator to prepare for a next screen kick.
         /// </summary>
         /// <returns></returns>
-        private IEnumerator EndKick()
-        {
+        private IEnumerator EndKick() {
             yield return null; // Wait a frame
             _animator.SetBool(AnimatorKickScreen, false);
         }

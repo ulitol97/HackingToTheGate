@@ -49,7 +49,7 @@ namespace Game.Props.Interactable
 
         /// <summary>
         /// Function called when the chest is inserted into the game.
-        /// Sets up referenced for later use.
+        /// Sets up references for later use.
         /// </summary>
         private void Start()
         {
