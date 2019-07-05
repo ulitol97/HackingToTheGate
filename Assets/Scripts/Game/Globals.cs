@@ -38,7 +38,7 @@ namespace Game
         public readonly Dictionary<string, string> TipsTable = new Dictionary<string, string>
         {
             {"placeholder", "\"Player\": Nothing to read here..."},
-            {"warning", "If only I had not awakened the guards..."},
+            {"warning", "DO NOT DISTURB THE BASEMENT WORKERS!"},
             {
                 "login", "Nice terminal! You better know  the IP of the network camera 02 of" +
                          " the Medicine faculty if you want to use it ;)"
