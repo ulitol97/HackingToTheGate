@@ -48,6 +48,11 @@ namespace Game.Props.Interactable
         /// </summary>
         private BoxCollider2D _physicsCollider;
         
+        /// <summary>
+        /// Collider managing the objects that enter a distance which is enough to interact with the door.
+        /// </summary>
+        private BoxCollider2D _contextualCollider;
+        
        
         /// <summary>
         /// Function called when the Door is inserted into the game.
@@ -59,7 +64,7 @@ namespace Game.Props.Interactable
             var parent = transform.parent;
             _spriteRenderer = parent.GetComponent<SpriteRenderer>();
             _physicsCollider = parent.GetComponent<BoxCollider2D>();
-            
+            _contextualCollider = GetComponent<BoxCollider2D>();
         }
 
         /// <summary>
@@ -90,6 +95,7 @@ namespace Game.Props.Interactable
             // Turn off sprite renderer and physics on door.
             _spriteRenderer.enabled = false;
             _physicsCollider.enabled = false;
+            _contextualCollider.enabled = false;
             isOpen = true;
 
         }

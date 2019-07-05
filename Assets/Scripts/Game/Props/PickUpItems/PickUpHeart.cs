@@ -14,6 +14,7 @@ namespace Game.Props.PickUpItems
         /// Amount of health points healed by the heart pick up.
         /// </summary>
         public FloatValue healingFactor;
+
         /// <summary>
         /// Increases the player's health global value and notifies the UI about the change
         /// via signal observer.

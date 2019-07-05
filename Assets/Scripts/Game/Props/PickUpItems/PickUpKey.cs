@@ -4,6 +4,13 @@ namespace Game.Props.PickUpItems
 {
     public class PickUpKey : FloorObject
     {
+        
+       protected override void Start()
+        {
+            SpriteRenderer = GetComponent<SpriteRenderer>();
+            SpriteRenderer.sprite = content.itemSprite;
+        }
+        
         protected override void Update()
         {
             if (PlayerInRange)
@@ -20,7 +27,7 @@ namespace Game.Props.PickUpItems
                 }
             }
         }
-        
+
         public override void PickUp()
         {
             // Set up dialogue

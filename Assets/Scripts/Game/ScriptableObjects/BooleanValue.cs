@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.ScriptableObjects
 {
@@ -23,18 +24,27 @@ namespace Game.ScriptableObjects
         /// it is needed to store a default value for them to reset each session.
         /// </summary>
         public bool defaultValue;
-        
-        
+
         public void OnBeforeSerialize()
         {}
 
         /// <summary>
-        /// Reset the runtime value held by the Vector2Value to its initial value when the
+        /// Reset the runtime value held by the BooleanValue to its initial value when the
         /// game session begins.
         /// </summary>
         public void OnAfterDeserialize()
         {
             runtimeValue = defaultValue;
+            
+        }
+
+        /// <summary>
+        /// Setup in order not to unload this instance from memory when entering a scene
+        /// that does not use it.
+        /// </summary>
+        private void OnEnable()
+        {
+            hideFlags = HideFlags.DontUnloadUnusedAsset;
         }
     }
 }

@@ -190,7 +190,7 @@ namespace Remote_Terminal
         /// </summary>
         private bool SshConnected
         {
-            get { return SshManager.Instance != null && SshManager.Instance.Connected; }
+            get { return SshManager.GetInstance(true) != null && SshManager.Instance.Connected; }
         }
         
         /// <summary>

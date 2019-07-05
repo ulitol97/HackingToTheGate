@@ -20,7 +20,7 @@ namespace Game.Props.PickUpItems
         /// <summary>
         /// Sprite rendender in charge of rendering the object in-game.
         /// </summary>
-        private SpriteRenderer _spriteRenderer;
+        protected SpriteRenderer SpriteRenderer;
     
         /// <summary>
         /// Boolean flag marked true if the player is in range to interact with the sign.
@@ -43,11 +43,12 @@ namespace Game.Props.PickUpItems
         /// </summary>
         public Text dialogText;
     
-        // Start is called before the first frame update
+        /// <summary>
+        /// Called when the item os inserted into the game, sets the reference needed for later logic operations.
+        /// </summary>
         protected virtual void Start()
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _spriteRenderer.sprite = content.itemSprite;
+            SpriteRenderer = GetComponent<SpriteRenderer>();
         }
     
         /// <summary>
@@ -75,7 +76,7 @@ namespace Game.Props.PickUpItems
         {
             receiveItem.Notify();
             IsPickedUp = true;
-            _spriteRenderer.enabled = false;
+            SpriteRenderer.enabled = false;
         }
     
         /// <summary>
