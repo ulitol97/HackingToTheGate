@@ -1,5 +1,4 @@
 ﻿using Game.Entities.Enemies;
-using Game.Entities.Player;
 using Game.Props;
 using Game.ScriptableObjects;
 using UnityEngine;
@@ -67,7 +66,7 @@ namespace Game.Entities
             }
             
             // Only player can break stuff
-            else if (other.CompareTag("Breakable") && this.gameObject.CompareTag("Player"))
+            else if (other.CompareTag("Breakable") && gameObject.CompareTag("Player"))
             {
                 if (other.GetComponent<Pot>() != null)
                     other.GetComponent<Pot>().Smash();

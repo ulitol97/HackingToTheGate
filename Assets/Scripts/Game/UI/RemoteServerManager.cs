@@ -1,6 +1,4 @@
-﻿using System;
-using Game.ScriptableObjects;
-using Remote_Terminal;
+﻿using Remote_Terminal;
 using UnityEngine;
 using UnityEngine.UI;
 

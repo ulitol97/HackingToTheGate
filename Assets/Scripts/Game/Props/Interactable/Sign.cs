@@ -1,5 +1,4 @@
-﻿using Game.ScriptableObjects;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.Props.Interactable
@@ -69,7 +68,7 @@ namespace Game.Props.Interactable
         /// Checks for end of collision events between the object and other with objects collision capabilities.
         /// If the object that stopped colliding with the sign is the player, marks that the player is out
         /// of range and signals the player that no interactive object is close and makes the sign dialog
-        /// disapperar.
+        /// disappear.
         /// </summary>
         /// <param name="other">Collider object that finished contact.</param>
         protected override void OnTriggerExit2D(Collider2D other)

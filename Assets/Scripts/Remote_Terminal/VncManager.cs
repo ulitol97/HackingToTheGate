@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Threading;
-using Game;
 using Game.ScriptableObjects;
 using MEC;
 using UnityEngine;
@@ -182,26 +181,9 @@ namespace Remote_Terminal
         public Sprite RemoteDesktopSprite
         {
             get { return _remoteDesktopSprite; }
-            private set { _remoteDesktopSprite = value; }
         }
 
-        public string VncHost
-        {
-            get { return vncHost; }
-            private set { vncHost = value; }
-        }
-        public uint VncPort
-        {
-            get { return vncPort; }
-            private set { vncPort = value; }
-        }
-        public string VncPassword
-        {
-            get { return vncPassword; }
-            private set { vncPassword = value; }
-        }
 
-        
         /// <summary>
         /// Returns true if there's a SSH connection currently established between the SSH client and remote host,
         /// otherwise returns false.
@@ -520,7 +502,7 @@ namespace Remote_Terminal
 
         /// <summary>
         /// Checks if the SSH and VNC clients are running and disconnects them form the host. Then sets their values
-        /// to null in order to allow new clients to be created via singleton instatiaton.
+        /// to null in order to allow new clients to be created via singleton instantiation.
         /// </summary>
         private void ResetClients()
         {

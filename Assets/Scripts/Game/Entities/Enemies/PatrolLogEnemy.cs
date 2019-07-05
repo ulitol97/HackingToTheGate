@@ -1,5 +1,4 @@
-﻿using Game.ScriptableObjects;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Entities.Enemies
 {
@@ -34,7 +33,8 @@ namespace Game.Entities.Enemies
         
         protected override void CheckDistance()
         {
-            float distanceToTarget = Vector3.Distance(transform.position, target.position);
+            var position = transform.position;
+            float distanceToTarget = Vector3.Distance(position, target.position);
             
             // Approach but never more than attack radius.
             if (distanceToTarget <= chaseRadius && distanceToTarget > attackRadius)
@@ -42,10 +42,11 @@ namespace Game.Entities.Enemies
                 if ((currentState == EnemyState.Idle || currentState == EnemyState.Walk) 
                     && currentState != EnemyState.Staggered)
                 {
-                    Vector3 movement = Vector3.MoveTowards(transform.position, 
+                    
+                    Vector3 movement = Vector3.MoveTowards(position, 
                         target.position, moveSpeed * Time.deltaTime);
 
-                    ChangeAnim(movement - transform.position);
+                    ChangeAnim(movement - position);
                     EnemyRigidBody.MovePosition(movement);
                 
                     EnemyAnimator.SetBool(AnimatorWakeUp, true);
@@ -57,10 +58,10 @@ namespace Game.Entities.Enemies
                 if (Vector3.Distance(transform.position, currentGoal.position)
                     > distanceTolerance.initialValue)
                 {
-                    Vector3 movement = Vector3.MoveTowards(transform.position, 
+                    Vector3 movement = Vector3.MoveTowards(position, 
                         currentGoal.position, moveSpeed * Time.deltaTime);
                 
-                    ChangeAnim(movement - transform.position);
+                    ChangeAnim(movement - position);
                     EnemyRigidBody.MovePosition(movement);
                 }
                 // Change goal

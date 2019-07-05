@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Game.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -67,7 +66,7 @@ namespace Game.SceneManagement
             }
         }
 
-        public IEnumerator FadeScene()
+        private IEnumerator FadeScene()
         {
             if (fadeOutPanel != null)
             {

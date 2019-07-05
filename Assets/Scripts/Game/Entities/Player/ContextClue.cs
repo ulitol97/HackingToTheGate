@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Entities.Player
 {
@@ -12,11 +11,8 @@ namespace Game.Entities.Player
         public void ChangeContext()
         {
             contextActive = !contextActive;
-            
-            if (contextActive)
-                contextClue.SetActive(true);
-            else
-                contextClue.SetActive(false);
+
+            contextClue.SetActive(contextActive);
         }
     }
 }

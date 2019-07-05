@@ -40,10 +40,10 @@ namespace Game.Entities.Enemies
        /// <param name="damage">Amount of health to be reduced.</param>
        private void TakeDamage(float damage)
        {
-           this.health -= damage;
+           health -= damage;
            if (health <= 0)
            {
-               this.gameObject.SetActive(false);
+               gameObject.SetActive(false);
            }
        }
 
@@ -52,6 +52,7 @@ namespace Game.Entities.Enemies
         /// </summary>
         /// <param name="rigidBody"></param>
         /// <param name="knockTime"></param>
+        /// <param name="damage">Damage inflicted by the knock back.</param>
         public void Knock(Rigidbody2D rigidBody, float knockTime, float damage)
         {
             StartCoroutine(EndKnock(rigidBody, knockTime));

@@ -133,8 +133,7 @@ namespace Game.Entities.Player
 		}
 	
 		/// <summary>
-		/// Function called on each frame the Player script is present into the game.
-		/// Checks for user controller input either on the joystick or the D-PAD to manage future player operations.
+		/// Function called on each frame the Player script is present into the game. Checks the player input.
 		/// </summary>
 		/// <remarks>GetAxisRaw allows digital input instead of analog input, either the movement signal is sent or not.
 		/// </remarks>
@@ -147,19 +146,18 @@ namespace Game.Entities.Player
 			CheckPlayerInput();
 		}
 
+		/// <summary>
+		/// Checks for user controller input either on the joystick or the D-PAD to manage future player operations.
+		/// </summary>
 		private void CheckPlayerInput()
 		{
 			// Check remote terminal input
 			if (Input.GetButtonDown("RemoteTerminal") && hasTerminal.runtimeValue
 			    && currentState != PlayerState.Attack)
 			{
-				if (currentState != PlayerState.RemoteTerminal)
-				{
-					currentState = PlayerState.RemoteTerminal;
-				}
-				else
-					currentState = PlayerState.Walk;
-				
+				currentState = currentState != PlayerState.RemoteTerminal ? 
+					PlayerState.RemoteTerminal : PlayerState.Walk;
+
 				playerRemoteTerminalSignal.Notify();
 			}
 			

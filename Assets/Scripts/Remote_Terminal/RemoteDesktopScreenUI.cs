@@ -1,4 +1,3 @@
-using System.Collections;
 using Game;
 using UnityEngine;
 using UnityEngine.UI;

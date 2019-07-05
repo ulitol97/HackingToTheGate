@@ -90,8 +90,9 @@ namespace Game.Entities.Enemies
         /// goes to sleep.</remarks>
         protected virtual void CheckDistance()
         {
-            float distanceToTarget = Vector3.Distance(transform.position, target.position);
-            float distanceToHome = Vector3.Distance(transform.position, homePosition.position);
+            var position = transform.position;
+            float distanceToTarget = Vector3.Distance(position, target.position);
+            float distanceToHome = Vector3.Distance(position, homePosition.position);
             
             // Approach but never more than attack radius.
             if (distanceToTarget <= chaseRadius && distanceToTarget > attackRadius)
@@ -99,10 +100,10 @@ namespace Game.Entities.Enemies
                 if ((currentState == EnemyState.Idle || currentState == EnemyState.Walk) 
                     && currentState != EnemyState.Staggered)
                 {
-                    Vector3 movement = Vector3.MoveTowards(transform.position, 
+                    Vector3 movement = Vector3.MoveTowards(position, 
                         target.position, moveSpeed * Time.deltaTime);
                     
-                    ChangeAnim(movement - transform.position);
+                    ChangeAnim(movement - position);
                     EnemyRigidBody.MovePosition(movement);
                 
                     // Walk and wake up animation if needed.
@@ -116,10 +117,10 @@ namespace Game.Entities.Enemies
                 // Move home
                 if (distanceToHome > distanceTolerance.initialValue)
                 {
-                    Vector3 movement = Vector3.MoveTowards(transform.position,
+                    Vector3 movement = Vector3.MoveTowards(position,
                         homePosition.position, moveSpeed * Time.deltaTime);
 
-                    ChangeAnim(movement - transform.position);
+                    ChangeAnim(movement - position);
                     EnemyRigidBody.MovePosition(movement);
                 }
                 // Sleep

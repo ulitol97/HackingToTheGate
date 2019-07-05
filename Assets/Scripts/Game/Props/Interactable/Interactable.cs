@@ -1,5 +1,4 @@
-﻿using System;
-using Game.ScriptableObjects;
+﻿using Game.ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Props.Interactable
