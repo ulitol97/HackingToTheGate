@@ -108,6 +108,11 @@ namespace Game.Entities.Player
 		public Signal playerRemoteTerminalSignal;
 		
 		/// <summary>
+		/// Signal observing if player's are damaged.
+		/// </summary>
+		public Signal playerDamageSignal;
+		
+		/// <summary>
 		/// Signal observing players death event.
 		/// </summary>
 		public Signal playerDeathSignal;
@@ -258,10 +263,14 @@ namespace Game.Entities.Player
 		/// <param name="damage">Damage inflicted to the player when knocked back.</param>
 		public void Knock(float knockTime, float damage)
 		{
-			currentHealth.runtimeValue -= damage;
+			// Reduce life no more than 0.
+			currentHealth.runtimeValue = Mathf.Max(0, currentHealth.runtimeValue - damage);
 			playerHealthSignal.Notify();
 			if (currentHealth.runtimeValue > 0)
 			{
+				// Camera kick
+				playerDamageSignal.Notify();
+				// End knock back
 				StartCoroutine(EndKnock(knockTime));
 			}
 			// Player death
