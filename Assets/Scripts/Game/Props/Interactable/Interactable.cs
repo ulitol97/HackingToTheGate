@@ -21,8 +21,8 @@ namespace Game.Props.Interactable
         public Signal context;
         
         /// <summary>
-        /// Checks for collision events between the sign and other objects with collision capabilities.
-        /// If the object colliding with the object is the player, marks that the player is in range and signals the
+        /// Checks for collision events between the Interactable object and other objects with collision capabilities.
+        /// If the object colliding with the object is the player, can mark that the player is in range and signals the
         /// player that an interactive object is close.
         /// </summary>
         /// <param name="other">Collider object that initiated contact.</param>
@@ -37,7 +37,8 @@ namespace Game.Props.Interactable
         }
 
         /// <summary>
-        /// Checks for end of collision events between the object and other with objects collision capabilities.
+        /// Checks for end of collision events between the Interactable object and other with objects collision
+        /// capabilities.
         /// If the object that stopped colliding with the interactable is the player, marks that the player is out
         /// of range and signals the player that no interactive object is close.
         /// </summary>

@@ -27,6 +27,11 @@ namespace Game.Entities.Enemies
         /// Game object instantiated when an enemy dies. Used for visual death effect.
         /// </summary>
         public GameObject deathEffect;
+
+        /// <summary>
+        /// Signal used for signal observers to observe enemy elimination events. 
+        /// </summary>
+        public Signal killedSignal;
         
         /// <summary>
         /// Enum structure holding the enemy possible states, like a state machine.
@@ -67,6 +72,9 @@ namespace Game.Entities.Enemies
         /// </summary>
         private void OnDeath()
         {
+            if (killedSignal != null)
+                killedSignal.Notify();
+            
             // If a death effect has been defined...
             if (deathEffect != null)
             {

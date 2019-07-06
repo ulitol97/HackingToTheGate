@@ -17,7 +17,7 @@ namespace Game.Props.Interactable.Door
         {
             base.Start();
 
-            // If already opened before destroy door
+            // If already opened before disable door
             if (isOpen.runtimeValue)
                 Destroy(Parent.gameObject);
         }

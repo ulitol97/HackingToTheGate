@@ -52,7 +52,7 @@ namespace Game.Props.PickUpItems
             
             // If it was picked up before, disable.
             if (isPickedUp.runtimeValue)
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             
         }
     

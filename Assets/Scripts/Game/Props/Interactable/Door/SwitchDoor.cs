@@ -4,11 +4,6 @@ namespace Game.Props.Interactable.Door
 {
     public class SwitchDoor : Door
     {
-//        /// <summary>
-//        /// List of switches the door is linked to.
-//        /// </summary>
-//        public List<Switch> switches;
-
         /// <summary>
         /// The correct order that the switches linked should be pressed in order to open a door.
         /// </summary>
@@ -26,9 +21,9 @@ namespace Game.Props.Interactable.Door
             base.Start();
             _currentProgressInSequence = 0;
             
-            // If already opened before destroy door
+            // If already opened before disable door
             if (isOpen.runtimeValue)
-                Destroy(Parent.gameObject);
+                Parent.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -53,7 +48,6 @@ namespace Game.Props.Interactable.Door
                 Open();
         }
 
-        // Override for no context clues.
         protected override void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player") && !other.isTrigger)
