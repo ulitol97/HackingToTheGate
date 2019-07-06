@@ -24,7 +24,6 @@ namespace Game.ScriptableObjects
         /// this value can change during the game session while using the initial
         /// value to reset it in the beginning of the game.
         /// </summary>
-        [HideInInspector] // Not appear in inspector
         public float runtimeValue;
 
         /// <summary>

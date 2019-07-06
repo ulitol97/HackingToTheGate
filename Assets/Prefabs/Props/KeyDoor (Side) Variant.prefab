@@ -15,6 +15,7 @@ MonoBehaviour:
   context: {fileID: 11400000, guid: e0e759611bbed884cb8f786f590a1cd9, type: 2}
   isOpen: {fileID: 0}
   playerInventory: {fileID: 11400000, guid: 623969f4e3dd7b14eb6c69a2569ffc2c, type: 2}
+  keyUsedSignal: {fileID: 11400000, guid: dbc5e97858243da40a9169a9593e4ac6, type: 2}
 --- !u!1001 &1356113772685530729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82,12 +83,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5797481451629733284, guid: eb0c1ccbfc1335e4bb5a17f60680feaf,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300356, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3,
-        type: 3}
     - target: {fileID: 5797481451629733282, guid: eb0c1ccbfc1335e4bb5a17f60680feaf,
         type: 3}
       propertyPath: m_Offset.x
@@ -103,6 +98,12 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 0.5970645
       objectReference: {fileID: 0}
+    - target: {fileID: 5797481451629733284, guid: eb0c1ccbfc1335e4bb5a17f60680feaf,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300356, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 7950474932446659427, guid: eb0c1ccbfc1335e4bb5a17f60680feaf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb0c1ccbfc1335e4bb5a17f60680feaf, type: 3}

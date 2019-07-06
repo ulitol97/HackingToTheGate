@@ -40,7 +40,6 @@ namespace Game.Props.Obstacles
         
         protected override void Activate()
         {
-            Debug.LogWarning("ACTIVATE");
             isOpen.runtimeValue = !isOpen.runtimeValue;
             UpdateObstacleState();
             

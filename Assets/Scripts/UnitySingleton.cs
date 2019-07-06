@@ -26,10 +26,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         if (_mShuttingDown )
         {
-            if (ignoreShuttingDown)
-                return _mInstance;
-            Debug.LogWarning("Devuelvo NULL");
-            return null;
+            return ignoreShuttingDown ? _mInstance : null;
         }
         
         lock (_mLock)

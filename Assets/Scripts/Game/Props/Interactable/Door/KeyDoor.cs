@@ -17,7 +17,7 @@ namespace Game.Props.Interactable.Door
         /// <summary>
         /// Signal notifying that a key was used to open a door.
         /// </summary>
-        public Signal KeyUsedSignal;
+        public Signal keyUsedSignal;
         
         /// <summary>
         /// Key doors will not reappear if they were opened once before, so they are deleted across scenes if needed.
@@ -37,7 +37,8 @@ namespace Game.Props.Interactable.Door
                 playerInventory.currentKeysValue.runtimeValue > 0)
             {
                 playerInventory.SubtractKey();
-                KeyUsedSignal.Notify();
+                context.Notify();
+                keyUsedSignal.Notify();
                 Open();
             }
         }

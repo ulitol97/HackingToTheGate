@@ -10,7 +10,6 @@ namespace Game.SceneManagement
     /// </summary>
     public class SceneTransition : MonoBehaviour
     {
-
         /// <summary>
         /// Name of the scene to be loaded by the scene transition.
         /// </summary>
@@ -44,15 +43,11 @@ namespace Game.SceneManagement
         
         private void Awake()
         {
-            // Hide cursor from game
-            Cursor.visible = false;
-            
             if (fadeInPanel != null)
             {
                 GameObject panelIn = Instantiate(fadeInPanel, Vector3.zero, Quaternion.identity);
                 Destroy(panelIn, 1);
             }
-
         }
 
         /// <summary>
@@ -72,9 +67,7 @@ namespace Game.SceneManagement
         private IEnumerator FadeScene()
         {
             if (fadeOutPanel != null)
-            {
                 Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity);
-            }
             
             yield return new WaitForSeconds(fadeWait.runtimeValue);
             

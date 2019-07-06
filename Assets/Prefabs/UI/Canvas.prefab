@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &70524293
 RectTransform:
   m_ObjectHideFlags: 0
@@ -691,7 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c21498ccc65a634f950bcda114c0f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: e0e759611bbed884cb8f786f590a1cd9, type: 2}
+  signal: {fileID: 11400000, guid: dbc5e97858243da40a9169a9593e4ac6, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:

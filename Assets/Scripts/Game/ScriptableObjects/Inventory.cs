@@ -14,11 +14,6 @@ namespace Game.ScriptableObjects
     public class Inventory : ScriptableObject
     {
         /// <summary>
-        /// List holding hte items present in the inventory.
-        /// </summary>
-        public List<Item> items = new List<Item>();
-        
-        /// <summary>
         /// Current active item in the inventory.
         /// </summary>
         public Item currentItem;
@@ -58,8 +53,6 @@ namespace Game.ScriptableObjects
                 hasSword.runtimeValue = true;
             else if (item.isTerminal)
                 hasTerminal.runtimeValue = true;
-            else if (!items.Contains(item))
-                items.Add(item);
         }
 
         /// <summary>

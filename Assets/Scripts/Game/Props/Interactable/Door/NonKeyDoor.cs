@@ -10,6 +10,7 @@ namespace Game.Props.Interactable.Door
     {
         public override void Open()
         {
+            context.Notify();
             Parent.gameObject.SetActive(false);
         }
     }
