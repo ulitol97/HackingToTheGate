@@ -31,7 +31,8 @@ namespace Game.Props.Interactable
             if (other.CompareTag("Player") && !other.isTrigger)
             {
                 PlayerInRange = true;
-                context.Notify();
+                if (context != null)
+                    context.Notify();
             }
 
         }
@@ -47,8 +48,9 @@ namespace Game.Props.Interactable
         {
             if (other.CompareTag("Player") && !other.isTrigger)
             {
-                context.Notify();
                 PlayerInRange = false;
+                if (context != null)
+                    context.Notify();
             }
         }
 
