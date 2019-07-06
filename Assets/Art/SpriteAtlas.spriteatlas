@@ -42,7 +42,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 40c3af929c3ab694792ddee1e870c941, type: 3}
-    totalSpriteSurfaceArea: 1483850
+    totalSpriteSurfaceArea: 2219754
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -1243,6 +1243,7 @@ SpriteAtlas:
   - {fileID: 21300040, guid: 637e9fb958d15184597d776140bd9c64, type: 3}
   - {fileID: 21300042, guid: 637e9fb958d15184597d776140bd9c64, type: 3}
   - {fileID: 21300044, guid: 637e9fb958d15184597d776140bd9c64, type: 3}
+  - {fileID: 21300000, guid: c3970e9a28cffaa48994d691c9b7aa6d, type: 3}
   - {fileID: 21300000, guid: df3ebcecadf079d49be9eab83cd8b5ed, type: 3}
   - {fileID: 21300000, guid: 3d33040f05424394a92f7e459f2d637d, type: 3}
   - {fileID: 21300698, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
@@ -3026,6 +3027,7 @@ SpriteAtlas:
   - log_20
   - log_21
   - log_22
+  - menu_background
   - sword
   - Inner
   - tiles_dungeon_v1.1_349
