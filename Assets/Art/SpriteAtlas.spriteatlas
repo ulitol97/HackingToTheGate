@@ -1304,6 +1304,8 @@ SpriteAtlas:
   - {fileID: 21300066, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300060, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300062, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
+  - {fileID: 21300436, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
+  - {fileID: 21300434, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300420, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300422, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300018, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
@@ -1320,11 +1322,9 @@ SpriteAtlas:
   - {fileID: 21300400, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300472, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300528, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
-  - {fileID: 21300434, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300414, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300474, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300534, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
-  - {fileID: 21300436, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300412, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300468, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   - {fileID: 21300532, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
@@ -3087,6 +3087,8 @@ SpriteAtlas:
   - tiles_dungeon_v1.1_33
   - tiles_dungeon_v1.1_30
   - tiles_dungeon_v1.1_31
+  - spikesUp
+  - spikesDown
   - tiles_dungeon_v1.1_210
   - tiles_dungeon_v1.1_211
   - tiles_dungeon_v1.1_9
@@ -3103,11 +3105,9 @@ SpriteAtlas:
   - tiles_dungeon_v1.1_200
   - tiles_dungeon_v1.1_236
   - tiles_dungeon_v1.1_264
-  - tiles_dungeon_v1.1_217
   - tiles_dungeon_v1.1_207
   - tiles_dungeon_v1.1_237
   - tiles_dungeon_v1.1_267
-  - tiles_dungeon_v1.1_218
   - tiles_dungeon_v1.1_206
   - tiles_dungeon_v1.1_234
   - tiles_dungeon_v1.1_266

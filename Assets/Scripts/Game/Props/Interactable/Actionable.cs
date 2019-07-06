@@ -21,10 +21,7 @@ namespace Game.Props.Interactable
         /// </summary>
         public int currentProgressInSequence;
 
-        /// <summary>
-        /// Represents whether the obstacle was activated or not.
-        /// </summary>
-        public bool actioned;
+        
         
         /// <summary>
         /// Retrieves a reference to the obstacle parent to deactivate it if obstacle destroyed.
@@ -43,7 +40,7 @@ namespace Game.Props.Interactable
         
         public virtual void OnActionReceived(int actionId)
         {
-            if (isOpen.runtimeValue || actioned)
+            if (isOpen.runtimeValue)
                 return;
 
             CompareWithActionableSequence(actionId);
@@ -72,8 +69,6 @@ namespace Game.Props.Interactable
         /// Logic to be executed when the obstacle is activated correctly.
         /// </summary>
         protected virtual void Activate()
-        {
-            actioned = true;
-        }
+        {}
     }
 }

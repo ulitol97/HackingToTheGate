@@ -219,8 +219,8 @@ TextureImporter:
     21300428: tiles_dungeon_v1.1_214
     21300430: tiles_dungeon_v1.1_215
     21300432: tiles_dungeon_v1.1_216
-    21300434: tiles_dungeon_v1.1_217
-    21300436: tiles_dungeon_v1.1_218
+    21300434: spikesDown
+    21300436: spikesUp
     21300438: tiles_dungeon_v1.1_219
     21300440: tiles_dungeon_v1.1_220
     21300442: tiles_dungeon_v1.1_221
@@ -4790,7 +4790,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_dungeon_v1.1_217
+      name: spikesDown
       rect:
         serializedVersion: 2
         x: 16
@@ -4810,7 +4810,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_dungeon_v1.1_218
+      name: spikesUp
       rect:
         serializedVersion: 2
         x: 32

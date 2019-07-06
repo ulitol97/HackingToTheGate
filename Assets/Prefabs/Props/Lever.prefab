@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3560503452736830098}
   - component: {fileID: 3560503452736830092}
   - component: {fileID: 3847799921748324118}
+  - component: {fileID: 9042703078217435726}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -123,3 +124,30 @@ MonoBehaviour:
   id: 0
   activeSprite: {fileID: 21300610, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
   inactiveSprite: {fileID: 21300614, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3, type: 3}
+  linkedObstacle: {fileID: 0}
+--- !u!61 &9042703078217435726
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560503452736830099}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0000001937151, y: -0.031112313}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.85777223, y: 0.86666167}
+  m_EdgeRadius: 0
