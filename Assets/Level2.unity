@@ -2507,6 +2507,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textDuration: 2.5
+--- !u!212 &2018232384 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6724978351375878515, guid: aa118d4348b2c654b96f91ebbba5d07d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6724978350947034278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &2018232385 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1143112737, guid: aa118d4348b2c654b96f91ebbba5d07d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6724978350947034278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2042132336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82954,6 +82966,16 @@ PrefabInstance:
       propertyPath: playerInitialDirectionY
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: playerHurtCollider
+      value: 
+      objectReference: {fileID: 2018232385}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: playerSpriteRenderer
+      value: 
+      objectReference: {fileID: 2018232384}
     - target: {fileID: 576102481, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
       propertyPath: m_IsActive
       value: 0

@@ -22,6 +22,16 @@ namespace Game.Entities.Player
 		/// Unity RigidBody component representing the player's character body in game.
 		/// </summary>
 		private Rigidbody2D _playerRigidBody;
+		
+		/// <summary>
+		/// Collider object checking for collisions that may damage the player.
+		/// </summary>
+		public Collider2D playerHurtCollider;
+		
+		/// <summary>
+		/// Sprite renderer in charge of the player.
+		/// </summary>
+		public SpriteRenderer playerSpriteRenderer;
 	
 		/// <summary>
 		/// Vector used to store the difference between the player's current position and his/her target position.
@@ -117,6 +127,26 @@ namespace Game.Entities.Player
 		/// </summary>
 		public Signal playerDeathSignal;
 
+		/// <summary>
+		/// Color used to represent the player has been hurt and is invulnerable.
+		/// </summary>
+		public Color damageColor;
+		
+		/// <summary>
+		/// Regular player sprite color.
+		/// </summary>
+		public Color regularColor;
+		
+		/// <summary>
+		/// Amount of seconds a player may stay invulnerable when hurt.
+		/// </summary>
+		public float invulnerabilityFlashDuration;
+		public int numberOfInvulnerabilityFlashes;
+		
+
+		/// <summary>
+		/// Tolerance to joystick input in order not to move on a minimum joystick tilt.
+		/// </summary>
 		private const float JoystickTolerance = 0.1f;
 		
 		/// <summary>
@@ -275,9 +305,8 @@ namespace Game.Entities.Player
 			}
 			// Player death
 			else
-			{
 				playerDeathSignal.Notify();
-			}
+			
 		}
 		
 		/// <summary>
@@ -286,14 +315,32 @@ namespace Game.Entities.Player
 		/// </summary>
 		/// <param name="knockTime">Time before stopping the knockback force.</param>
 		/// <returns></returns>
-		private IEnumerator EndKnock( float knockTime)
+		private IEnumerator EndKnock(float knockTime)
 		{
 			if (_playerRigidBody != null)
 			{
+				StartCoroutine(Invulnerability());
 				yield return new  WaitForSeconds(knockTime);
 				_playerRigidBody.velocity = Vector2.zero;
 				currentState = PlayerState.Idle;
 			}
+		}
+		
+		// ReSharper disable once Unity.InefficientPropertyAccess
+		private IEnumerator Invulnerability()
+		{
+			int temp = 0;
+			playerHurtCollider.enabled = false;
+
+			while (temp < numberOfInvulnerabilityFlashes)
+			{
+				playerSpriteRenderer.color = damageColor;
+				yield return new WaitForSeconds(invulnerabilityFlashDuration);
+				playerSpriteRenderer.color = regularColor;
+				yield return new WaitForSeconds(invulnerabilityFlashDuration);
+				temp++;
+			}
+			playerHurtCollider.enabled = true;
 		}
 		
 		/// <summary>

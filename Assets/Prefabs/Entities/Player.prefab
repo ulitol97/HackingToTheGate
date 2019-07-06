@@ -787,6 +787,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  playerHurtCollider: {fileID: 1143112737}
+  playerSpriteRenderer: {fileID: 6724978351375878515}
   playerInitialDirectionX: 0
   playerInitialDirectionY: -1
   currentState: 0
@@ -801,6 +803,10 @@ MonoBehaviour:
     type: 2}
   playerDamageSignal: {fileID: 11400000, guid: e63297093e65e2f41b220bcec00df95b, type: 2}
   playerDeathSignal: {fileID: 11400000, guid: d4f4efbfc9988e441b0addbc71c5142a, type: 2}
+  damageColor: {r: 0.9056604, g: 0.20932718, b: 0.20932718, a: 0.60784316}
+  regularColor: {r: 1, g: 1, b: 1, a: 1}
+  invulnerabilityFlashDuration: 0.07
+  numberOfInvulnerabilityFlashes: 6
 --- !u!114 &7847369237335361769
 MonoBehaviour:
   m_ObjectHideFlags: 0

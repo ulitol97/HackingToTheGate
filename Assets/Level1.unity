@@ -90568,9 +90568,81 @@ PrefabInstance:
       propertyPath: contextActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: damageColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: damageColor.g
+      value: 0.13256602
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: damageColor.b
+      value: 0.08018869
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: damageColor.a
+      value: 0.6627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: regularColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: regularColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: regularColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: regularColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: invulnerabilityFlashDuration
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: numberOfInvulnerabilityFlashes
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: playerHurtCollider
+      value: 
+      objectReference: {fileID: 6724978350947034280}
+    - target: {fileID: 6724978351375878527, guid: aa118d4348b2c654b96f91ebbba5d07d,
+        type: 3}
+      propertyPath: playerSpriteRenderer
+      value: 
+      objectReference: {fileID: 6724978350947034279}
     m_RemovedComponents:
     - {fileID: 4508810205119092313, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aa118d4348b2c654b96f91ebbba5d07d, type: 3}
+--- !u!212 &6724978350947034279 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6724978351375878515, guid: aa118d4348b2c654b96f91ebbba5d07d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6724978350947034278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &6724978350947034280 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1143112737, guid: aa118d4348b2c654b96f91ebbba5d07d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6724978350947034278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6956516376438206311
 PrefabInstance:
   m_ObjectHideFlags: 0
