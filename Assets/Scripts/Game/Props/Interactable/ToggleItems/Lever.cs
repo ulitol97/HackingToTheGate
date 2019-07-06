@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Game.Props.Interactable.ToggleItems
 {
+    /// <summary>
+    /// The class Lever inherits from Toggle, and adds the capability of staying in their state
+    /// permanently when not being interacted with.
+    /// </summary>
     public class Lever : Toggle
     {
         private bool _active;

@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 0}
   playerInventory: {fileID: 0}
+  isPickedUp: {fileID: 0}
   dialogBox: {fileID: 0}
   dialogText: {fileID: 0}
   receiveItem: {fileID: 11400000, guid: 57a6316fe36f3904bb1954f4f3289b31, type: 2}

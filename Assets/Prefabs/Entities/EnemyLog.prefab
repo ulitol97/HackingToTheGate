@@ -163,11 +163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62b7a7cdaf7d20479d18c2f06c29e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
   maxHealth: {fileID: 11400000, guid: 84c166bcfb95d2944be043a02c8d6e8d, type: 2}
   moveSpeed: 1.75
   deathEffect: {fileID: 6347222844938120502, guid: 9edde1bcc9febb1488708b83d346236e,
     type: 3}
+  killedSignal: {fileID: 0}
   currentState: 0
   target: {fileID: 0}
   homePosition: {fileID: 0}

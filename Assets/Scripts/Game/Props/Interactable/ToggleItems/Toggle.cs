@@ -2,6 +2,10 @@
 
 namespace Game.Props.Interactable.ToggleItems
 {
+    /// <summary>
+    /// The class Toggle represents any game object that acts as an ON-OFF mechanism. It is capable
+    /// of communication with any ActionableObstacle, which will be opened by interaction with the Toggle object.
+    /// </summary>
     public class Toggle : Interactable
     {
         /// <summary>

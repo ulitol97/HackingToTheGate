@@ -1,4 +1,4 @@
-﻿namespace Game.Entities.Player
+﻿namespace Game.Entities.Player.ContextClues
 {
     /// <summary>
     /// Context clue shown when the player is close to a closed door.

@@ -44,6 +44,9 @@ namespace Game.SceneManagement
         
         private void Awake()
         {
+            // Hide cursor from game
+            Cursor.visible = false;
+            
             if (fadeInPanel != null)
             {
                 GameObject panelIn = Instantiate(fadeInPanel, Vector3.zero, Quaternion.identity);

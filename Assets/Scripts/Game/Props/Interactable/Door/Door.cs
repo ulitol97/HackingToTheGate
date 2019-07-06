@@ -5,7 +5,7 @@ namespace Game.Props.Interactable.Door
 {
     /// <summary>
     /// The Door class inherits from Interactable.
-    /// Represents an in-game door the player can interact with.
+    /// Serves as a template to any an in-game door the player can interact with.
     /// </summary>
     public abstract class Door : Interactable, IDoor
     {

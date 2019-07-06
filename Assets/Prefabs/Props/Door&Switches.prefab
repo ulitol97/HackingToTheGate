@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16649734c7c4eb40831b9dac937447a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
+  context: {fileID: 0}
   id: 5
   activeSprite: {fileID: 21300196, guid: 3d816fef7c702134295262270597a974, type: 3}
   inactiveSprite: {fileID: 21300194, guid: 3d816fef7c702134295262270597a974, type: 3}
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16649734c7c4eb40831b9dac937447a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
+  context: {fileID: 0}
   id: 4
   activeSprite: {fileID: 21300196, guid: 3d816fef7c702134295262270597a974, type: 3}
   inactiveSprite: {fileID: 21300194, guid: 3d816fef7c702134295262270597a974, type: 3}
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16649734c7c4eb40831b9dac937447a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
+  context: {fileID: 0}
   id: 3
   activeSprite: {fileID: 21300196, guid: 3d816fef7c702134295262270597a974, type: 3}
   inactiveSprite: {fileID: 21300194, guid: 3d816fef7c702134295262270597a974, type: 3}
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16649734c7c4eb40831b9dac937447a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
+  context: {fileID: 0}
   id: 2
   activeSprite: {fileID: 21300196, guid: 3d816fef7c702134295262270597a974, type: 3}
   inactiveSprite: {fileID: 21300194, guid: 3d816fef7c702134295262270597a974, type: 3}
@@ -606,7 +606,6 @@ MonoBehaviour:
   isOpen: {fileID: 11400000, guid: 4a328da2e4823ce40819ac8495d6f52a, type: 2}
   actionableSequence: 
   currentProgressInSequence: 0
-  actioned: 0
 --- !u!1 &5213533343977503890
 GameObject:
   m_ObjectHideFlags: 0

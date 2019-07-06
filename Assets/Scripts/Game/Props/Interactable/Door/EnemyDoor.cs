@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace Game.Props.Interactable.Door
 {
+    /// <summary>
+    /// The EnemyDoor class inherits from Door.
+    /// Represents an in-game door the player can open if a certain amount of enemies have been
+    /// eliminated.
+    /// </summary>
     public class EnemyDoor : Door
     {
         /// <summary>

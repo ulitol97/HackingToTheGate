@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Entities.Player
+namespace Game.Entities.Player.ContextClues
 {
     /// <summary>
     /// ContextClue acts as a template class for representing special information above the player avatar,

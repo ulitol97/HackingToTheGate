@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Game.Props.Interactable.Door
 {
+    /// <summary>
+    /// The KeyDoor class inherits from Door.
+    /// Represents an in-game door the player can open if he/she has a key available in the inventory.
+    /// </summary>
     public class KeyDoor : Door
     {
         /// <summary>
