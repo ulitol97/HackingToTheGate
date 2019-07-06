@@ -1767,6 +1767,7 @@ SpriteAtlas:
   - {fileID: 21300242, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300240, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300194, guid: 3d816fef7c702134295262270597a974, type: 3}
+  - {fileID: 21300048, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300034, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300096, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300032, guid: 3d816fef7c702134295262270597a974, type: 3}
@@ -1800,7 +1801,6 @@ SpriteAtlas:
   - {fileID: 21300094, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300054, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300074, guid: 3d816fef7c702134295262270597a974, type: 3}
-  - {fileID: 21300048, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300072, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300050, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300062, guid: 3d816fef7c702134295262270597a974, type: 3}
@@ -3550,6 +3550,7 @@ SpriteAtlas:
   - objects_121
   - objects_120
   - switchUp
+  - rock1
   - objects_17
   - objects_48
   - objects_16
@@ -3583,7 +3584,6 @@ SpriteAtlas:
   - objects_47
   - objects_27
   - objects_37
-  - objects_24
   - objects_36
   - objects_25
   - objects_31

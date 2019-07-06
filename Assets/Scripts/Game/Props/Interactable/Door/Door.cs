@@ -51,7 +51,6 @@ namespace Game.Props.Interactable.Door
             // Store it was opened and destroy.
             isOpen.runtimeValue = true;
             Parent.gameObject.SetActive(false);
-//            Destroy(Parent.gameObject);
         }
     }
 }

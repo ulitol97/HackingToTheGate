@@ -6,7 +6,7 @@ namespace Game.Props.Interactable.Door
     {
         public override void Open()
         {
-            Destroy(Parent.gameObject);
+            Parent.gameObject.SetActive(false);
         }
     }
 }

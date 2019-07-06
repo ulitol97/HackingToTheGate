@@ -28,7 +28,7 @@ namespace Game.Entities
         public FloatValue damage;
         
         /// <summary>
-        /// Checks for start-collision events affecting the game element attached to this scrip and
+        /// Checks for start-collision events affecting the game element attached to this script and
         /// triggers the corresponding logic of the object that collided with the attack.
         /// If the enemy entered the collision, it is knocked back proportionally to the distance to the player.
         /// </summary>

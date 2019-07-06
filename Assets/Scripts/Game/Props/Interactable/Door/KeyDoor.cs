@@ -19,7 +19,7 @@ namespace Game.Props.Interactable.Door
 
             // If already opened before disable door
             if (isOpen.runtimeValue)
-                Destroy(Parent.gameObject);
+                Parent.gameObject.SetActive(false);
         }
         
         protected override void Update()

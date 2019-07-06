@@ -26,7 +26,7 @@ TextureImporter:
     21300042: objects_21
     21300044: objects_22
     21300046: objects_23
-    21300048: objects_24
+    21300048: rock1
     21300050: objects_25
     21300052: objects_26
     21300054: objects_27
@@ -192,7 +192,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -720,7 +720,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_24
+      name: rock1
       rect:
         serializedVersion: 2
         x: 260

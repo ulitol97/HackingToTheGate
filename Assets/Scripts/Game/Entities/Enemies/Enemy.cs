@@ -10,7 +10,7 @@ namespace Game.Entities.Enemies
         /// <summary>
         /// Runtime health of the enemy.
         /// </summary>
-        public float health;
+        private float _health;
 
         /// <summary>
         /// Value storing the max health a certain type of enemy must have.
@@ -50,7 +50,7 @@ namespace Game.Entities.Enemies
 
         private void Awake()
         {
-            health = maxHealth.initialValue;
+            _health = maxHealth.initialValue;
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace Game.Entities.Enemies
        /// <param name="damage">Amount of health to be reduced.</param>
        private void TakeDamage(float damage)
        {
-           health -= damage;
-           if (health <= 0)
+           _health -= damage;
+           if (_health <= 0)
            {
                OnDeath();
                gameObject.SetActive(false);
@@ -93,7 +93,8 @@ namespace Game.Entities.Enemies
         /// <param name="damage">Damage inflicted by the knock back.</param>
         public void Knock(Rigidbody2D rigidBody, float knockTime, float damage)
         {
-            StartCoroutine(EndKnock(rigidBody, knockTime));
+            if (gameObject.activeInHierarchy)
+                StartCoroutine(EndKnock(rigidBody, knockTime));
             TakeDamage(damage);
         }
 
@@ -106,7 +107,7 @@ namespace Game.Entities.Enemies
         /// <returns></returns>
         private IEnumerator EndKnock(Rigidbody2D rigidBody, float knockTime)
         {
-            if (rigidBody != null)
+            if (rigidBody != null && gameObject.activeInHierarchy)
             {
                 yield return new  WaitForSeconds(knockTime);
                 rigidBody.velocity = Vector2.zero;
