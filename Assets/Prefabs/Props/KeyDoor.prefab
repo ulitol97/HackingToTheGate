@@ -73,6 +73,7 @@ MonoBehaviour:
   context: {fileID: 11400000, guid: e0e759611bbed884cb8f786f590a1cd9, type: 2}
   isOpen: {fileID: 0}
   playerInventory: {fileID: 11400000, guid: 623969f4e3dd7b14eb6c69a2569ffc2c, type: 2}
+  KeyUsedSignal: {fileID: 11400000, guid: e0e759611bbed884cb8f786f590a1cd9, type: 2}
 --- !u!1 &5797481451629733287
 GameObject:
   m_ObjectHideFlags: 0

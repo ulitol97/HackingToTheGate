@@ -11,7 +11,7 @@ namespace Game.ScriptableObjects
     /// so it can be left outside the scene so that it survives scene changes.
     /// </remarks>
     [CreateAssetMenu]
-    public class Inventory : ScriptableObject, ISerializationCallbackReceiver
+    public class Inventory : ScriptableObject
     {
         /// <summary>
         /// List holding hte items present in the inventory.
@@ -22,18 +22,17 @@ namespace Game.ScriptableObjects
         /// Current active item in the inventory.
         /// </summary>
         public Item currentItem;
-
-        /// <summary>
-        /// Number of keys present in the players inventory in the beginning of a game session.
-        /// </summary>
-        public int keysInitialValue;
         
         /// <summary>
         /// Runtime value representing the amount of keys present in the inventory
         /// during the game session.
         /// </summary>
-        [HideInInspector] // Not appear in inspector
-        public int keysRuntimeValue;
+        public FloatValue currentKeysValue;
+        
+        /// <summary>
+        /// Maximum number of keys present in the players inventory at the same time.
+        /// </summary>
+        public FloatValue maxKeysValue;
 
         /// <summary>
         /// Represents whether the player has acquired a sword or not. A boolean value is used as a global variable.
@@ -53,8 +52,8 @@ namespace Game.ScriptableObjects
         /// <param name="item"></param>
         public void AddItem(Item item)
         {
-            if (item.isKey)
-                keysRuntimeValue++;
+            if (item.isKey && currentKeysValue.runtimeValue < maxKeysValue.runtimeValue)
+                currentKeysValue.runtimeValue++;
             else if (item.isSword)
                 hasSword.runtimeValue = true;
             else if (item.isTerminal)
@@ -68,19 +67,7 @@ namespace Game.ScriptableObjects
         /// </summary>
         public void SubtractKey()
         {
-            keysRuntimeValue = Mathf.Max(0, keysRuntimeValue - 1);
-        }
-
-        public void OnBeforeSerialize()
-        {}
-
-        /// <summary>
-        /// Reset the runtime value hof keys held by the player when the
-        /// game session begins.
-        /// </summary>
-        public void OnAfterDeserialize()
-        {
-            keysRuntimeValue = keysInitialValue;
+            currentKeysValue.runtimeValue = Mathf.Max(0, currentKeysValue.runtimeValue - 1);
         }
     }
 }

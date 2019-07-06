@@ -2,10 +2,13 @@
 
 namespace Game.Props.PickUpItems
 {
+    /// <summary>
+    /// The PickUpKey class represents a key that can be picked up from the floor
+    /// by the player by passing through it.
+    /// </summary>
     public class PickUpKey : FloorObject
     {
-        
-       protected override void Start()
+        protected override void Start()
         {
             base.Start();
             SpriteRenderer.sprite = content.itemSprite;

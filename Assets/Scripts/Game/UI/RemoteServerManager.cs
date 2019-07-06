@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
+    /// <summary>
+    /// The RemoteServerManager observes for changes in the connection status with the remote server to represent
+    /// them on the UI.
+    /// </summary>
     public class RemoteServerManager : MonoBehaviour
     {
         /// <summary>
@@ -35,7 +39,8 @@ namespace Game.UI
         public void UpdateOnlineStatus()
         {
             if (VncManager.GetInstance(true) != null)
-                connectionCircle.color = VncManager.GetInstance(true).ConnectionStatus ? connectedColor : disconnectedColor;
+                connectionCircle.color = VncManager.GetInstance(true).ConnectionStatus ? 
+                    connectedColor : disconnectedColor;
         }
     }
 }

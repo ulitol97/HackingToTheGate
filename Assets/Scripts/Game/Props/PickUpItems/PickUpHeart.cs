@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Game.Props.PickUpItems
 {
+    /// <summary>
+    /// The PickUpHeart class represents a life point that can be picked up from the floor
+    /// by the player by passing through it.
+    /// </summary>
     public class PickUpHeart : FloorObject
     {
         /// <summary>

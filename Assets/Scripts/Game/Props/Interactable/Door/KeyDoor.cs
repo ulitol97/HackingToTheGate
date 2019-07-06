@@ -13,6 +13,11 @@ namespace Game.Props.Interactable.Door
         /// Reference to the player's inventory, used to check for player's keys.
         /// </summary>
         public Inventory playerInventory;
+
+        /// <summary>
+        /// Signal notifying that a key was used to open a door.
+        /// </summary>
+        public Signal KeyUsedSignal;
         
         /// <summary>
         /// Key doors will not reappear if they were opened once before, so they are deleted across scenes if needed.
@@ -28,10 +33,12 @@ namespace Game.Props.Interactable.Door
         
         protected override void Update()
         {
-            if (PlayerInRange && Input.GetButtonDown("Interact") && playerInventory.keysRuntimeValue > 0)
+            if (PlayerInRange && Input.GetButtonDown("Interact") && 
+                playerInventory.currentKeysValue.runtimeValue > 0)
             {
                 playerInventory.SubtractKey();
-                    Open();
+                KeyUsedSignal.Notify();
+                Open();
             }
         }
     }

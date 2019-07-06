@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currentItem: {fileID: 11400000, guid: 6ca92fea08f66b34b9c70ba4a617a42c, type: 2}
-  keysInitialValue: 0
-  keysRuntimeValue: 0
+  currentKeysValue: {fileID: 11400000, guid: b5f702c21a2a1d04187277a6c5eb38cb, type: 2}
+  maxKeysValue: {fileID: 11400000, guid: 51ef13927dd4353439f8624e6e6624cd, type: 2}
   hasSword: {fileID: 11400000, guid: 0179e717981bef942bd67702c892ad3d, type: 2}
   hasTerminal: {fileID: 11400000, guid: a1b5817acaaeb1746a37cce0353c3702, type: 2}

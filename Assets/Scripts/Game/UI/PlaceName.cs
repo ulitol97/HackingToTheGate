@@ -3,23 +3,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Game.Entities.Player
+namespace Game.UI
 {
     /// <summary>
-    /// The PlayerSpawn class handles game logic that should happen whenever a Player
-    /// element is spawned in game, that is, at the beginning of each level.
+    /// The PlaceName class handles, at the beginning of each level, the appearance of a descriptive text containing
+    /// the name of the level.
     /// </summary>
-    public class PlayerSpawn : MonoBehaviour
+    public class PlaceName : MonoBehaviour
     {
-
-        /// <summary>
-        /// Represents the GameObject holding the name of each level.
-        /// </summary>
-        public GameObject text;
         /// <summary>
         /// Represents the text component rendering the text name of each level.
         /// </summary>
-        public Text placeText;
+        private Text _placeText;
 
         /// <summary>
         /// Amount of seconds the name of the level should be shown.
@@ -34,6 +29,7 @@ namespace Game.Entities.Player
         /// </summary>
         private void Start()
         {
+            _placeText = GetComponent<Text>();
             StartCoroutine(DrawPlaceName());
         }
         
@@ -43,11 +39,11 @@ namespace Game.Entities.Player
         /// </summary>
         private IEnumerator DrawPlaceName()
         {
-            placeText.gameObject.SetActive(true);
-            placeText.text = Globals.Instance.LevelNameTable[SceneManager.GetActiveScene().name];
-            Debug.Log(placeText.text);
+            _placeText.gameObject.SetActive(true);
+            _placeText.text = Globals.Instance.LevelNameTable[SceneManager.GetActiveScene().name];
+
             yield return new WaitForSeconds(textDuration);
-            placeText.gameObject.SetActive(false);
+            _placeText.gameObject.SetActive(false);
         }
     }
 }

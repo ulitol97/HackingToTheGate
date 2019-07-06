@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 namespace Game.Props.PickUpItems
 {
+    /// <summary>
+    /// The FloorObject class represents items that appear on the dungeon floor and be picked up
+    /// by player by passing through them.
+    /// </summary>
     public abstract class FloorObject : MonoBehaviour, IPickUpItem
     {
     
@@ -18,7 +22,7 @@ namespace Game.Props.PickUpItems
         public Inventory playerInventory;
 
         /// <summary>
-        /// Sprite rendender in charge of rendering the object in-game.
+        /// Sprite renderer in charge of rendering the object in-game.
         /// </summary>
         protected SpriteRenderer SpriteRenderer;
     
