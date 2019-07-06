@@ -42,7 +42,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 40c3af929c3ab694792ddee1e870c941, type: 3}
-    totalSpriteSurfaceArea: 1484206
+    totalSpriteSurfaceArea: 1483850
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -1706,11 +1706,9 @@ SpriteAtlas:
   - {fileID: 21300102, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300138, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300172, guid: 3d816fef7c702134295262270597a974, type: 3}
-  - {fileID: 21300196, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300100, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300132, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300174, guid: 3d816fef7c702134295262270597a974, type: 3}
-  - {fileID: 21300194, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300114, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300134, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300160, guid: 3d816fef7c702134295262270597a974, type: 3}
@@ -1768,6 +1766,7 @@ SpriteAtlas:
   - {fileID: 21300244, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300242, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300240, guid: 3d816fef7c702134295262270597a974, type: 3}
+  - {fileID: 21300194, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300034, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300096, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300032, guid: 3d816fef7c702134295262270597a974, type: 3}
@@ -1826,6 +1825,7 @@ SpriteAtlas:
   - {fileID: 21300236, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300204, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300238, guid: 3d816fef7c702134295262270597a974, type: 3}
+  - {fileID: 21300196, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300218, guid: 3d816fef7c702134295262270597a974, type: 3}
   - {fileID: 21300216, guid: 3d816fef7c702134295262270597a974, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -3489,11 +3489,9 @@ SpriteAtlas:
   - objects_51
   - objects_69
   - objects_86
-  - objects_98
   - objects_50
   - objects_66
   - objects_87
-  - objects_97
   - objects_57
   - objects_67
   - objects_80
@@ -3551,6 +3549,7 @@ SpriteAtlas:
   - objects_122
   - objects_121
   - objects_120
+  - switchUp
   - objects_17
   - objects_48
   - objects_16
@@ -3609,6 +3608,7 @@ SpriteAtlas:
   - objects_118
   - objects_102
   - objects_119
+  - switchDown
   - objects_109
   - objects_108
   m_Tag: SpriteAtlas
