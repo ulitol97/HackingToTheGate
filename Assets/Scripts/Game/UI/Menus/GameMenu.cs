@@ -7,7 +7,6 @@ namespace Game.UI.Menus
     /// </summary>
     public abstract class GameMenu : MonoBehaviour, IMenu
     {
-        
         /// <summary>
         /// Boolean flag to control if the user manual should be rendered or not.
         /// </summary>

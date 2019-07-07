@@ -1,0 +1,18 @@
+{
+  "vncConnectionInfo": {
+    "targetHost": "127.0.0.1",
+    "vncServerPassword": "",
+    "port": 5900
+  },
+  "sshConnectionInfo": {
+    "username": "tfg",
+    "password": "123456",
+    "port": 22,
+    "publicKeyAuth": {
+      "path": "",
+      "passPhrase": "",
+      "preferSshPublicKey": true
+    }
+  },
+  "secondsBetweenConnectionAttempts": 8
+}

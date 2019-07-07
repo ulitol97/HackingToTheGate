@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Configuration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -40,7 +41,7 @@ namespace Game.UI
         private IEnumerator DrawPlaceName()
         {
             _placeText.gameObject.SetActive(true);
-            _placeText.text = Globals.Instance.LevelNameTable[SceneManager.GetActiveScene().name];
+            _placeText.text = GameConfigurationManager.Instance.LevelNameTable[SceneManager.GetActiveScene().name];
 
             yield return new WaitForSeconds(textDuration);
             _placeText.gameObject.SetActive(false);

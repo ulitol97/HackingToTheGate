@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using Game.Configuration;
 using Game.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Entities.Player
 {
@@ -400,11 +402,11 @@ namespace Game.Entities.Player
 		}
 
 		/// <summary>
-		/// Logic to execute when notified that the player's health is empty.
+		/// Logic to execute when notified that the player's health is emptied.
 		/// </summary>
 		public void OnPlayerDeath()
 		{
-			Globals.Instance.GameOver();
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 		
 	}

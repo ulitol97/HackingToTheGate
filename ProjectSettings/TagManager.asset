@@ -8,6 +8,9 @@ TagManager:
   - Breakable
   - Enemy
   - RemoteServer
+  - ConfigFileLoading
+  - ConfigFileOK
+  - ConfigFileErrors
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Configuration;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.Props.Interactable
@@ -50,11 +51,11 @@ namespace Game.Props.Interactable
                 var text = "";
                 try
                 {
-                    text = Globals.Instance.SignMessagesTable[dialogKey];
+                    text = GameConfigurationManager.Instance.SignMessagesTable[dialogKey];
                 }
                 catch
                 {
-                    text = Globals.Instance.SignMessagesTable["placeholder"];
+                    text = GameConfigurationManager.Instance.SignMessagesTable["placeholder"];
                 }
                 finally
                 {
