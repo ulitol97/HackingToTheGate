@@ -488,7 +488,6 @@ namespace Remote_Terminal
         private void CancelScreenRefresh()
         {
             ResetScreenRefresh();
-            
             // Stop threaded screen refreshing.
             if (_threadRunning)
             {
@@ -504,36 +503,47 @@ namespace Remote_Terminal
         /// Checks if the SSH and VNC clients are running and disconnects them form the host. Then sets their values
         /// to null in order to allow new clients to be created via singleton instantiation.
         /// </summary>
-        private void ResetClients()
+        private void RemoveClients()
         {
             if (VncConnected)
             {
                 _rd.Dispose(false);
                 _rd = null;
             }
+
             if (SshConnected)
                 SshManager.GetInstance(true).Dispose();
         }
-        
-        /// <summary>
-        /// Stops all data flow between the game and the server, ensuring all threads and clients related are stopped
-        /// or disconnected.
-        /// </summary>
-        private void StopConnection()
+
+        private void DisconnectClients()
         {
-            // Stop the remote desktop refresh process
-            CancelScreenRefresh();
-            
-            // Disconnect VNC and SSH clients to ensure connection is restarted safely.
-            ResetClients();
+            if (VncConnected)
+            {
+                _rd.Disconnect();
+                _rd = null;
+            }
+            if (SshConnected)
+                SshManager.GetInstance(true).Disconnect();
         }
 
         /// <summary>
         /// Called when the game is quit (e.g: on game closing) to interrupt the connection to the remote host nicely.
         /// </summary>
+        private void OnDestroy()
+        {
+            // Stop the remote desktop refresh process
+            CancelScreenRefresh();
+            DisconnectClients();
+        }
+        
+        /// <summary>
+        /// Called when the game is quit (e.g: on game closing) to interrupt the connection to the remote host nicely.
+        /// </summary>
         private void OnApplicationQuit()
         {
-            StopConnection();
+            // Stop the remote desktop refresh process
+            CancelScreenRefresh();
+            RemoveClients();
         }
     }
 }

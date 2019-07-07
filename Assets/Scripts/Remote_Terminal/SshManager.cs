@@ -1,3 +1,4 @@
+using System;
 using Renci.SshNet;
 
 namespace Remote_Terminal
@@ -35,7 +36,14 @@ namespace Remote_Terminal
         {
             get
             {
-                return _client != null && _client.IsConnected;
+                try
+                {
+                    return _client != null && _client.IsConnected;
+                }
+                catch (ObjectDisposedException)
+                {
+                    return false;
+                }
             }
         }
 
@@ -149,11 +157,32 @@ namespace Remote_Terminal
         /// </summary>
         public void Dispose ()
         {
-            if (_forwardedPort != null)
-                _forwardedPort.Dispose();
-            
+            Disconnect();
+            _client.Dispose();
+        }
+        
+        
+        /// <summary>
+        /// Closes the SshClient and stops the port forwarding if it's taking place. Then, sets the singleton instance
+        /// to null to allow a new SshClient to be initialized.
+        /// </summary>
+        public void Disconnect ()
+        {
             if (_client != null)
-                _client.Dispose();
+            {
+                RemovePortForwarding();
+                _client.Disconnect();
+            }
+        }
+
+        private void RemovePortForwarding()
+        {
+            if (_forwardedPort != null)
+            {
+                if (_client != null)
+                    _client.RemoveForwardedPort(_forwardedPort);
+                _forwardedPort.Dispose();
+            }
         }
     }
 }

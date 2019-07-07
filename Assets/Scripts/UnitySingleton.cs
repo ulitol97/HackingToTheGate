@@ -20,6 +20,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     public static T Instance
     {
         get { return GetInstance(false); }
+        set { _mInstance = value; }
     }
 
     public static T GetInstance(bool ignoreShuttingDown)

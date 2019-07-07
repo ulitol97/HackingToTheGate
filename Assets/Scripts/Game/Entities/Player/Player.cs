@@ -69,7 +69,8 @@ namespace Game.Entities.Player
 			Attack,
 			Interact,
 			RemoteTerminal,
-			Staggered
+			Staggered,
+			Paused
 		}
 
 		/// <summary>
@@ -175,7 +176,7 @@ namespace Game.Entities.Player
 		private void Update () {
 			
 			// Do not read input for movement while interacting.
-			if(currentState == PlayerState.Interact)
+			if(currentState == PlayerState.Interact || currentState == PlayerState.Paused)
 				return;
 			
 			CheckPlayerInput();
@@ -253,9 +254,10 @@ namespace Game.Entities.Player
 		{
 			if (_change != Vector2.zero)
 			{
-				_playerAnimator.SetBool(AnimatorMoving, true);
 				MoveCharacter();
 				AnimateCharacter();
+				_playerAnimator.SetBool(AnimatorMoving, true);
+				
 			}
 			else
 			{
@@ -276,10 +278,13 @@ namespace Game.Entities.Player
 		}
 
 		/// <summary>
-		/// Animates the player character sprite regarding the user input and the target location it is moving
+		/// Animates the player character sprite regarding the user input and the target location it is moving.
 		/// </summary>
 		private void AnimateCharacter()
 		{
+			_change.x = Mathf.Round(_change.x);
+			_change.y = Mathf.Round(_change.y);
+			_change.y = Mathf.Round(_change.y);
 			_playerAnimator.SetFloat(AnimatorMoveX, _change.x);
 			_playerAnimator.SetFloat(AnimatorMoveY, _change.y);
 		}
@@ -366,11 +371,37 @@ namespace Game.Entities.Player
 			}
 		}
 		
+		/// <summary>
+		/// Changes the player current state.
+		/// </summary>
+		/// <param name="state"></param>
 		public void ChangeState(PlayerState state)
 		{
 			currentState = state;
 		}
 
+		/// <summary>
+		/// Logic to execute when notified that the game has been paused.
+		/// </summary>
+		public void OnGamePause()
+		{
+			switch (currentState)
+			{
+				case PlayerState.RemoteTerminal:
+				case PlayerState.Interact:
+					return;
+				case PlayerState.Paused:
+					ChangeState(PlayerState.Idle);
+					break;
+				default:
+					ChangeState(PlayerState.Paused);
+					break;
+			}
+		}
+
+		/// <summary>
+		/// Logic to execute when notified that the player's health is empty.
+		/// </summary>
 		public void OnPlayerDeath()
 		{
 			Globals.Instance.GameOver();

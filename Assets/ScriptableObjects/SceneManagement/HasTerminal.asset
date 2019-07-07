@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba94f1c6175849743850b1f185c34092, type: 3}
   m_Name: HasTerminal
   m_EditorClassIdentifier: 
-  runtimeValue: 0
-  defaultValue: 0
+  runtimeValue: 1
+  defaultValue: 1
