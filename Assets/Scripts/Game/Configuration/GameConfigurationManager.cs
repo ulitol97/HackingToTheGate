@@ -9,7 +9,8 @@ namespace Game.Configuration
 {
     /// <summary>
     /// The class GameConfigurationManager implements the Singleton pattern in order to hold
-    /// variables that need to be available during the whole game session.
+    /// variables that need to be available during the whole game session. It is capable of accessing a
+    /// game configuration file and validate it.
     /// </summary>
     public class GameConfigurationManager : Singleton<GameConfigurationManager>
     {
@@ -18,19 +19,33 @@ namespace Game.Configuration
         /// </summary>
         private const string ConfigFileName = "config.json";
         
-        public Regex ipValidation = new Regex(@"\b(?:(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b");
+        public Regex ipValidation = new Regex(
+            @"\b(?:(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b");
 
-        public int minPortNumberAccepted = 1;
-        public int maxPortNumberAccepted = 65535;
+        /// <summary>
+        /// The minimum value that the ports used for communication specified in the configuration file can take.
+        /// </summary>
+        private const int MinPortNumberAccepted = 1;
+        /// <summary>
+        /// The maximum value that the ports used for communication specified in the configuration file can take.
+        /// </summary>
+        private const int MaxPortNumberAccepted = 65535;
 
         /// <summary>
         /// Boolean flag representing if the game current configuration is valid to start a new game or not.
         /// </summary>
         public static bool IsValid;
-
-
+        
+        /// <summary>
+        /// Reference to a GameConfiguration object holding all the variables specified in the user configuration file.
+        /// </summary>
         public static GameConfiguration GameConfig;
 
+        /// <summary>
+        /// Checks for the existence of a game configuration file and if it exists proceeds to validate it.
+        /// If the file does not exist or can't be read because of incorrect formatting, the configuration in the file
+        /// is considered invalid (<see cref="IsValid"/>).
+        /// </summary>
         public void LoadGameConfiguration()
         {
             string configFilePath = Path.Combine(Application.streamingAssetsPath, ConfigFileName);
@@ -55,14 +70,14 @@ namespace Game.Configuration
         }
 
         /// <summary>
-        /// Checks that after validating the users config file, at least a valid remote host IP and a valid
+        /// Checks that, after validating the users config file, at least a valid remote host IP and a valid
         /// username to attempt authentication are specified.
         /// </summary>
         private void Validate()
         {
             ValidateConfigFields();
+            
             // Final checks
-
             if (GameConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
             {
                 IsValid = false;
@@ -83,14 +98,15 @@ namespace Game.Configuration
         }
 
         /// <summary>
-        /// Validates all the items present in the game configuration file, setting them to a default value if any.
+        /// Validates all the items present in the game configuration file, setting them to a default value if
+        /// possible when the user input values are not valid.
         /// </summary>
         private void ValidateConfigFields()
         {
             TextValidator ipValidator = new TextValidator(ipValidation);
             TextValidator textValidator = new TextValidator();
-            IntegerValidator sshPortValidator = new IntegerValidator(minPortNumberAccepted, maxPortNumberAccepted, 22);
-            IntegerValidator vncPortValidator = new IntegerValidator(minPortNumberAccepted, maxPortNumberAccepted, 5900);
+            IntegerValidator sshPortValidator = new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 22);
+            IntegerValidator vncPortValidator = new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 5900);
             
             // Vnc info validation
             GameConfig.vncConnectionInfo.targetHost = 
@@ -145,6 +161,10 @@ namespace Game.Configuration
             {"tip3", "Did you get any cool secret nformation form mauricio?"}
         };
 
+        /// <summary>
+        /// Represents the information held by the game configuration file in a text chain.
+        /// </summary>
+        /// <returns>String containing summary of the game configuration</returns>
         public new static string ToString()
         {
             string prefix = "Current connection settings...\n";

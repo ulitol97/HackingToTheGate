@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Threading;
 using Game.Configuration;
@@ -46,37 +45,31 @@ namespace Remote_Terminal
 		/// <summary>
         /// Username used in the Ssh authentication process.
         /// </summary>
-        [SerializeField][DefaultValue("tfg")] 
-        private string sshUserName;
+        private string _sshUserName;
         /// <summary>
         /// Password used in the Ssh authentication process.
         /// </summary>
-        [SerializeField][DefaultValue("")] 
-        private string sshPassword;
+        private string _sshPassword;
         
         /// <summary>
         /// Port used to establish the Ssh connection with the remote host.
         /// </summary>
-        [SerializeField][DefaultValue(22)] 
-		private int sshPort;
+		private int _sshPort;
 
         /// <summary>
         /// True if the Ssh authentication should be made via user and private key.
         /// False if the Ssh authentication should be made via user and password.
         /// </summary>
-        [SerializeField][DefaultValue(false)] 
-        private bool sshConnectViaKey;
+        private bool _sshConnectViaKey;
         
         /// <summary>
         /// Path of the key file used in the Ssh authentication process.
         /// </summary>
-        [SerializeField][DefaultValue("")] 
-        private string sshKeyPath;
+        private string _sshKeyPath;
         /// <summary>
         /// Passphrase of the private key used in the Ssh authentication process.
         /// </summary>
-        [SerializeField][DefaultValue("")] 
-        private string sshKeyPassphrase;
+        private string _sshKeyPassphrase;
 
         // VNC
 
@@ -94,21 +87,18 @@ namespace Remote_Terminal
         /// <summary>
         /// Target host to which the VNC client should connect.
         /// </summary>
-        [SerializeField] [DefaultValue(Localhost)]
-        private string vncHost;
+        private string _vncHost;
 
         /// <summary>
         /// Port used to establish the VNC connection with the remote host.
         /// </summary>
-        [SerializeField] [DefaultValue(5900)] 
-        private uint vncPort;
+        private uint _vncPort;
         
 
         /// <summary>
         /// Password used in the VNC authentication process.
         /// </summary>
-        [SerializeField] [DefaultValue("")]
-        private string vncPassword;
+        private string _vncPassword;
 
         // Bitmap handling
         
@@ -130,8 +120,7 @@ namespace Remote_Terminal
         /// <summary>
         /// Interval between connection checks.
         /// </summary>
-        [SerializeField] [DefaultValue(7)] 
-        private int checkConnectionInterval;
+        private int _checkConnectionInterval;
         
         /// <summary>
         /// Minimum amount of time passed between connection attempts/checks.
@@ -238,8 +227,8 @@ namespace Remote_Terminal
         private void Start()
         {
             SetUpFromConfiguration();
-            if (checkConnectionInterval < MinConnectionInterval)
-                checkConnectionInterval = MinConnectionInterval;
+            if (_checkConnectionInterval < MinConnectionInterval)
+                _checkConnectionInterval = MinConnectionInterval;
             
             _sshManager = SshManager.Instance;
             ConnectToHost();
@@ -247,16 +236,16 @@ namespace Remote_Terminal
 
         private void SetUpFromConfiguration()
         {
-            sshUserName = GameConfigurationManager.GameConfig.sshConnectionInfo.username;
-            sshPassword = GameConfigurationManager.GameConfig.sshConnectionInfo.password;
-            sshPort = GameConfigurationManager.GameConfig.sshConnectionInfo.port;
-            sshConnectViaKey = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.preferSshPublicKey;
-            sshKeyPath = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.path;
-            sshKeyPassphrase = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.passPhrase;
-            vncHost = GameConfigurationManager.GameConfig.vncConnectionInfo.targetHost;
-            vncPassword = GameConfigurationManager.GameConfig.vncConnectionInfo.vncServerPassword;
-            vncPort = (uint) GameConfigurationManager.GameConfig.vncConnectionInfo.port;
-            checkConnectionInterval = GameConfigurationManager.GameConfig.secondsBetweenConnectionAttempts;
+            _sshUserName = GameConfigurationManager.GameConfig.sshConnectionInfo.username;
+            _sshPassword = GameConfigurationManager.GameConfig.sshConnectionInfo.password;
+            _sshPort = GameConfigurationManager.GameConfig.sshConnectionInfo.port;
+            _sshConnectViaKey = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.preferSshPublicKey;
+            _sshKeyPath = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.path;
+            _sshKeyPassphrase = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.passPhrase;
+            _vncHost = GameConfigurationManager.GameConfig.vncConnectionInfo.targetHost;
+            _vncPassword = GameConfigurationManager.GameConfig.vncConnectionInfo.vncServerPassword;
+            _vncPort = (uint) GameConfigurationManager.GameConfig.vncConnectionInfo.port;
+            _checkConnectionInterval = GameConfigurationManager.GameConfig.secondsBetweenConnectionAttempts;
         }
 
         /// <summary>
@@ -271,19 +260,15 @@ namespace Remote_Terminal
             try
             {
                 // Attempt to contact the server both via SSH and VNC.
-                SetUpSshConnection(sshPort);
+                SetUpSshConnection();
                 SetUpRemoteDesktop();
             }
-            catch (Exception e) // If the server could not be contacted, periodically try again.
+            catch (Exception) // If the server could not be contacted, periodically try again.
             {
                 connect = false;
 
-                    Debug.Log("Connection to host not successful");
-                    Debug.Log("SSH CONNECTED: " + SshConnected);
-                    Debug.Log("VNC CONNECTED: " + VncConnected);
-                    Debug.Log(e);
-                    if (!_attemptingConnection)
-                        StartCoroutine(AttemptToConnect());
+                if (!_attemptingConnection)
+                    StartCoroutine(AttemptToConnect());
             }
             
             if (connect)
@@ -299,14 +284,14 @@ namespace Remote_Terminal
         /// either the SSH or VNC client has not reached the host.
         /// </summary>
         /// <remarks>The periodic attempts will be run each N number of seconds
-        /// <see cref="checkConnectionInterval"/>.</remarks>
+        /// <see cref="_checkConnectionInterval"/>.</remarks>
         private IEnumerator AttemptToConnect()
         {
             _attemptingConnection = true;
             while (!SshConnected || !VncConnected)
             {
                 ConnectToHost();
-                yield return new WaitForSeconds(checkConnectionInterval);
+                yield return new WaitForSeconds(_checkConnectionInterval);
             }
             _attemptingConnection = false;
         }
@@ -329,25 +314,21 @@ namespace Remote_Terminal
         /// Initializes a new SshManager in charge of logging into the remote server via Ssh and start a tunnel
         /// between client and servers VNC port (590X).
         /// </summary>
-        /// <param name="sshPort">Port used by the SshClient to establish the connection.</param>
         /// <remarks>In case there's already a connected SSH client, this function will return automatically.</remarks>
-        private void SetUpSshConnection(int sshPort)
+        private void SetUpSshConnection()
         {
             if (SshConnected)
                 return;
             
-            this.sshPort = sshPort;
-
             // If no key path has been specified, don't try to connect this way.
-            if (sshConnectViaKey && !sshKeyPath.Equals(""))
-                _sshManager.SetUpManager(vncHost, this.sshPort, sshUserName, sshKeyPath, sshKeyPassphrase);
+            if (_sshConnectViaKey && !_sshKeyPath.Equals(""))
+                _sshManager.SetUpManager(_vncHost, _sshPort, _sshUserName, _sshKeyPath, _sshKeyPassphrase);
 
             else
-                _sshManager.SetUpManager(vncHost, this.sshPort, sshUserName, sshPassword);
+                _sshManager.SetUpManager(_vncHost, _sshPort, _sshUserName, _sshPassword);
 
-            _sshManager.ForwardPort(Localhost, vncPort, vncHost, vncPort);
+            _sshManager.ForwardPort(Localhost, _vncPort, _vncHost, _vncPort);
             _sshManager.Connect();
-            Debug.Log("SSH connected to host");
         }
 
         /// <summary>
@@ -362,15 +343,13 @@ namespace Remote_Terminal
 
             // If we are tunneling the VNC connection through SSH, connect to "localhost", not remote machine address.
             if (SshConnected && _sshManager.Forward)
-                vncHost = Localhost;
+                _vncHost = Localhost;
 
             // Not specifying a display, the target tty will depend on the server port of choice
-            _rd = new RemoteDesktop(vncHost, (int) vncPort, vncPassword);
-            Debug.Log("Remote Desktop host: " + vncHost);
+            _rd = new RemoteDesktop(_vncHost, (int) _vncPort, _vncPassword);
 
             // Connect via VNC
             _rd.Connect();
-            Debug.Log("Remote Desktop connected to: " + vncHost);
         }
 
 
@@ -465,7 +444,7 @@ namespace Remote_Terminal
         /// and order the start of a new whole connection process.
         /// </summary>
         /// <remarks>The periodic checks will be run each N number of seconds
-        /// <see cref="checkConnectionInterval"/>.</remarks>
+        /// <see cref="_checkConnectionInterval"/>.</remarks>
         private IEnumerator CheckOnVncConnection()
         {
             while (_rd != null) // Run as long as there's a remote  desktop component active
@@ -480,7 +459,7 @@ namespace Remote_Terminal
                     // Re-start the connection process
                     ConnectToHost();
                 }
-                yield return new WaitForSeconds(checkConnectionInterval);
+                yield return new WaitForSeconds(_checkConnectionInterval);
             }
         }
         
