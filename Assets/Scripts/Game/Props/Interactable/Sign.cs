@@ -1,4 +1,5 @@
-﻿using Game.Configuration;
+﻿using System;
+using Game.Configuration;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,10 +22,25 @@ namespace Game.Props.Interactable
         public Text dialogText;
 
         /// <summary>
-        /// String identifying the dialog the sign must show the player.
+        /// Dummy text to show when no specific text is found for the id specified (<see cref="dialogId"/>).
         /// </summary>
-        public string dialogKey;
+        private string _defaultText = "Nothing to read here...";
+        
+        /// <summary>
+        /// Text displayed by the sign.
+        /// </summary>
+        private string _signText = "Nothing to read here...";
 
+        /// <summary>
+        /// Id identifying the text from the list of clues that was retrieved from the JSON file
+        /// that the sign must show.
+        /// </summary>
+        public int dialogId;
+
+        private void Start()
+        {
+            SetSignText();
+        }
 
         /// <summary>
         /// Function called on each frame the Sign the script is attached to is present into the game.
@@ -38,31 +54,29 @@ namespace Game.Props.Interactable
             }
         }
         
+        private void SetSignText()
+        {
+            try
+            {
+                _signText = GameConfigurationManager.ChallengesConfig.GetClues()[dialogId];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                _signText = _defaultText;
+            }
+            finally
+            {
+                dialogText.text = _signText;
+            }
+        }
+        
         /// <summary>
         /// If the sign's text is being displayed, it is hidden.
         /// If the sign's text is no hidden
         /// </summary>
         private void ToggleSignText()
         {
-            if (dialogBox.activeInHierarchy)
-                dialogBox.SetActive(false);
-            else
-            {
-                var text = "";
-                try
-                {
-                    text = GameConfigurationManager.Instance.SignMessagesTable[dialogKey];
-                }
-                catch
-                {
-                    text = GameConfigurationManager.Instance.SignMessagesTable["placeholder"];
-                }
-                finally
-                {
-                    dialogText.text = text;
-                    dialogBox.SetActive(true);
-                }
-            }
+            dialogBox.SetActive(!dialogBox.activeInHierarchy);
         }
         
         /// <summary>

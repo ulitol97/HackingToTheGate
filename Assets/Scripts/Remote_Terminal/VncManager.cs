@@ -236,16 +236,16 @@ namespace Remote_Terminal
 
         private void SetUpFromConfiguration()
         {
-            _sshUserName = GameConfigurationManager.GameConfig.sshConnectionInfo.username;
-            _sshPassword = GameConfigurationManager.GameConfig.sshConnectionInfo.password;
-            _sshPort = GameConfigurationManager.GameConfig.sshConnectionInfo.port;
-            _sshConnectViaKey = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.preferSshPublicKey;
-            _sshKeyPath = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.path;
-            _sshKeyPassphrase = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.passPhrase;
-            _vncHost = GameConfigurationManager.GameConfig.vncConnectionInfo.targetHost;
-            _vncPassword = GameConfigurationManager.GameConfig.vncConnectionInfo.vncServerPassword;
-            _vncPort = (uint) GameConfigurationManager.GameConfig.vncConnectionInfo.port;
-            _checkConnectionInterval = GameConfigurationManager.GameConfig.secondsBetweenConnectionAttempts;
+            _sshUserName = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.username;
+            _sshPassword = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.password;
+            _sshPort = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.port;
+            _sshConnectViaKey = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.publicKeyAuth.preferSshPublicKey;
+            _sshKeyPath = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.publicKeyAuth.path;
+            _sshKeyPassphrase = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase;
+            _vncHost = GameConfigurationManager.ConnectionConfig.vncConnectionInfo.targetHost;
+            _vncPassword = GameConfigurationManager.ConnectionConfig.vncConnectionInfo.vncServerPassword;
+            _vncPort = (uint) GameConfigurationManager.ConnectionConfig.vncConnectionInfo.port;
+            _checkConnectionInterval = GameConfigurationManager.ConnectionConfig.secondsBetweenConnectionAttempts;
         }
 
         /// <summary>

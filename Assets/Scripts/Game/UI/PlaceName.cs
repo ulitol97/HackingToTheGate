@@ -41,10 +41,16 @@ namespace Game.UI
         private IEnumerator DrawPlaceName()
         {
             _placeText.gameObject.SetActive(true);
-            _placeText.text = GameConfigurationManager.Instance.LevelNameTable[SceneManager.GetActiveScene().name];
+            _placeText.text = GameConfigurationManager.Instance.LevelNameTable[int.Parse(GetLevelNumber())];
 
             yield return new WaitForSeconds(textDuration);
             _placeText.gameObject.SetActive(false);
+        }
+        
+        private static string GetLevelNumber()
+        {
+            string text = SceneManager.GetActiveScene().name;
+            return text.StartsWith("Level") ? text.Substring("Level".Length) : text;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Game.Configuration;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.Props.Interactable.Door
@@ -16,9 +18,20 @@ namespace Game.Props.Interactable.Door
         public InputField inputField;
 
         /// <summary>
-        /// Password that opens the door.
+        /// Dummy password to assign to the door when no specific text is found
+        /// for the id specified (<see cref="passwordId"/>).
         /// </summary>
-        public string password;
+        private string _defaultPassword = "";
+
+        /// <summary>
+        /// Password of the door.
+        /// </summary>
+        private string _password;
+        /// <summary>
+        /// Id identifying the password of the door from the list of answers that was retrieved
+        /// from the JSON config file.
+        /// </summary>
+        public int passwordId;
         
         
         /// <summary>
@@ -32,6 +45,20 @@ namespace Game.Props.Interactable.Door
             // If already opened before disable door
             if (isOpen.runtimeValue)
                 Parent.gameObject.SetActive(false);
+            else
+                SetDoorPassword();
+        }
+
+        private void SetDoorPassword()
+        {
+            try
+            {
+                _password = GameConfigurationManager.ChallengesConfig.GetAnswers()[passwordId];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                _password = _defaultPassword;
+            }
         }
 
         /// <summary>
@@ -78,7 +105,7 @@ namespace Game.Props.Interactable.Door
         /// </summary>
         private void ValidatePassword()
         {
-            if (inputField.text.Trim().Equals(password))
+            if (inputField.text.Trim().Equals(_password))
             {
                 if (context != null)
                     context.Notify();

@@ -4,11 +4,11 @@ using UnityEngine;
 namespace Game.Configuration
 {
     /// <summary>
-    /// The GameConfiguration class encapsulates all the configuration parameters the games need to run.
+    /// The ConnectionConfiguration class encapsulates all the connection parameters the games need to run.
     /// Instances of this class can be loaded from a Json file.
     /// </summary>
     [System.Serializable]
-    public class GameConfiguration
+    public class ConnectionConfiguration
     {
         public VncConnectionInfo vncConnectionInfo;
         public SshConnectionInfo sshConnectionInfo;
@@ -49,13 +49,13 @@ namespace Game.Configuration
         }
 
         /// <summary>
-        /// Creates an instance of the GameConfiguration class from a JSON file with the correct format.
+        /// Creates an instance of the ConnectionConfiguration class from a JSON file with the correct format.
         /// </summary>
         /// <param name="jsonFilePath">Path where the json file is located.</param>
         /// <returns></returns>
-        public static GameConfiguration CreateFromJson(string jsonFilePath)
+        public static ConnectionConfiguration CreateFromJson(string jsonFilePath)
         {
-            return JsonUtility.FromJson<GameConfiguration>(jsonFilePath);
+            return JsonUtility.FromJson<ConnectionConfiguration>(jsonFilePath);
         }
         
         /// <summary>

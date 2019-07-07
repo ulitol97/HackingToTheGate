@@ -15,9 +15,19 @@ namespace Game.Configuration
     public class GameConfigurationManager : Singleton<GameConfigurationManager>
     {
         /// <summary>
-        /// Name of the file containing the game configuration.
+        /// Name of the file containing the configuration parameters of the connection to the remote host.
         /// </summary>
-        private const string ConfigFileName = "config.json";
+        private const string ConnectionConfigFileName = "config.json";
+        
+        /// <summary>
+        /// Name of the file containing the answers to password puzzles.
+        /// </summary>
+        private const string AnswersConfigFileName = "answers.json";
+        
+        /// <summary>
+        /// Name of the file containing the clues given to players to solve puzzles.
+        /// </summary>
+        private const string CluesConfigFileName = "clues.json";
         
         public Regex ipValidation = new Regex(
             @"\b(?:(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b");
@@ -37,9 +47,10 @@ namespace Game.Configuration
         public static bool IsValid;
         
         /// <summary>
-        /// Reference to a GameConfiguration object holding all the variables specified in the user configuration file.
+        /// Reference to a ConnectionConfiguration object holding all the variables specified in the user configuration file.
         /// </summary>
-        public static GameConfiguration GameConfig;
+        public static ConnectionConfiguration ConnectionConfig;
+        public static ChallengesConfiguration ChallengesConfig;
 
         /// <summary>
         /// Checks for the existence of a game configuration file and if it exists proceeds to validate it.
@@ -48,24 +59,31 @@ namespace Game.Configuration
         /// </summary>
         public void LoadGameConfiguration()
         {
-            string configFilePath = Path.Combine(Application.streamingAssetsPath, ConfigFileName);
-            if (File.Exists(configFilePath))
+            string connectionPath = Path.Combine(Application.streamingAssetsPath, ConnectionConfigFileName);
+            string cluesPath = Path.Combine(Application.streamingAssetsPath, CluesConfigFileName);
+            string answersPath = Path.Combine(Application.streamingAssetsPath, AnswersConfigFileName);
+            if (File.Exists(connectionPath) && File.Exists(cluesPath) && File.Exists(answersPath))
             {
                 try
                 {
-                    GameConfig = GameConfiguration.CreateFromJson(File.ReadAllText(configFilePath));
+                    ConnectionConfig = ConnectionConfiguration.CreateFromJson(File.ReadAllText(connectionPath));
+                    ChallengesConfig = new ChallengesConfiguration
+                    {
+                        answers = ChallengesConfiguration.RetrieveAnswersFromJson(File.ReadAllText(answersPath)),
+                        clues = ChallengesConfiguration.RetrieveCluesFromJson(File.ReadAllText(cluesPath))
+                    };
                 }
                 catch (Exception)
                 {
                     IsValid = false;
                     return;
                 }
-                Validate();
+                ValidateConnectionSettings();
             }
             else
             {
                 IsValid = false;
-                GameConfig = null;
+                ConnectionConfig = null;
             }
         }
 
@@ -73,92 +91,92 @@ namespace Game.Configuration
         /// Checks that, after validating the users config file, at least a valid remote host IP and a valid
         /// username to attempt authentication are specified.
         /// </summary>
-        private void Validate()
+        private void ValidateConnectionSettings()
         {
-            ValidateConfigFields();
+            ValidateConnectionFields();
             
             // Final checks
-            if (GameConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
+            if (ConnectionConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
             {
                 IsValid = false;
                 return;
             }
-            if (GameConfig.sshConnectionInfo.username.Equals(TextValidator.DefaultValue))
+            if (ConnectionConfig.sshConnectionInfo.username.Equals(TextValidator.DefaultValue))
             {
                 IsValid = false;
                 return;
             }
 
             IsValid = true;
-
-            // Pr cada pista en el array, incluir su validacion en una lista de pistas. Hacer a los carteles leer
-            // su texto de la lista de pista.
-
-            // Hacer algo similar con el nombre de cada piso de la mazmorra.
         }
 
         /// <summary>
         /// Validates all the items present in the game configuration file, setting them to a default value if
         /// possible when the user input values are not valid.
         /// </summary>
-        private void ValidateConfigFields()
+        private void ValidateConnectionFields()
         {
             TextValidator ipValidator = new TextValidator(ipValidation);
             TextValidator textValidator = new TextValidator();
-            IntegerValidator sshPortValidator = new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 22);
-            IntegerValidator vncPortValidator = new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 5900);
+            
+            IntegerValidator sshPortValidator = 
+                new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 22);
+            IntegerValidator vncPortValidator = 
+                new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 5900);
             
             // Vnc info validation
-            GameConfig.vncConnectionInfo.targetHost = 
-                ipValidator.Validate(GameConfig.vncConnectionInfo.targetHost);
+            ConnectionConfig.vncConnectionInfo.targetHost = 
+                ipValidator.Validate(ConnectionConfig.vncConnectionInfo.targetHost);
             
-            GameConfig.vncConnectionInfo.port =
-                vncPortValidator.Validate(GameConfig.vncConnectionInfo.port);
+            ConnectionConfig.vncConnectionInfo.port =
+                vncPortValidator.Validate(ConnectionConfig.vncConnectionInfo.port);
             
-            GameConfig.vncConnectionInfo.vncServerPassword =
-                textValidator.Validate(GameConfig.vncConnectionInfo.vncServerPassword);
+            ConnectionConfig.vncConnectionInfo.vncServerPassword =
+                textValidator.Validate(ConnectionConfig.vncConnectionInfo.vncServerPassword);
             
             // Ssh info validation
             
-            GameConfig.sshConnectionInfo.username = textValidator.Validate(GameConfig.sshConnectionInfo.username);
-            GameConfig.sshConnectionInfo.password = textValidator.Validate(GameConfig.sshConnectionInfo.password);
+            ConnectionConfig.sshConnectionInfo.username = 
+                textValidator.Validate(ConnectionConfig.sshConnectionInfo.username);
+            ConnectionConfig.sshConnectionInfo.password = 
+                textValidator.Validate(ConnectionConfig.sshConnectionInfo.password);
             
-            GameConfig.sshConnectionInfo.port = sshPortValidator.Validate(GameConfig.sshConnectionInfo.port);
+            ConnectionConfig.sshConnectionInfo.port = 
+                sshPortValidator.Validate(ConnectionConfig.sshConnectionInfo.port);
             
-            GameConfig.sshConnectionInfo.publicKeyAuth.path = 
-                textValidator.Validate(GameConfig.sshConnectionInfo.publicKeyAuth.path);
-            GameConfig.sshConnectionInfo.publicKeyAuth.passPhrase = 
-                textValidator.Validate(GameConfig.sshConnectionInfo.publicKeyAuth.passPhrase);
+            ConnectionConfig.sshConnectionInfo.publicKeyAuth.path = 
+                textValidator.Validate(ConnectionConfig.sshConnectionInfo.publicKeyAuth.path);
+            ConnectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase = 
+                textValidator.Validate(ConnectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase);
         }
 
         /// <summary>
         /// Names of the locations found in game. Each name's key is the level they're in.
         /// </summary>
         /// <remarks>Readonly since it shouldn't be modified.</remarks>
-        public readonly Dictionary<string, string> LevelNameTable = new Dictionary<string, string>
+        public readonly List<string> LevelNameTable = new List<string>
         {
-            {"Level0", "Nayru Ruins"}, 
-            {"Level1", "Nayru Dungeon - Basement 2"}, 
-            {"Level2", "Nayru Dungeon - Basement 1"}, 
-            {"Level3", "Nayru Castle"}, 
-            {"Level4", "Nayru Castle - Overworld"}, 
+            {"Nayru Ruins"}, 
+            {"Nayru Dungeon - Basement 2"}, 
+            {"Nayru Dungeon - Basement 1"}, 
+            {"Nayru Castle"}, 
+            {"Nayru Castle - Overworld"}, 
         };
 
         /// <summary>
         /// Tips given by the different dialogs and signs the player may find.
         /// </summary>
-        public readonly Dictionary<string, string> SignMessagesTable = new Dictionary<string, string>
+        public readonly List<string> SignMessagesTable = new List<string>
         {
-            {"placeholder", "\"Player\": Nothing to read here..."},
-            {"warning", "DO NOT DISTURB THE BASEMENT WORKERS!"},
-            {"tip0", "Nice terminal! You better know  the IP of the network camera 02 of" +
+            {"DO NOT DISTURB THE BASEMENT WORKERS!"},
+            {"Nice terminal! You better know  the IP of the network camera 02 of" +
                          " the Medicine faculty if you want to use it ;)"
             },
-            {"tip1", "If you can't figure out something, maybe the answer is not " +
+            {"If you can't figure out something, maybe the answer is not " +
                      "in this dungeon but elsewhere..."
             },
-            {"tip2", "Mauricio hash cat on shadowfile entry."},
-            {"tip3", "Did you get any cool secret nformation form mauricio?"}
+            "Mauricio hash cat on shadowfile entry.",
+            "Did you get any cool secret nformation form mauricio?"
         };
 
         /// <summary>
@@ -168,8 +186,8 @@ namespace Game.Configuration
         public new static string ToString()
         {
             string prefix = "Current connection settings...\n";
-            return (GameConfig == null || !IsValid) ? prefix + "Fix your config file to play" : 
-                prefix + GameConfig;
+            return (ConnectionConfig == null || !IsValid) ? prefix + "Fix your config files to play" : 
+                prefix + ConnectionConfig;
         }
     }
 }
