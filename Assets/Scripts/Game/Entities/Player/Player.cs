@@ -149,7 +149,7 @@ namespace Game.Entities.Player
 		/// <summary>
 		/// Tolerance to joystick input in order not to move on a minimum joystick tilt.
 		/// </summary>
-		private const float JoystickTolerance = 0.25f;
+		private const float JoystickTolerance = 0.6f;
 		
 		/// <summary>
 		/// Function called when the Player script is loaded into the game.

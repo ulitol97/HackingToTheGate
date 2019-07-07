@@ -64,10 +64,6 @@ namespace Game.Props.Interactable
             {
                 _signText = _defaultText;
             }
-            finally
-            {
-                dialogText.text = _signText;
-            }
         }
         
         /// <summary>
@@ -76,6 +72,7 @@ namespace Game.Props.Interactable
         /// </summary>
         private void ToggleSignText()
         {
+            dialogText.text = _signText;
             dialogBox.SetActive(!dialogBox.activeInHierarchy);
         }
         
