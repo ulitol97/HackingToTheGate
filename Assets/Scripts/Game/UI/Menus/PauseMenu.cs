@@ -20,17 +20,14 @@ namespace Game.UI.Menus
         public Signal pauseSignal;
         
         /// <summary>
-        /// Function running on first frame to ensure the game is not paused when launched.
+        /// Function running on first frame to ensure the game is not marked as paused when loaded.
         /// </summary>
         protected override void Start()
         {
             base.Start();
             _isPaused = false;
         }
-
-        /// <summary>
-        /// Each frame check for player input to load or unload the pause screen.
-        /// </summary>
+        
         protected override void Update()
         {
             if (Input.GetButtonDown("Pause"))
@@ -62,7 +59,7 @@ namespace Game.UI.Menus
         }
 
         /// <summary>
-        /// Exits the game session and loads main menu.
+        /// Exits the game session and loads the main menu.
         /// </summary>
         public override void QuitMenu()
         {

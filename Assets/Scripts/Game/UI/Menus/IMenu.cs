@@ -7,7 +7,7 @@
     public interface IMenu
     {
         /// <summary>
-        /// Close the menu and return to the screen before the menu.
+        /// Close the menu and return to a previous screen.
         /// </summary>
         void QuitMenu();
 

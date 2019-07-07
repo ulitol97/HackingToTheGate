@@ -2,6 +2,9 @@
 
 namespace Game.UI.Menus
 {
+    /// <summary>
+    /// THe GameMenu abstract class implements some base functionality used by all the menus in the game.
+    /// </summary>
     public abstract class GameMenu : MonoBehaviour, IMenu
     {
         
@@ -23,6 +26,9 @@ namespace Game.UI.Menus
         /// </summary>
         public GameObject manualPanel;
         
+        /// <summary>
+        /// Run when the menu is inserted into the game. Ensure that the user manual is not being shown initially.
+        /// </summary>
         protected virtual void Start()
         {
             IsShowingHelp = false;
@@ -36,7 +42,7 @@ namespace Game.UI.Menus
             if (Input.GetButtonDown("Attack") && IsShowingHelp)
                 ToggleHelp();
         }
-
+        
         public virtual void QuitMenu()
         {
             Application.Quit();

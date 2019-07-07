@@ -27,7 +27,7 @@ namespace Game.UI.Menus
 
 
         /// <summary>
-        /// Inits a game session on the first level available.
+        /// Inits a game session on the first level of the game.
         /// </summary>
         public void NewGame()
         {
@@ -36,7 +36,7 @@ namespace Game.UI.Menus
         }
 
         /// <summary>
-        /// Reloads the current settings for connection with the remote server.
+        /// Loads the current settings for connection with the remote server, substituting the existing ones.
         /// </summary>
         public void LoadSettings()
         {
