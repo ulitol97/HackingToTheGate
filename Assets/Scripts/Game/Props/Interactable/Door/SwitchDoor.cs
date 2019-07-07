@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Game.Props.Interactable.Door
+﻿namespace Game.Props.Interactable.Door
 {
     /// <summary>
     /// The SwitchDoor class inherits from ActionableObstacle, which also encapsulates the door

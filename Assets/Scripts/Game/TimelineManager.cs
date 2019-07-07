@@ -5,7 +5,7 @@ namespace Game
 {
     public class TimelineManager : MonoBehaviour
     {
-        private bool fix = false;
+        private bool _fix;
         public Animator playerAnimator;
         public RuntimeAnimatorController playerAnimController;
         public PlayableDirector director;
@@ -20,9 +20,9 @@ namespace Game
         // Update is called once per frame
         private void Update()
         {
-            if (director.state != PlayState.Playing && !fix)
+            if (director.state != PlayState.Playing && !_fix)
             {
-                fix = true;
+                _fix = true;
                 playerAnimator.runtimeAnimatorController = playerAnimController;
             }
         }

@@ -1,5 +1,4 @@
-﻿using Game.ScriptableObjects;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Props.Interactable.ToggleItems
 {

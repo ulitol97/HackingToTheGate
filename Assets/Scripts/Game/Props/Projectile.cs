@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Game.Props
@@ -35,13 +34,7 @@ namespace Game.Props
             myRigidBody = GetComponent<Rigidbody2D>();
             StartCoroutine(DestroyProjectile());
         }
-
-        // Update is called once per frame
-        protected virtual void Update()
-        {
         
-        }
-
         /// <summary>
         /// Sets up the projectile initial velocity in the game world.
         /// </summary>

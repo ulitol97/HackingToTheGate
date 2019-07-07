@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Game.Props.Interactable
+﻿namespace Game.Props.Interactable
 {
     /// <summary>
     /// THe interface actionable serves as a contract to derived objects that will perform

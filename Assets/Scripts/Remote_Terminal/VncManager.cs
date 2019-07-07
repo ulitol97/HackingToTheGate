@@ -200,14 +200,6 @@ namespace Remote_Terminal
             get { return SshConnected && VncConnected; }
         }
 
-        /// <summary>
-        /// Creates a new VncManager.
-        /// </summary>
-        /// <remarks>Made private to prevent non-singleton constructor use.</remarks>
-        protected VncManager()
-        {
-        }
-
 
         /// <summary>
         /// Function called when the VncManager is inserted into the game.
@@ -216,12 +208,16 @@ namespace Remote_Terminal
         /// </summary>
         private void Awake()
         {
-            // Set to not destroy between scenes.
             if (GameObject.FindGameObjectsWithTag("RemoteServer").Length > 1)
-                Destroy(gameObject);
+            {
+                Debug.LogError("DESTROYING THIS MANAGER");
+                Debug.LogError(GetInstance(true));
+                gameObject.SetActive(false);
+            }
+            // Set to not destroy between scenes.
+
             else
                 DontDestroyOnLoad(gameObject);
-
         }
 
         private void Start()

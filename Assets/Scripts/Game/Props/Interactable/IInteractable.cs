@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Game.Props.Interactable
+﻿namespace Game.Props.Interactable
 {
     public interface IInteractable
     {

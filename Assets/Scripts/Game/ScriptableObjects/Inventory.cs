@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.ScriptableObjects
 {
@@ -41,8 +40,7 @@ namespace Game.ScriptableObjects
         public BooleanValue hasTerminal;
         
         /// <summary>
-        /// Adds an item to the inventory list of items (<see cref="items"/>) after checking if it is an special
-        /// type of item. Only adds it if is not present already and updates the number of keys.
+        /// Adds an item to the inventory after checking what type of item it is.
         /// </summary>
         /// <param name="item"></param>
         public void AddItem(Item item)
