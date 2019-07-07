@@ -156,29 +156,13 @@ namespace Game.Configuration
         /// <remarks>Readonly since it shouldn't be modified.</remarks>
         public readonly List<string> LevelNameTable = new List<string>
         {
-            {"Nayru Ruins"}, 
-            {"Nayru Dungeon - Basement 2"}, 
-            {"Nayru Dungeon - Basement 1"}, 
-            {"Nayru Castle"}, 
-            {"Nayru Castle - Overworld"}, 
+            "Spriggan Ruins", 
+            "Spriggan Dungeon - Basement 2", 
+            "Spriggan Dungeon - Basement 1", 
+            "Spriggan Castle", 
+            "Spriggan Castle - Outdoors", 
         };
-
-        /// <summary>
-        /// Tips given by the different dialogs and signs the player may find.
-        /// </summary>
-        public readonly List<string> SignMessagesTable = new List<string>
-        {
-            {"DO NOT DISTURB THE BASEMENT WORKERS!"},
-            {"Nice terminal! You better know  the IP of the network camera 02 of" +
-                         " the Medicine faculty if you want to use it ;)"
-            },
-            {"If you can't figure out something, maybe the answer is not " +
-                     "in this dungeon but elsewhere..."
-            },
-            "Mauricio hash cat on shadowfile entry.",
-            "Did you get any cool secret nformation form mauricio?"
-        };
-
+        
         /// <summary>
         /// Represents the information held by the game configuration file in a text chain.
         /// </summary>
