@@ -32,8 +32,11 @@ namespace Game.UI.Menus
         {
             if (Input.GetButtonDown("Pause"))
                 TogglePause();
-            else if (Input.GetButtonDown("Attack") && IsShowingHelp)
-                ToggleHelp();
+            else if (Input.GetButtonDown("Attack") && _isPaused)
+                if(IsShowingHelp)
+                    ToggleHelp();
+                else
+                    TogglePause();
         }
 
         /// <summary>
