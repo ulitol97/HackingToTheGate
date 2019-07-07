@@ -39,8 +39,9 @@ namespace Game.UI.Menus
             if (remoteClient != null)
                 Destroy(remoteClient);
             
-            if (!GameConfigurationManager.isValid)
+            if (!GameConfigurationManager.IsValid)
                 LoadSettings();
+            UpdateUi();
         }
 
         private void SetUpConfigFileText()
@@ -61,8 +62,7 @@ namespace Game.UI.Menus
         /// </summary>
         public void NewGame()
         {
-            Debug.LogError(GameConfigurationManager.isValid);
-            if (!GameConfigurationManager.isValid)
+            if (!GameConfigurationManager.IsValid)
                 return;
             
             Cursor.visible = false;
@@ -85,7 +85,7 @@ namespace Game.UI.Menus
 
         private void UpdateUi()
         {
-            if (GameConfigurationManager.isValid)
+            if (GameConfigurationManager.IsValid)
                 _configOkText.SetActive(true);
             else
                 _configErrorText.SetActive(true);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Threading;
+using Game.Configuration;
 using Game.ScriptableObjects;
 using MEC;
 using UnityEngine;
@@ -232,16 +233,30 @@ namespace Remote_Terminal
             else
                 DontDestroyOnLoad(gameObject);
 
-            if (checkConnectionInterval < MinConnectionInterval)
-                checkConnectionInterval = MinConnectionInterval;
-            
-            _sshManager = SshManager.Instance;
-            
         }
 
         private void Start()
         {
+            SetUpFromConfiguration();
+            if (checkConnectionInterval < MinConnectionInterval)
+                checkConnectionInterval = MinConnectionInterval;
+            
+            _sshManager = SshManager.Instance;
             ConnectToHost();
+        }
+
+        private void SetUpFromConfiguration()
+        {
+            sshUserName = GameConfigurationManager.GameConfig.sshConnectionInfo.username;
+            sshPassword = GameConfigurationManager.GameConfig.sshConnectionInfo.password;
+            sshPort = GameConfigurationManager.GameConfig.sshConnectionInfo.port;
+            sshConnectViaKey = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.preferSshPublicKey;
+            sshKeyPath = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.path;
+            sshKeyPassphrase = GameConfigurationManager.GameConfig.sshConnectionInfo.publicKeyAuth.passPhrase;
+            vncHost = GameConfigurationManager.GameConfig.vncConnectionInfo.targetHost;
+            vncPassword = GameConfigurationManager.GameConfig.vncConnectionInfo.vncServerPassword;
+            vncPort = (uint) GameConfigurationManager.GameConfig.vncConnectionInfo.port;
+            checkConnectionInterval = GameConfigurationManager.GameConfig.secondsBetweenConnectionAttempts;
         }
 
         /// <summary>

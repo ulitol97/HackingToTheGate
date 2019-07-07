@@ -26,10 +26,10 @@ namespace Game.Configuration
         /// <summary>
         /// Boolean flag representing if the game current configuration is valid to start a new game or not.
         /// </summary>
-        public static bool isValid;
+        public static bool IsValid;
 
 
-        private static GameConfiguration _gameConfig;
+        public static GameConfiguration GameConfig;
 
         public void LoadGameConfiguration()
         {
@@ -38,19 +38,19 @@ namespace Game.Configuration
             {
                 try
                 {
-                    _gameConfig = GameConfiguration.CreateFromJson(File.ReadAllText(configFilePath));
+                    GameConfig = GameConfiguration.CreateFromJson(File.ReadAllText(configFilePath));
                 }
                 catch (Exception)
                 {
-                    isValid = false;
+                    IsValid = false;
                     return;
                 }
                 Validate();
             }
             else
             {
-                isValid = false;
-                _gameConfig = null;
+                IsValid = false;
+                GameConfig = null;
             }
         }
 
@@ -63,18 +63,18 @@ namespace Game.Configuration
             ValidateConfigFields();
             // Final checks
 
-            if (_gameConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
+            if (GameConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
             {
-                isValid = false;
+                IsValid = false;
                 return;
             }
-            if (_gameConfig.sshConnectionInfo.username.Equals(TextValidator.DefaultValue))
+            if (GameConfig.sshConnectionInfo.username.Equals(TextValidator.DefaultValue))
             {
-                isValid = false;
+                IsValid = false;
                 return;
             }
 
-            isValid = true;
+            IsValid = true;
 
             // Pr cada pista en el array, incluir su validacion en una lista de pistas. Hacer a los carteles leer
             // su texto de la lista de pista.
@@ -93,26 +93,26 @@ namespace Game.Configuration
             IntegerValidator vncPortValidator = new IntegerValidator(minPortNumberAccepted, maxPortNumberAccepted, 5900);
             
             // Vnc info validation
-            _gameConfig.vncConnectionInfo.targetHost = 
-                ipValidator.Validate(_gameConfig.vncConnectionInfo.targetHost);
+            GameConfig.vncConnectionInfo.targetHost = 
+                ipValidator.Validate(GameConfig.vncConnectionInfo.targetHost);
             
-            _gameConfig.vncConnectionInfo.port =
-                vncPortValidator.Validate(_gameConfig.vncConnectionInfo.port);
+            GameConfig.vncConnectionInfo.port =
+                vncPortValidator.Validate(GameConfig.vncConnectionInfo.port);
             
-            _gameConfig.vncConnectionInfo.vncServerPassword =
-                textValidator.Validate(_gameConfig.vncConnectionInfo.vncServerPassword);
+            GameConfig.vncConnectionInfo.vncServerPassword =
+                textValidator.Validate(GameConfig.vncConnectionInfo.vncServerPassword);
             
             // Ssh info validation
             
-            _gameConfig.sshConnectionInfo.username = textValidator.Validate(_gameConfig.sshConnectionInfo.username);
-            _gameConfig.sshConnectionInfo.password = textValidator.Validate(_gameConfig.sshConnectionInfo.password);
+            GameConfig.sshConnectionInfo.username = textValidator.Validate(GameConfig.sshConnectionInfo.username);
+            GameConfig.sshConnectionInfo.password = textValidator.Validate(GameConfig.sshConnectionInfo.password);
             
-            _gameConfig.sshConnectionInfo.port = sshPortValidator.Validate(_gameConfig.sshConnectionInfo.port);
+            GameConfig.sshConnectionInfo.port = sshPortValidator.Validate(GameConfig.sshConnectionInfo.port);
             
-            _gameConfig.sshConnectionInfo.publicKeyAuth.path = 
-                textValidator.Validate(_gameConfig.sshConnectionInfo.publicKeyAuth.path);
-            _gameConfig.sshConnectionInfo.publicKeyAuth.passPhrase = 
-                textValidator.Validate(_gameConfig.sshConnectionInfo.publicKeyAuth.passPhrase);
+            GameConfig.sshConnectionInfo.publicKeyAuth.path = 
+                textValidator.Validate(GameConfig.sshConnectionInfo.publicKeyAuth.path);
+            GameConfig.sshConnectionInfo.publicKeyAuth.passPhrase = 
+                textValidator.Validate(GameConfig.sshConnectionInfo.publicKeyAuth.passPhrase);
         }
 
         /// <summary>
@@ -148,8 +148,8 @@ namespace Game.Configuration
         public new static string ToString()
         {
             string prefix = "Current connection settings...\n";
-            return (_gameConfig == null || !isValid) ? prefix + "Fix your config file to play" : 
-                prefix + _gameConfig;
+            return (GameConfig == null || !IsValid) ? prefix + "Fix your config file to play" : 
+                prefix + GameConfig;
         }
     }
 }

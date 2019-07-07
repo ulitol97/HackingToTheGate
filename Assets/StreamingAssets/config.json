@@ -1,6 +1,6 @@
 {
   "vncConnectionInfo": {
-    "targetHost": "127.0.0.1",
+    "targetHost": "178.62.101.170",
     "vncServerPassword": "",
     "port": 5900
   },
