@@ -144,7 +144,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0093586445, y: 0.046248436}
+  m_Offset: {x: 0.0093586445, y: 0.072161674}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -155,7 +155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.83154535, y: 0.79302025}
+  m_Size: {x: 0.83154535, y: 0.7411938}
   m_EdgeRadius: 0
 --- !u!114 &3095701065670310190
 MonoBehaviour:
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8827874535928091174}
   m_Layer: 0
-  m_Name: ObstacleAndSwitches
+  m_Name: ObstacleAndLever
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -281,21 +281,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3560503452736830098, guid: 9862c849440bebe4f911093385620e56,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 634611433
-      objectReference: {fileID: 0}
-    - target: {fileID: 3560503452736830098, guid: 9862c849440bebe4f911093385620e56,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3560503452736830098, guid: 9862c849440bebe4f911093385620e56,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -2
-      objectReference: {fileID: 0}
     - target: {fileID: 3847799921748324118, guid: 9862c849440bebe4f911093385620e56,
         type: 3}
       propertyPath: context
@@ -312,6 +297,21 @@ PrefabInstance:
       propertyPath: linkedObstacle
       value: 
       objectReference: {fileID: 3095701064978723802}
+    - target: {fileID: 3560503452736830098, guid: 9862c849440bebe4f911093385620e56,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 634611433
+      objectReference: {fileID: 0}
+    - target: {fileID: 3560503452736830098, guid: 9862c849440bebe4f911093385620e56,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3560503452736830098, guid: 9862c849440bebe4f911093385620e56,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9862c849440bebe4f911093385620e56, type: 3}
 --- !u!4 &2807727093347903104 stripped
