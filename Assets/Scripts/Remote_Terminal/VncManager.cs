@@ -242,6 +242,15 @@ namespace Remote_Terminal
             _vncPassword = GameConfigurationManager.ConnectionConfig.vncConnectionInfo.vncServerPassword;
             _vncPort = (uint) GameConfigurationManager.ConnectionConfig.vncConnectionInfo.port;
             _checkConnectionInterval = GameConfigurationManager.ConnectionConfig.secondsBetweenConnectionAttempts;
+            
+            Debug.LogError(_sshUserName);
+            Debug.LogError(_sshPassword);
+            Debug.LogError(_sshPort);
+            Debug.LogError(_sshPort);
+            Debug.LogError(_sshConnectViaKey);
+            Debug.LogError(_sshKeyPath);
+            Debug.LogError(_sshKeyPassphrase);
+            Debug.LogError(_checkConnectionInterval);
         }
 
         /// <summary>
@@ -259,7 +268,7 @@ namespace Remote_Terminal
                 SetUpSshConnection();
                 SetUpRemoteDesktop();
             }
-            catch (Exception) // If the server could not be contacted, periodically try again.
+            catch (Exception e) // If the server could not be contacted, periodically try again.
             {
                 connect = false;
 
@@ -317,7 +326,7 @@ namespace Remote_Terminal
                 return;
             
             // If no key path has been specified, don't try to connect this way.
-            if (_sshConnectViaKey && !_sshKeyPath.Equals(""))
+            if (_sshConnectViaKey && !_sshKeyPath.Trim().Equals(""))
                 _sshManager.SetUpManager(_vncHost, _sshPort, _sshUserName, _sshKeyPath, _sshKeyPassphrase);
 
             else

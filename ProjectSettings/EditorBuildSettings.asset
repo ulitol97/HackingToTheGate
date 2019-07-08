@@ -15,11 +15,11 @@ EditorBuildSettings:
     path: Assets/TitleMenu.unity
     guid: 388306cc5aa2fe849b4db07bf1677d84
   - enabled: 1
-    path: Assets/Level0.unity
-    guid: 54d79d0e8b7ecf644a07a5fb82d432cc
-  - enabled: 1
     path: Assets/Level1.unity
     guid: db05a438e3874674ea2dfcbd67e0a0ca
+  - enabled: 1
+    path: Assets/Level0.unity
+    guid: 54d79d0e8b7ecf644a07a5fb82d432cc
   - enabled: 1
     path: Assets/Level2.unity
     guid: aff37199d8321dd41b7f12ec2b4b1bb1
