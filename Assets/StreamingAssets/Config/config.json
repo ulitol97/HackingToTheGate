@@ -1,12 +1,12 @@
 {
   "vncConnectionInfo": {
-    "targetHost": "178.62.101.170",
+    "targetHost": "127.0.0.1,
     "vncServerPassword": "",
     "port": 5900
   },
   "sshConnectionInfo": {
-    "username": "tfg",
-    "password": "123456",
+    "username": "",
+    "password": "",
     "port": 22,
     "publicKeyAuth": {
       "path": "",

@@ -70,6 +70,10 @@ namespace Game.Configuration
             ret += "SSH login username: " + sshConnectionInfo.username + "\n";
             ret += "SSH login password: " + Regex.Replace(sshConnectionInfo.password, ".", "*") + "\n";
             ret += "SSH port: " + sshConnectionInfo.port + "\n";
+            if (sshConnectionInfo.publicKeyAuth.path.Trim().Equals(""))
+                ret += "User key path: undefined \n";
+            else
+                ret += "User key path: " + sshConnectionInfo.publicKeyAuth.path + "\n";
             ret += "Prefer public key authentication: " + sshConnectionInfo.publicKeyAuth.preferSshPublicKey +"\n";
             return ret;
         }

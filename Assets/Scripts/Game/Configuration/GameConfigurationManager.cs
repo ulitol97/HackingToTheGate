@@ -146,6 +146,7 @@ namespace Game.Configuration
             
             ConnectionConfig.sshConnectionInfo.publicKeyAuth.path = 
                 textValidator.Validate(ConnectionConfig.sshConnectionInfo.publicKeyAuth.path);
+            
             ConnectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase = 
                 textValidator.Validate(ConnectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase);
         }
