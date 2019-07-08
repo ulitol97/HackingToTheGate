@@ -965,7 +965,7 @@ PrefabInstance:
     - target: {fileID: 4883399914365973152, guid: 704ff9235ba20c94c9602d4652fa6d33,
         type: 3}
       propertyPath: chaseRadius
-      value: 1.8
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 4883399914365973152, guid: 704ff9235ba20c94c9602d4652fa6d33,
         type: 3}
@@ -2193,7 +2193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetScene: Level3
-  playerPosition: {x: 7.5, y: 8.7}
+  playerPosition: {x: 1.34, y: -16.2}
   playerLocationStorage: {fileID: 11400000, guid: b32bcd35803bd084ba2be3ddc63a1a0e,
     type: 2}
   fadeInPanel: {fileID: 2114256338324102486, guid: e983df802d156ee48a015e3adb5443cb,
@@ -82325,27 +82325,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1742605385371339487, guid: 8c6ea637d2654fe448560588723e6bed,
         type: 3}
+      propertyPath: linkedObstacles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742605385371339487, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
+      propertyPath: linkedObstacle
+      value: 
+      objectReference: {fileID: 817709734}
+    - target: {fileID: 1742605385371339487, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
+      propertyPath: linkedObstacles.Array.data[0]
+      value: 
+      objectReference: {fileID: 817709734}
+    - target: {fileID: 1742605385953784849, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
+      propertyPath: linkedObstacles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742605385953784849, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
       propertyPath: linkedObstacle
       value: 
       objectReference: {fileID: 817709734}
     - target: {fileID: 1742605385953784849, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
+      propertyPath: linkedObstacles.Array.data[0]
+      value: 
+      objectReference: {fileID: 817709734}
+    - target: {fileID: 1742605386561307898, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
+      propertyPath: linkedObstacles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742605386561307898, guid: 8c6ea637d2654fe448560588723e6bed,
         type: 3}
       propertyPath: linkedObstacle
       value: 
       objectReference: {fileID: 817709734}
     - target: {fileID: 1742605386561307898, guid: 8c6ea637d2654fe448560588723e6bed,
         type: 3}
+      propertyPath: linkedObstacles.Array.data[0]
+      value: 
+      objectReference: {fileID: 817709734}
+    - target: {fileID: 1742605386578058961, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
+      propertyPath: linkedObstacles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742605386578058961, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
       propertyPath: linkedObstacle
       value: 
       objectReference: {fileID: 817709734}
     - target: {fileID: 1742605386578058961, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
+      propertyPath: linkedObstacles.Array.data[0]
+      value: 
+      objectReference: {fileID: 817709734}
+    - target: {fileID: 1742605387292950144, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
+      propertyPath: linkedObstacles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742605387292950144, guid: 8c6ea637d2654fe448560588723e6bed,
         type: 3}
       propertyPath: linkedObstacle
       value: 
       objectReference: {fileID: 817709734}
     - target: {fileID: 1742605387292950144, guid: 8c6ea637d2654fe448560588723e6bed,
         type: 3}
-      propertyPath: linkedObstacle
+      propertyPath: linkedObstacles.Array.data[0]
       value: 
       objectReference: {fileID: 817709734}
     m_RemovedComponents: []

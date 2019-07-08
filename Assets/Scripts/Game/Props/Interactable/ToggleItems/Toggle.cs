@@ -30,10 +30,10 @@ namespace Game.Props.Interactable.ToggleItems
         protected SpriteRenderer SpriteRenderer;
 
         /// <summary>
-        /// The Actionable element the switch is linked to.
-        /// A switch may send an "open" signal to the linked obstacle when activated.
+        /// The Actionable elements the switch is linked to.
+        /// A switch may send an "open" signal to the linked obstacles when activated.
         /// </summary>
-        public ActionableObstacle linkedObstacle;
+        public ActionableObstacle[] linkedObstacles;
         
         /// <summary>
         /// Function called when the Toggle is inserted into the game.
@@ -52,8 +52,12 @@ namespace Game.Props.Interactable.ToggleItems
         protected virtual void ActivateSwitch()
         {
             SpriteRenderer.sprite = activeSprite;
-            if (linkedObstacle != null)
-                linkedObstacle.OnActionReceived(id);
+
+            foreach (var obstacle in linkedObstacles)
+            {
+                if (obstacle != null)
+                    obstacle.OnActionReceived(id);
+            }
             AudioManager.Instance.PlayEffectClip(AudioManager.ToggleSwitch);
         }
         

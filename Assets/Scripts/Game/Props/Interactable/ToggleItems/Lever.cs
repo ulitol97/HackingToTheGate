@@ -34,8 +34,11 @@ namespace Game.Props.Interactable.ToggleItems
             _active = !_active;
             SpriteRenderer.sprite = _active ? activeSprite : inactiveSprite;
                 
-            if (linkedObstacle != null)
-                linkedObstacle.OnActionReceived(id);
+            foreach (var obstacle in linkedObstacles)
+            {
+                if (obstacle != null)
+                    obstacle.OnActionReceived(id);
+            }
             AudioManager.Instance.PlayEffectClip(AudioManager.ToggleSwitch);
         }
         

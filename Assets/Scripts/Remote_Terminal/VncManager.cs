@@ -209,11 +209,8 @@ namespace Remote_Terminal
         private void Awake()
         {
             if (GameObject.FindGameObjectsWithTag("RemoteServer").Length > 1)
-            {
-                Debug.LogError("DESTROYING THIS MANAGER");
-                Debug.LogError(GetInstance(true));
                 gameObject.SetActive(false);
-            }
+            
             // Set to not destroy between scenes.
 
             else
@@ -242,15 +239,6 @@ namespace Remote_Terminal
             _vncPassword = GameConfigurationManager.ConnectionConfig.vncConnectionInfo.vncServerPassword;
             _vncPort = (uint) GameConfigurationManager.ConnectionConfig.vncConnectionInfo.port;
             _checkConnectionInterval = GameConfigurationManager.ConnectionConfig.secondsBetweenConnectionAttempts;
-            
-            Debug.LogError(_sshUserName);
-            Debug.LogError(_sshPassword);
-            Debug.LogError(_sshPort);
-            Debug.LogError(_sshPort);
-            Debug.LogError(_sshConnectViaKey);
-            Debug.LogError(_sshKeyPath);
-            Debug.LogError(_sshKeyPassphrase);
-            Debug.LogError(_checkConnectionInterval);
         }
 
         /// <summary>
