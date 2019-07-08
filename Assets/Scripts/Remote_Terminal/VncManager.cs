@@ -7,6 +7,7 @@ using Game.Configuration;
 using Game.ScriptableObjects;
 using MEC;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using VncSharp4Unity2D;
 
 namespace Remote_Terminal
@@ -518,10 +519,11 @@ namespace Remote_Terminal
         private void OnDestroy()
         {
             // Stop the remote desktop refresh process
-            if (gameObject.activeInHierarchy)
+            if (gameObject.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("TitleMenu"))
             {
                 CancelScreenRefresh();
                 DisconnectClients();
+                Debug.LogError("Destroyed");
             }
         }
         
