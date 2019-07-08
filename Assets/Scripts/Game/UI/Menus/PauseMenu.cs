@@ -1,4 +1,5 @@
 ﻿using Game.Audio;
+using Game.Configuration;
 using Game.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -72,7 +73,7 @@ namespace Game.UI.Menus
         /// </summary>
         public override void QuitMenu()
         {
-            SceneManager.LoadScene("TitleMenu");
+            SceneManager.LoadScene(GameConfigurationManager.MenuScene);
             Time.timeScale = 1f;
         }
     }

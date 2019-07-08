@@ -150,7 +150,7 @@ namespace Game.Entities.Player
 		/// <summary>
 		/// Tolerance to joystick input in order not to move on a minimum joystick tilt.
 		/// </summary>
-		private const float JoystickTolerance = 0.1f;
+		private const float JoystickTolerance = 0.6f;
 		
 		/// <summary>
 		/// Function called when the Player script is loaded into the game.
@@ -169,7 +169,7 @@ namespace Game.Entities.Player
 			// Place the player where needed for believable transitions.
 			transform.position = startingPosition.initialValue;
 		}
-	
+
 		/// <summary>
 		/// Function called on each frame the Player script is present into the game. Checks the player input.
 		/// </summary>
@@ -233,6 +233,7 @@ namespace Game.Entities.Player
 		{
 			_change = Vector2.zero;
 			UpdateAnimationAndMove();
+			
 		}
 
 		private IEnumerator Attack()
@@ -260,7 +261,6 @@ namespace Game.Entities.Player
 				MoveCharacter();
 				AnimateCharacter();
 				_playerAnimator.SetBool(AnimatorMoving, true);
-				
 			}
 			else
 			{
@@ -277,7 +277,7 @@ namespace Game.Entities.Player
 		private void  MoveCharacter()
 		{
 			_playerRigidBody.MovePosition(
-				_playerRigidBody.position + speed * Time.deltaTime * _change.normalized);
+				_playerRigidBody.position + speed * Time.fixedDeltaTime * _change.normalized);
 		}
 
 		/// <summary>
@@ -351,6 +351,7 @@ namespace Game.Entities.Player
 				temp++;
 			}
 			playerHurtCollider.enabled = true;
+			_playerRigidBody.velocity = Vector2.zero;
 		}
 		
 		/// <summary>

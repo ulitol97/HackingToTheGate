@@ -256,7 +256,7 @@ namespace Remote_Terminal
                 SetUpSshConnection();
                 SetUpRemoteDesktop();
             }
-            catch (Exception e) // If the server could not be contacted, periodically try again.
+            catch (Exception) // If the server could not be contacted, periodically try again.
             {
                 connect = false;
 
@@ -519,11 +519,11 @@ namespace Remote_Terminal
         private void OnDestroy()
         {
             // Stop the remote desktop refresh process
-            if (gameObject.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("TitleMenu"))
+            if (gameObject.activeInHierarchy || SceneManager.GetActiveScene().name.
+                    Equals(GameConfigurationManager.MenuScene))
             {
                 CancelScreenRefresh();
                 DisconnectClients();
-                Debug.LogError("Destroyed");
             }
         }
         

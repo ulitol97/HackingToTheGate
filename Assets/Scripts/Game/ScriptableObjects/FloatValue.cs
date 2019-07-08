@@ -26,6 +26,11 @@ namespace Game.ScriptableObjects
         /// </summary>
         public float runtimeValue;
 
+        public FloatValue(float initialValue)
+        {
+            this.initialValue = initialValue;
+        }
+
         /// <summary>
         /// Function called when the FloatValue is enabled to be part of a scene.
         /// Subscribes the scene manager to the event in <see cref="OnLevelFinishedLoading"/>.

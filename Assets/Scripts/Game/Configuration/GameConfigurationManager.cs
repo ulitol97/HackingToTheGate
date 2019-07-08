@@ -163,7 +163,12 @@ namespace Game.Configuration
             "Spriggan Castle", 
             "Spriggan Castle - Outdoors", 
         };
-        
+
+        /// <summary>
+        /// Constant containing the name of the menu scene for quicker access.
+        /// </summary>
+        public const string MenuScene = "TitleMenu";
+
         /// <summary>
         /// Represents the information held by the game configuration file in a text chain.
         /// </summary>

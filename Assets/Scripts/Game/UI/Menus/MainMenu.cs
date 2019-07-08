@@ -38,12 +38,7 @@ namespace Game.UI.Menus
             // Set to not destroy between scenes.
             GameObject remoteClient = GameObject.FindWithTag("RemoteServer");
             if (remoteClient != null)
-            {
-                Debug.LogError("Destroying");
                 Destroy(remoteClient);
-            }
-
-            
             
             if (!GameConfigurationManager.IsValid)
                 LoadSettings();
