@@ -21,8 +21,6 @@ namespace Game.Props.Interactable
         /// </summary>
         public int currentProgressInSequence;
 
-        
-        
         /// <summary>
         /// Retrieves a reference to the obstacle parent to deactivate it if obstacle destroyed.
         /// </summary>

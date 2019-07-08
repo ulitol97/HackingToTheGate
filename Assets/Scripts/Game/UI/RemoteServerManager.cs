@@ -1,4 +1,5 @@
-﻿using Remote_Terminal;
+﻿using Game.Audio;
+using Remote_Terminal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,9 +39,13 @@ namespace Game.UI
         /// </summary>
         public void UpdateOnlineStatus()
         {
+            Color color = connectionCircle.color;
             if (VncManager.GetInstance(true) != null)
                 connectionCircle.color = VncManager.GetInstance(true).ConnectionStatus ? 
                     connectedColor : disconnectedColor;
+            
+            if (connectionCircle.color != color)
+                AudioManager.Instance.PlayEffectClip(AudioManager.ConnectionChange);
         }
     }
 }

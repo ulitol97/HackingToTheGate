@@ -1,4 +1,5 @@
-﻿using Game.Configuration;
+﻿using Game.Audio;
+using Game.Configuration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -42,6 +43,8 @@ namespace Game.UI.Menus
             if (!GameConfigurationManager.IsValid)
                 LoadSettings();
             UpdateUi();
+            
+            AudioManager.Instance.PlayMusicClip(AudioManager.MainTheme);
         }
 
         private void SetUpConfigFileText()
@@ -63,9 +66,14 @@ namespace Game.UI.Menus
         public void NewGame()
         {
             if (!GameConfigurationManager.IsValid)
+            {
+                AudioManager.Instance.PlayEffectClip(AudioManager.Error);
                 return;
-            
+            }
             Cursor.visible = false;
+            AudioManager.Instance.PlayEffectClip(AudioManager.NewGame);
+            AudioManager.Instance.PlayMusicClip(AudioManager.BackgroundTheme);
+            
             SceneManager.LoadScene("Level1");
         }
 
@@ -77,6 +85,7 @@ namespace Game.UI.Menus
             _configErrorText.SetActive(false);
             _configOkText.SetActive(false);
             _loadingConfigText.SetActive(true);
+            AudioManager.Instance.PlayEffectClip(AudioManager.Confirm);
             GameConfigurationManager.Instance.LoadGameConfiguration();
             
             _loadingConfigText.SetActive(false);
@@ -88,8 +97,11 @@ namespace Game.UI.Menus
             if (GameConfigurationManager.IsValid)
                 _configOkText.SetActive(true);
             else
+            {
                 _configErrorText.SetActive(true);
-            
+                AudioManager.Instance.PlayEffectClip(AudioManager.Error);
+            }
+
             currentSettingText.text = GameConfigurationManager.ToString();
         }
     }

@@ -1,4 +1,5 @@
-﻿using Game.ScriptableObjects;
+﻿using Game.Audio;
+using Game.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -86,6 +87,7 @@ namespace Game.Props.PickUpItems
             receiveItem.Notify();
             isPickedUp.runtimeValue = true;
             SpriteRenderer.enabled = false;
+            AudioManager.Instance.PlayEffectClip(AudioManager.PickUpItem);
         }
     
         /// <summary>

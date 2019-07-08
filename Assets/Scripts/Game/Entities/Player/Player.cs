@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Game.Audio;
 using Game.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -239,6 +240,7 @@ namespace Game.Entities.Player
 			_playerAnimator.SetTrigger(AnimatorAttacking);
 			currentState = PlayerState.Attack;
 			yield return new WaitForFixedUpdate(); // Wait one frame
+			AudioManager.Instance.PlayEffectClip(AudioManager.Attack);
 			yield return new WaitForSeconds(0.3f); // Wait for length of the animation
 			
 			if (currentState != PlayerState.Interact)
@@ -306,6 +308,8 @@ namespace Game.Entities.Player
 			{
 				// Camera kick
 				playerDamageSignal.Notify();
+				// Sound effect
+				AudioManager.Instance.PlayEffectClip(AudioManager.PlayerHit);
 				// End knock back
 				StartCoroutine(EndKnock(knockTime));
 			}

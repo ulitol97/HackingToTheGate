@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Audio;
 using Game.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -61,6 +62,7 @@ namespace Game.SceneManagement
             {
                 playerLocationStorage.initialValue = playerPosition;
                 StartCoroutine(FadeScene());
+                AudioManager.Instance.PlayEffectClip(AudioManager.SceneTransition);
             }
         }
 

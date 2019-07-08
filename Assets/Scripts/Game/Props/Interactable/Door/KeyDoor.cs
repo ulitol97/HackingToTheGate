@@ -1,4 +1,5 @@
-﻿using Game.ScriptableObjects;
+﻿using Game.Audio;
+using Game.ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Props.Interactable.Door
@@ -33,13 +34,17 @@ namespace Game.Props.Interactable.Door
         
         protected override void Update()
         {
-            if (PlayerInRange && Input.GetButtonDown("Interact") && 
-                playerInventory.currentKeysValue.runtimeValue > 0)
+            if (PlayerInRange && Input.GetButtonDown("Interact"))
             {
-                playerInventory.SubtractKey();
-                context.Notify();
-                keyUsedSignal.Notify();
-                Open();
+                if (playerInventory.currentKeysValue.runtimeValue > 0)
+                {
+                    playerInventory.SubtractKey();
+                    context.Notify();
+                    keyUsedSignal.Notify();
+                    Open();
+                }
+                else
+                    AudioManager.Instance.PlayEffectClip(AudioManager.Error);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Game.Props.Interactable;
+﻿using Game.Audio;
+using Game.Props.Interactable;
 using UnityEngine;
 
 namespace Game.Props.Obstacles
@@ -53,6 +54,7 @@ namespace Game.Props.Obstacles
         {
             _spriteRenderer.sprite = isOpen.runtimeValue ? obstacleInactive : obstacleActive;
             _boxCollider.enabled = !isOpen.runtimeValue;
+            AudioManager.Instance.PlayEffectClip(AudioManager.LowerSpikes);
         }
     }
 }

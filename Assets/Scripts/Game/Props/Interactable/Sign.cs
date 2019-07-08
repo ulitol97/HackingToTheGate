@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Audio;
 using Game.Configuration;
 using UnityEngine;
 using UnityEngine.UI;
@@ -74,6 +75,7 @@ namespace Game.Props.Interactable
         {
             dialogText.text = _signText;
             dialogBox.SetActive(!dialogBox.activeInHierarchy);
+            AudioManager.Instance.PlayEffectClip(AudioManager.Confirm);
         }
         
         /// <summary>

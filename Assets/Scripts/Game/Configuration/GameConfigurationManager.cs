@@ -17,17 +17,17 @@ namespace Game.Configuration
         /// <summary>
         /// Name of the file containing the configuration parameters of the connection to the remote host.
         /// </summary>
-        private const string ConnectionConfigFileName = "config.json";
+        private const string ConnectionConfigFileName = "Config/config.json";
         
         /// <summary>
         /// Name of the file containing the answers to password puzzles.
         /// </summary>
-        private const string AnswersConfigFileName = "answers.json";
+        private const string AnswersConfigFileName = "Config/answers.json";
         
         /// <summary>
         /// Name of the file containing the clues given to players to solve puzzles.
         /// </summary>
-        private const string CluesConfigFileName = "clues.json";
+        private const string CluesConfigFileName = "Config/clues.json";
         
         public Regex ipValidation = new Regex(
             @"\b(?:(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b");

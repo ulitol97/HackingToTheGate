@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Audio;
+using UnityEngine;
 
 namespace Game.UI.Menus
 {
@@ -44,6 +45,7 @@ namespace Game.UI.Menus
         
         public virtual void QuitMenu()
         {
+            AudioManager.Instance.PlayEffectClip(AudioManager.Confirm);
             Application.Quit();
         }
 
@@ -56,6 +58,8 @@ namespace Game.UI.Menus
             IsShowingHelp = !IsShowingHelp;
             manualPanel.SetActive(IsShowingHelp);
             mainPanel.SetActive(!IsShowingHelp);
+
+            AudioManager.Instance.PlayEffectClip(IsShowingHelp ? AudioManager.Confirm : AudioManager.Back);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Game.ScriptableObjects;
+﻿using Game.Audio;
+using Game.ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Props.Interactable.Door
@@ -51,6 +52,7 @@ namespace Game.Props.Interactable.Door
             // Store it was opened and destroy.
             isOpen.runtimeValue = true;
             Parent.gameObject.SetActive(false);
+            AudioManager.Instance.PlayEffectClip(AudioManager.OpenDoor);
         }
     }
 }

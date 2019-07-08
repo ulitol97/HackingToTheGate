@@ -1,4 +1,6 @@
-﻿namespace Game.Props.Interactable.Door
+﻿using Game.Audio;
+
+namespace Game.Props.Interactable.Door
 {
     /// <summary>
     /// The NonKeyDoor class inherits from Door.
@@ -10,6 +12,7 @@
         {
             context.Notify();
             Parent.gameObject.SetActive(false);
+            AudioManager.Instance.PlayEffectClip(AudioManager.OpenDoor);
         }
     }
 }

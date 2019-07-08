@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Audio;
 using Game.ScriptableObjects;
 using UnityEngine;
 
@@ -74,12 +75,12 @@ namespace Game.Entities.Enemies
         {
             if (killedSignal != null)
                 killedSignal.Notify();
+            AudioManager.Instance.PlayEffectClip(AudioManager.EnemyDead);
             
             // If a death effect has been defined...
             if (deathEffect != null)
             {
                 GameObject enemyDeathEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
-                
                 // Destroy effect after a sec.
                 Destroy(enemyDeathEffect, 1f);
             }

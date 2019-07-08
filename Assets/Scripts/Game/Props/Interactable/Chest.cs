@@ -1,4 +1,5 @@
-﻿using Game.ScriptableObjects;
+﻿using Game.Audio;
+using Game.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -84,6 +85,7 @@ namespace Game.Props.Interactable
             // Set up dialogue
             dialogBox.SetActive(true);
             dialogText.text = content.itemDescription;
+            AudioManager.Instance.PlayEffectClip(AudioManager.PickUpItem);
 
             // Set up player inventory and notify player for animation.
             playerInventory.AddItem(content);
@@ -108,6 +110,7 @@ namespace Game.Props.Interactable
                 dialogBox.SetActive(false);
                 receiveItem.Notify();
                 PlayerInRange = false;
+                AudioManager.Instance.PlayEffectClip(AudioManager.Confirm);
         }
         
         /// <summary>

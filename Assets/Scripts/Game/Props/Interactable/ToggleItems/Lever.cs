@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Audio;
+using UnityEngine;
 
 namespace Game.Props.Interactable.ToggleItems
 {
@@ -35,6 +36,7 @@ namespace Game.Props.Interactable.ToggleItems
                 
             if (linkedObstacle != null)
                 linkedObstacle.OnActionReceived(id);
+            AudioManager.Instance.PlayEffectClip(AudioManager.ToggleSwitch);
         }
         
         protected override void OnTriggerEnter2D(Collider2D other)

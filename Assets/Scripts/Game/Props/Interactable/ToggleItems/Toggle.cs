@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Audio;
+using UnityEngine;
 
 namespace Game.Props.Interactable.ToggleItems
 {
@@ -53,6 +54,7 @@ namespace Game.Props.Interactable.ToggleItems
             SpriteRenderer.sprite = activeSprite;
             if (linkedObstacle != null)
                 linkedObstacle.OnActionReceived(id);
+            AudioManager.Instance.PlayEffectClip(AudioManager.ToggleSwitch);
         }
         
         /// <summary>
@@ -61,6 +63,7 @@ namespace Game.Props.Interactable.ToggleItems
         private void DeactivateSwitch()
         {
             SpriteRenderer.sprite = inactiveSprite;
+            AudioManager.Instance.PlayEffectClip(AudioManager.ToggleSwitch);
         }
 
         /// <summary>

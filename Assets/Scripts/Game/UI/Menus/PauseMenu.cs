@@ -1,4 +1,5 @@
-﻿using Game.ScriptableObjects;
+﻿using Game.Audio;
+using Game.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,11 +33,15 @@ namespace Game.UI.Menus
         {
             if (Input.GetButtonDown("Pause"))
                 TogglePause();
+            
             else if (Input.GetButtonDown("Attack") && _isPaused)
+            {
                 if(IsShowingHelp)
                     ToggleHelp();
                 else
                     TogglePause();
+                AudioManager.Instance.PlayEffectClip(AudioManager.Back);
+            }
         }
 
         /// <summary>
@@ -59,6 +64,7 @@ namespace Game.UI.Menus
                 Time.timeScale = 1f;
                 IsShowingHelp = false;
             }
+            AudioManager.Instance.PlayEffectClip(AudioManager.Pause);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Audio;
 using UnityEngine;
 
 namespace Game.Props
@@ -32,6 +33,7 @@ namespace Game.Props
         public void Smash()
         {
             _animator.SetTrigger(AnimatorSmash);
+            AudioManager.Instance.PlayEffectClip(AudioManager.BreakPot);
             StartCoroutine(Break());
         }
 
