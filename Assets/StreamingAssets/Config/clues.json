@@ -5,7 +5,7 @@
 		"I heard you have access to the shadowfile entry of a user called 'SuperAdmin'... If only you had hashcat installed as well...",
 		"So, did you get any cool login information from 'SuperAdmin'?",
 		"Talking about the shadowfile, maybe you should use SuperAdmin's account to see how many lines it contains...",
-		"Seems like SuperAdmin has an apache server installed, I bet you can't steal his shadowfile makinf it public on the server :)",
+		"Seems like SuperAdmin has an apache server installed, I bet you can't steal his shadowfile making it public on the server :)",
 		"If you stole the shadowfile, you may know in which port the Apache server was running, right?",
 		"You did a good job down there. Now shut down that machine and let's leave."
 		]

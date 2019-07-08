@@ -212,7 +212,6 @@ namespace Remote_Terminal
                 gameObject.SetActive(false);
             
             // Set to not destroy between scenes.
-
             else
                 DontDestroyOnLoad(gameObject);
         }
@@ -519,8 +518,11 @@ namespace Remote_Terminal
         private void OnDestroy()
         {
             // Stop the remote desktop refresh process
-            CancelScreenRefresh();
-            DisconnectClients();
+            if (gameObject.activeInHierarchy)
+            {
+                CancelScreenRefresh();
+                DisconnectClients();
+            }
         }
         
         /// <summary>

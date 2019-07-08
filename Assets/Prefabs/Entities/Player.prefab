@@ -806,8 +806,8 @@ MonoBehaviour:
   playerDeathSignal: {fileID: 11400000, guid: d4f4efbfc9988e441b0addbc71c5142a, type: 2}
   damageColor: {r: 0.9056604, g: 0.20932718, b: 0.20932718, a: 0.60784316}
   regularColor: {r: 1, g: 1, b: 1, a: 1}
-  invulnerabilityFlashDuration: 0.07
-  numberOfInvulnerabilityFlashes: 6
+  invulnerabilityFlashDuration: 0.08
+  numberOfInvulnerabilityFlashes: 7
 --- !u!114 &7847369237335361769
 MonoBehaviour:
   m_ObjectHideFlags: 0
