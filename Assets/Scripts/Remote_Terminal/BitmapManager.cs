@@ -61,7 +61,6 @@ namespace Remote_Terminal
 		private Texture2D BitmapToTexture2D(Bitmap bmp)
 		{
 			byte[] desktopBytes = Bitmap2RawBytes(bmp);
-
 			Texture2D desktopTexture = new Texture2D(bmp.Width, bmp.Height, TextureFormat.BGRA32, false);
 			desktopTexture.LoadRawTextureData(desktopBytes);
 			desktopTexture.Apply();
@@ -79,6 +78,7 @@ namespace Remote_Terminal
 			Texture2D desktopTexture = new Texture2D(bmp.Width, bmp.Height, TextureFormat.BGRA32, false);
 			desktopTexture.LoadRawTextureData(bytes);
 			desktopTexture.Apply();
+			bmp.Dispose();
 			return desktopTexture;
 		}
 
@@ -96,7 +96,6 @@ namespace Remote_Terminal
 				bmp.Save(stream, ImageFormat.Bmp);
 				bytesStream = stream.ToArray().Skip(54).ToArray();
 			}
-			
 			return bytesStream;
 		}
 	}

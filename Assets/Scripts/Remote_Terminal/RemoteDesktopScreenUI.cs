@@ -57,7 +57,7 @@ namespace Remote_Terminal
             if (!_statusOnline || !_statusOnScreen)
                 return;
 
-            _imageRenderer.sprite = VncManager.GetInstance(true).RemoteDesktopSprite;
+            _imageRenderer.sprite = VncManager.GetInstance(true).remoteDesktopSprite;
         }
         
         
@@ -92,7 +92,7 @@ namespace Remote_Terminal
 
             }
             else if (VncManager.GetInstance(true) != null)
-                _imageRenderer.sprite = VncManager.GetInstance(true).RemoteDesktopSprite;
+                _imageRenderer.sprite = VncManager.GetInstance(true).remoteDesktopSprite;
             
 
             // Deactivate game element if terminal mode is not toggled

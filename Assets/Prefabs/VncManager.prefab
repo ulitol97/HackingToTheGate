@@ -117,15 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28257f1524d8e9489c9d3e98293f6ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sshUserName: tfg
-  sshPassword: 123456
-  sshPort: 22
-  sshConnectViaKey: 0
-  sshKeyPath: D:\Eduardo\Documents\Keys\sshKeys\DO-TFG.pem
-  sshKeyPassphrase: 
-  vncHost: 178.62.101.170
-  vncPort: 5900
-  vncPassword: 
-  checkConnectionInterval: 7
+  remoteDesktopSprite: {fileID: 21300000, guid: dcf217024ffa09347818c5ea3b8acd22,
+    type: 3}
   keyboardManager: {fileID: 7885183851774489033}
   serverStatusSignal: {fileID: 11400000, guid: 91831c15b891f204b8b28f16d8863511, type: 2}

@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Threading;
 using Game.Configuration;
 using Game.ScriptableObjects;
-using MEC;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VncSharp4Unity2D;
@@ -28,7 +27,7 @@ namespace Remote_Terminal
         /// <summary>
         /// Sprite holding the live image of the remote desktop.
         /// </summary>
-        private Sprite _remoteDesktopSprite;
+        public Sprite remoteDesktopSprite;
         
         /// <summary>
         /// Boolean flag representing if the byte array holding the current desktop image has changed
@@ -163,15 +162,10 @@ namespace Remote_Terminal
         public Signal serverStatusSignal;
 
         // Getters / Setters
-        
-        public RemoteDesktop RemoteDesktop
+
+        private RemoteDesktop RemoteDesktop
         {
             get { return _rd; }
-        }
-
-        public Sprite RemoteDesktopSprite
-        {
-            get { return _remoteDesktopSprite; }
         }
 
 
@@ -300,6 +294,7 @@ namespace Remote_Terminal
             if (_pendingAction != null) // 1 refresh max per update
             {
                 _pendingAction.Invoke();
+                _pendingAction = null;
             }
         }
 
@@ -377,24 +372,30 @@ namespace Remote_Terminal
         /// <summary>
         /// Co-routine in charge of creating a new sprite from the bytes received from the server and un-marking the
         /// _bytesChanged flag for the game to request new sprite updates.
+        /// In case a sprite texture is already in use, destroy it when replaced to prevent memory leaks.
         /// </summary>
         private IEnumerator<float> UpdateVncSprite()
         {
+            // Load a texture form the remote image.
             try
             {
-                Texture2D texture = BitmapManager.GetInstance().BitmapToTexture2D(_desktop, _desktopBytes);
-                
-                _remoteDesktopSprite = Sprite.Create(texture,
-                    new Rect(0, 0, texture.width, texture.height),
+                Texture2D newTexture = BitmapManager.GetInstance().BitmapToTexture2D(_desktop, _desktopBytes);
+                Texture2D oldTexture = remoteDesktopSprite.texture;
+
+                remoteDesktopSprite = Sprite.Create(newTexture,
+                    new Rect(0, 0, newTexture.width, newTexture.height),
                     new Vector2(0.5f, 0.5f));
+
+                Destroy(oldTexture);
             }
-            finally // Whether an error occurs or not processing the image, prepare to refresh the screen again.
+            finally
             {
                 _desktop.Dispose();
-                _pendingAction = null;
+                _desktop = null;
                 _bytesChanged = false;
+                _pendingAction = null;
             }
-
+            // Wait 1 frame.
             yield return new float();
         }
 
@@ -408,12 +409,13 @@ namespace Remote_Terminal
             _threadRunning = true;
             while (VncConnected && _threadRunning)
             {
-                if (_bytesChanged == false && _pendingAction == null)
+                if (!_bytesChanged && _pendingAction == null)
                 {
-                    _desktop = (Bitmap) _rd.Desktop.Clone(); // Operate on a copy not to interrupt the flow of the connection
+                    _desktop = _rd.Desktop.Clone() as Bitmap;
+                    
                     _desktopBytes = BitmapManager.GetInstance().Bitmap2RawBytes(_desktop);
                     _bytesChanged = true;
-                    _pendingAction = () => { Timing.RunCoroutine(UpdateVncSprite()); };
+                    _pendingAction = () => StartCoroutine(UpdateVncSprite());
                 }
             }
         }

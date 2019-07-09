@@ -1,8 +1,8 @@
 {
    "clues" : [ "DO NOT DISTURB THE BASEMENT WORKERS!", 
-		"Nice terminal! You better know  the IP of the network camera 02 of the Medicine faculty if you want to use it ;)", 
+		"Nice terminal! You can enter the 'tfg' account...once you know the IP of the network camera 02 of the Medicine faculty ;)", 
 		"If you can't figure out something, maybe the answer is not in this dungeon but elsewhere...",
-		"I heard you have access to the shadowfile entry of a user called 'SuperAdmin'... If only you had hashcat installed as well...",
+		"I heard you have access to the shadowfile entry of a user called 'SuperAdmin'... If only you had hashcat and a password dictionary as well...",
 		"So, did you get any cool login information from 'SuperAdmin'?",
 		"Talking about the shadowfile, maybe you should use SuperAdmin's account to see how many lines it contains...",
 		"Seems like SuperAdmin has an apache server installed, I bet you can't steal his shadowfile making it public on the server :)",

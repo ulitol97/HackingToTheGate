@@ -1,16 +1,16 @@
 {
   "_comment": "Route to the ssh key file must be escaped if using Windows path syntax",
   "vncConnectionInfo": {
-    "targetHost": "127.0.0.1",
+    "targetHost": "178.62.101.170",
     "vncServerPassword": "",
     "port": 5900
   },
   "sshConnectionInfo": {
-    "username": "example",
+    "username": "tfg",
     "password": "",
     "port": 22,
     "publicKeyAuth": {
-      "path": "",
+      "path": "D:\\Eduardo\\Documents\\Keys\\sshKeys\\DO-TFG.pem",
       "passPhrase": "",
       "preferSshPublicKey": true
     }

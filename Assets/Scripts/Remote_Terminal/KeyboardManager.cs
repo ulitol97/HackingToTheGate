@@ -149,7 +149,7 @@ namespace Remote_Terminal
             if (VncManager.GetInstance(true) != null)
                 VncManager.GetInstance(true).SendKeyToServer(virtualKey, pressed);
 
-            yield return new float();
+            yield break;
         }
 
         /// <summary>
