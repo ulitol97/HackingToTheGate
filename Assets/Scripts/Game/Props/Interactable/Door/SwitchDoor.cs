@@ -9,6 +9,12 @@
     public class SwitchDoor : ActionableObstacle
     {
         /// <summary>
+        /// Switch doors must not check for user input each update.
+        /// </summary>
+        protected override void Update()
+        {}
+
+        /// <summary>
         /// Open the door when the obstacle is activated correctly.
         /// </summary>
         protected override void Activate()

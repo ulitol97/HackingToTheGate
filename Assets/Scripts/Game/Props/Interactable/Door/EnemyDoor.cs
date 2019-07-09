@@ -45,6 +45,12 @@ namespace Game.Props.Interactable.Door
             Open();
         }
 
+        /// <summary>
+        /// Enemy doors must not check for user input each update.
+        /// </summary>
+        protected override void Update()
+        {}
+        
         protected override void Start()
         {
             base.Start();
