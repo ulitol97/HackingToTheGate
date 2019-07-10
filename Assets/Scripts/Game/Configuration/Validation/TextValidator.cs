@@ -6,13 +6,8 @@ namespace Game.Configuration.Validation
     /// The TextValidator class allows to validate if a given string matches a certain patterns and
     /// to return a specific value in case it is not.
     /// </summary>
-    public class TextValidator
+    public class TextValidator : AbstractValidator<string>
     {
-        /// <summary>
-        /// Value to return if the string validation fails.
-        /// </summary>
-        public const string DefaultValue = "";
-        
         /// <summary>
         /// Pattern to compare the string against.
         /// </summary>
@@ -24,6 +19,7 @@ namespace Game.Configuration.Validation
         public TextValidator()
         {
             // Match everything
+            DefaultValue = "";
             _comparePattern = new Regex("(?s).*");
         }
 
@@ -33,6 +29,7 @@ namespace Game.Configuration.Validation
         /// <param name="pattern">Regex containing the pattern to be matched.</param>
         public TextValidator(Regex pattern)
         {
+            DefaultValue = "";
             _comparePattern = pattern;
         }
 
@@ -42,7 +39,7 @@ namespace Game.Configuration.Validation
         /// <param name="input">Input string to be validated.</param>
         /// <returns>A default value if the validations fails or the original input trimmed if the validation
         /// succeeded.</returns>
-        public string Validate(string input)
+        public override string Validate(string input)
         {
             if (input == null)
                 return DefaultValue;

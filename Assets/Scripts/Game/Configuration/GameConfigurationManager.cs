@@ -94,7 +94,8 @@ namespace Game.Configuration
         private void ValidateConnectionSettings()
         {
             ValidateConnectionFields();
-            
+            Debug.Log("a"+ TextValidator.DefaultValue + "a");
+            Debug.Log("a"+ IntegerValidator.DefaultValue + "a");
             // Final checks
             if (ConnectionConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
             {
@@ -116,15 +117,12 @@ namespace Game.Configuration
         /// </summary>
         private void ValidateConnectionFields()
         {
+            // Vnc info validation
             TextValidator ipValidator = new TextValidator(ipValidation);
             TextValidator textValidator = new TextValidator();
-            
-            IntegerValidator sshPortValidator = 
-                new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 22);
             IntegerValidator vncPortValidator = 
                 new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 5900);
             
-            // Vnc info validation
             ConnectionConfig.vncConnectionInfo.targetHost = 
                 ipValidator.Validate(ConnectionConfig.vncConnectionInfo.targetHost);
             
@@ -135,6 +133,9 @@ namespace Game.Configuration
                 textValidator.Validate(ConnectionConfig.vncConnectionInfo.vncServerPassword);
             
             // Ssh info validation
+            
+            IntegerValidator sshPortValidator = 
+                new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 22);
             
             ConnectionConfig.sshConnectionInfo.username = 
                 textValidator.Validate(ConnectionConfig.sshConnectionInfo.username);

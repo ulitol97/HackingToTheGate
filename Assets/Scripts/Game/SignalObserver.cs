@@ -6,7 +6,7 @@ namespace Game
 {
     /// <summary>
     /// The class SignalObserver watches for changes coming from unity events
-    /// and trigger logic operations in consequence.
+    /// and triggers logic operations in consequence.
     /// </summary>
     public class SignalObserver : MonoBehaviour, IObserver
     {

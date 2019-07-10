@@ -7,7 +7,7 @@
   },
   "sshConnectionInfo": {
     "username": "tfg",
-    "password": "",
+    "password": "123456",
     "port": 22,
     "publicKeyAuth": {
       "path": "D:\\Eduardo\\Documents\\Keys\\sshKeys\\DO-TFG.pem",
