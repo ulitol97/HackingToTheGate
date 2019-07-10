@@ -1,13 +1,13 @@
 ﻿using Game.ScriptableObjects;
 using UnityEngine;
 
-namespace Game.Props.Interactable
+namespace Game.Entities.Props.Interactable
 {
     /// <summary>
     /// The abstract class Actionable encapsulates the common and default behaviour to all
     /// game objects that will be interacted by means of a toggle mechanism (switches and levers).
     /// </summary>
-    public abstract class ActionableObstacle : Door.Door, IActionable
+    public abstract class ActionableObstacle : Door, IActionable
     {
         /// <summary>
         /// The correct order that the toggles linked to the actionable should be

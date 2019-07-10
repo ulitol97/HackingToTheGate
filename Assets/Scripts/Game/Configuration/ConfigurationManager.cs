@@ -44,7 +44,7 @@ namespace Game.Configuration
         /// <summary>
         /// Boolean flag representing if the game current configuration is valid to start a new game or not.
         /// </summary>
-        public static bool IsValid;
+        public bool isValid;
         
         /// <summary>
         /// Reference to a ConnectionConfiguration object holding all the variables specified in the user configuration file.
@@ -55,7 +55,7 @@ namespace Game.Configuration
         /// <summary>
         /// Checks for the existence of a game configuration file and if it exists proceeds to validate it.
         /// If the file does not exist or can't be read because of incorrect formatting, the configuration in the file
-        /// is considered invalid (<see cref="IsValid"/>).
+        /// is considered invalid (<see cref="isValid"/>).
         /// </summary>
         public void LoadGameConfiguration()
         {
@@ -75,14 +75,14 @@ namespace Game.Configuration
                 }
                 catch (Exception)
                 {
-                    IsValid = false;
+                    isValid = false;
                     return;
                 }
-                ValidateConnectionSettings();
+                ValidateConfiguration();
             }
             else
             {
-                IsValid = false;
+                isValid = false;
                 connectionConfig = null;
             }
         }
@@ -91,22 +91,22 @@ namespace Game.Configuration
         /// Checks that, after validating the users config file, at least a valid remote host IP and a valid
         /// username to attempt authentication are specified.
         /// </summary>
-        private void ValidateConnectionSettings()
+        private void ValidateConfiguration()
         {
             ValidateConnectionFields();
             // Final checks
             if (connectionConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
             {
-                IsValid = false;
+                isValid = false;
                 return;
             }
             if (connectionConfig.sshConnectionInfo.username.Equals(TextValidator.DefaultValue))
             {
-                IsValid = false;
+                isValid = false;
                 return;
             }
 
-            IsValid = true;
+            isValid = true;
         }
 
         /// <summary>
@@ -116,9 +116,9 @@ namespace Game.Configuration
         private void ValidateConnectionFields()
         {
             // Vnc info validation
-            TextValidator ipValidator = new TextValidator(_ipValidation);
-            TextValidator textValidator = new TextValidator();
-            IntegerValidator vncPortValidator = 
+            IValidator<string> ipValidator = new TextValidator(_ipValidation);
+            IValidator<string> textValidator = new TextValidator();
+            IValidator<int> vncPortValidator = 
                 new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 5900);
             
             connectionConfig.vncConnectionInfo.targetHost = 
@@ -132,7 +132,7 @@ namespace Game.Configuration
             
             // Ssh info validation
             
-            IntegerValidator sshPortValidator = 
+            IValidator<int> sshPortValidator = 
                 new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 22);
             
             connectionConfig.sshConnectionInfo.username = 
@@ -175,7 +175,7 @@ namespace Game.Configuration
         public new string ToString()
         {
             string prefix = "Current connection settings...\n";
-            return (connectionConfig == null || !IsValid) ? prefix + "Fix your config files to play" : 
+            return (connectionConfig == null || !isValid) ? prefix + "Fix your config files to play" : 
                 prefix + connectionConfig;
         }
     }

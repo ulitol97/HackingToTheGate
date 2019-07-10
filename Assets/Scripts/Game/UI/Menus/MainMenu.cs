@@ -41,7 +41,7 @@ namespace Game.UI.Menus
             if (remoteClient != null)
                 Destroy(remoteClient);
             
-            if (!ConfigurationManager.IsValid)
+            if (!ConfigurationManager.Instance.isValid)
                 LoadSettings();
             UpdateUi();
             
@@ -66,7 +66,7 @@ namespace Game.UI.Menus
         /// </summary>
         public void NewGame()
         {
-            if (!ConfigurationManager.IsValid)
+            if (!ConfigurationManager.Instance.isValid)
             {
                 AudioManager.Instance.PlayEffectClip(AudioManager.Error);
                 return;
@@ -95,7 +95,7 @@ namespace Game.UI.Menus
 
         private void UpdateUi()
         {
-            if (ConfigurationManager.IsValid)
+            if (ConfigurationManager.Instance.isValid)
                 _configOkText.SetActive(true);
             else
             {

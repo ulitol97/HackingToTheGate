@@ -11,6 +11,18 @@ namespace Game.Configuration
     [System.Serializable]
     public class ChallengesConfiguration
     {
+        [System.Serializable]
+        public class AnswersConfiguration
+        {
+            public List<string> answers;
+        }
+        
+        [System.Serializable]
+        public class CluesConfiguration
+        {
+            public List<string> clues;
+        }
+        
 
         public AnswersConfiguration answers;
         public CluesConfiguration clues;
@@ -44,18 +56,6 @@ namespace Game.Configuration
         public static CluesConfiguration RetrieveCluesFromJson(string jsonFilePath)
         {
             return JsonUtility.FromJson<CluesConfiguration>(jsonFilePath);
-        }
-        
-        [System.Serializable]
-        public class AnswersConfiguration
-        {
-            public List<string> answers;
-        }
-        
-        [System.Serializable]
-        public class CluesConfiguration
-        {
-            public List<string> clues;
         }
     }
 }
