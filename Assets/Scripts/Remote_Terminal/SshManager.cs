@@ -10,7 +10,7 @@ namespace Remote_Terminal
     /// protocol, cyphering the data shared between and server in the process.
     /// As a singleton, a maximum of one instance of this class will be managed by the game.
     /// </summary>
-    public class SshManager : Singleton<SshManager>
+    public class SshManager
     {
         /// <summary>
         /// Holds the current and only simultaneous instance of the SshManager in use by the game.
@@ -64,10 +64,10 @@ namespace Remote_Terminal
         /// <returns>A new SshManager instance or the currently existing singleton instance.</returns>
         public void SetUpManager(string ip, int port, string username, string password)
         {
-            Instance._ip = ip;
-            Instance._port = port;
-            Instance._username = username;
-            Instance._password = password;
+            _ip = ip;
+            _port = port;
+            _username = username;
+            _password = password;
             
             var conn = new ConnectionInfo(_ip, _port, _username, 
                 new PasswordAuthenticationMethod(_username, _password));
@@ -87,11 +87,11 @@ namespace Remote_Terminal
         public void SetUpManager(string ip, int port, string username, string keyFileName, 
             string passPhrase)
         {
-            Instance._ip = ip;
-            Instance._port = port;
-            Instance._username = username;
-            Instance._keyFileName = keyFileName;
-            Instance._passPhrase = passPhrase;
+            _ip = ip;
+            _port = port;
+            _username = username;
+            _keyFileName = keyFileName;
+            _passPhrase = passPhrase;
             
             var conn = new ConnectionInfo(_ip, _port, _username, 
                 new PrivateKeyAuthenticationMethod(_username, 

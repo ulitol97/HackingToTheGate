@@ -175,7 +175,7 @@ namespace Remote_Terminal
         /// </summary>
         private bool SshConnected
         {
-            get { return SshManager.GetInstance(true) != null && SshManager.GetInstance(true).Connected; }
+            get { return _sshManager != null && _sshManager.Connected; }
         }
         
         /// <summary>
@@ -217,7 +217,7 @@ namespace Remote_Terminal
             if (_checkConnectionInterval < MinConnectionInterval)
                 _checkConnectionInterval = MinConnectionInterval;
             
-            _sshManager = SshManager.Instance;
+            _sshManager = new SshManager();
             ConnectToHost();
         }
 
@@ -501,7 +501,7 @@ namespace Remote_Terminal
             }
 
             if (SshConnected)
-                SshManager.GetInstance(true).Dispose();
+                _sshManager.Dispose();
         }
 
         private void DisconnectClients()
@@ -512,7 +512,7 @@ namespace Remote_Terminal
                 _rd = null;
             }
             if (SshConnected)
-                SshManager.GetInstance(true).Disconnect();
+                _sshManager.Disconnect();
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Remote_Terminal
     /// </summary>
     /// <remarks>Seems like Unity has an issue detecting the AltGr key, which is interpreted as Ctrl Left.
     /// This issue was solved programatically.</remarks>
-    public class KeyboardManager : Singleton<KeyboardManager>, IObserver
+    public class KeyboardManager : MonoBehaviour, IObserver
     {
         private bool _terminalMode;
         
@@ -63,15 +63,7 @@ namespace Remote_Terminal
         /// keyboard updates to the server.
         /// </summary>
         private bool _statusOnScreen;
-
-        /// <summary>
-        /// Creates a new instance of the KeyboardManager class.
-        /// </summary>
-        /// <remarks>Made private to prevent non-singleton constructor use.</remarks>
-        protected KeyboardManager()
-        {
-        }
-
+        
         /// <summary>
         /// Function called when the KeyboardManager is inserted into the game.
         /// Filters the valid keys that will be checked on each game frame and stores then in the _keyCodes property.

@@ -94,8 +94,6 @@ namespace Game.Configuration
         private void ValidateConnectionSettings()
         {
             ValidateConnectionFields();
-            Debug.Log("a"+ TextValidator.DefaultValue + "a");
-            Debug.Log("a"+ IntegerValidator.DefaultValue + "a");
             // Final checks
             if (ConnectionConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
             {

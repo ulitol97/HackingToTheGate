@@ -33,6 +33,7 @@ namespace Game.UI.Menus
         protected override void Start()
         {
             base.Start();
+            Cursor.visible = true;
             SetUpConfigFileText();
             
             // Set to not destroy between scenes.

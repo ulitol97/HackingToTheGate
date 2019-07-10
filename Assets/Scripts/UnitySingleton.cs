@@ -54,17 +54,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-//    static T GetInstance(bool ignoreShuttingDown)
-//    {
-//        if (!ignoreShuttingDown)
-//            return Instance;
-//        else
-//        {
-//            
-//        }
-//
-//    }
-
     /// <summary>
     /// On the event of having the GameObject set for destruction in-game,
     /// mark it to prevent its access from external code.
