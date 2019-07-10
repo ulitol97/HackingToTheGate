@@ -41,7 +41,7 @@ namespace Game.UI.Menus
             if (remoteClient != null)
                 Destroy(remoteClient);
             
-            if (!GameConfigurationManager.IsValid)
+            if (!ConfigurationManager.IsValid)
                 LoadSettings();
             UpdateUi();
             
@@ -66,7 +66,7 @@ namespace Game.UI.Menus
         /// </summary>
         public void NewGame()
         {
-            if (!GameConfigurationManager.IsValid)
+            if (!ConfigurationManager.IsValid)
             {
                 AudioManager.Instance.PlayEffectClip(AudioManager.Error);
                 return;
@@ -87,7 +87,7 @@ namespace Game.UI.Menus
             _configOkText.SetActive(false);
             _loadingConfigText.SetActive(true);
             AudioManager.Instance.PlayEffectClip(AudioManager.Confirm);
-            GameConfigurationManager.Instance.LoadGameConfiguration();
+            ConfigurationManager.Instance.LoadGameConfiguration();
             
             _loadingConfigText.SetActive(false);
             UpdateUi();
@@ -95,7 +95,7 @@ namespace Game.UI.Menus
 
         private void UpdateUi()
         {
-            if (GameConfigurationManager.IsValid)
+            if (ConfigurationManager.IsValid)
                 _configOkText.SetActive(true);
             else
             {
@@ -103,7 +103,7 @@ namespace Game.UI.Menus
                 AudioManager.Instance.PlayEffectClip(AudioManager.Error);
             }
 
-            currentSettingText.text = GameConfigurationManager.ToString();
+            currentSettingText.text = ConfigurationManager.Instance.ToString();
         }
     }
 }

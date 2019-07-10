@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 namespace Game.Audio
 {
-    public class AudioManager : Singleton<AudioManager>
+    public class AudioManager : UnitySingleton<AudioManager>
     {
 
         private AudioSource _musicSource;
@@ -39,11 +39,6 @@ namespace Game.Audio
         public void PlayEffectClip(string filename)
         {
             StartCoroutine(PlayAudioClip(filename, true));
-        }
-
-        public void StopMusic()
-        {
-            _musicSource.Stop();
         }
 
         private IEnumerator PlayAudioClip(string filename, bool isEffect)

@@ -53,7 +53,7 @@ namespace Game.Props.Interactable.Door
         {
             try
             {
-                _password = GameConfigurationManager.ChallengesConfig.GetAnswers()[passwordId];
+                _password = ConfigurationManager.Instance.challengesConfig.GetAnswers()[passwordId];
             }
             catch (IndexOutOfRangeException)
             {

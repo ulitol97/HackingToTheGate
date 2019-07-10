@@ -41,7 +41,7 @@ namespace Game.UI
         private IEnumerator DrawPlaceName()
         {
             _placeText.gameObject.SetActive(true);
-            _placeText.text = GameConfigurationManager.Instance.LevelNameTable[int.Parse(GetLevelNumber())];
+            _placeText.text = ConfigurationManager.Instance.LevelNameTable[int.Parse(GetLevelNumber())];
 
             yield return new WaitForSeconds(textDuration);
             _placeText.gameObject.SetActive(false);

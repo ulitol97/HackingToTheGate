@@ -20,7 +20,7 @@ namespace Remote_Terminal
     /// As an observed subject, it has a connection status <see cref="ConnectionStatus"/> which is notified to the
     /// registered observers if changed.
     /// </summary>
-    public class VncManager : Singleton<VncManager>
+    public class VncManager : UnitySingleton<VncManager>
     {
         // Sprite and texture updating
         
@@ -223,16 +223,16 @@ namespace Remote_Terminal
 
         private void SetUpFromConfiguration()
         {
-            _sshUserName = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.username;
-            _sshPassword = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.password;
-            _sshPort = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.port;
-            _sshConnectViaKey = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.publicKeyAuth.preferSshPublicKey;
-            _sshKeyPath = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.publicKeyAuth.path;
-            _sshKeyPassphrase = GameConfigurationManager.ConnectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase;
-            _vncHost = GameConfigurationManager.ConnectionConfig.vncConnectionInfo.targetHost;
-            _vncPassword = GameConfigurationManager.ConnectionConfig.vncConnectionInfo.vncServerPassword;
-            _vncPort = (uint) GameConfigurationManager.ConnectionConfig.vncConnectionInfo.port;
-            _checkConnectionInterval = GameConfigurationManager.ConnectionConfig.secondsBetweenConnectionAttempts;
+            _sshUserName = ConfigurationManager.Instance.connectionConfig.sshConnectionInfo.username;
+            _sshPassword = ConfigurationManager.Instance.connectionConfig.sshConnectionInfo.password;
+            _sshPort = ConfigurationManager.Instance.connectionConfig.sshConnectionInfo.port;
+            _sshConnectViaKey = ConfigurationManager.Instance.connectionConfig.sshConnectionInfo.publicKeyAuth.preferSshPublicKey;
+            _sshKeyPath = ConfigurationManager.Instance.connectionConfig.sshConnectionInfo.publicKeyAuth.path;
+            _sshKeyPassphrase = ConfigurationManager.Instance.connectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase;
+            _vncHost = ConfigurationManager.Instance.connectionConfig.vncConnectionInfo.targetHost;
+            _vncPassword = ConfigurationManager.Instance.connectionConfig.vncConnectionInfo.vncServerPassword;
+            _vncPort = (uint) ConfigurationManager.Instance.connectionConfig.vncConnectionInfo.port;
+            _checkConnectionInterval = ConfigurationManager.Instance.connectionConfig.secondsBetweenConnectionAttempts;
         }
 
         /// <summary>
@@ -522,7 +522,7 @@ namespace Remote_Terminal
         {
             // Stop the remote desktop refresh process
             if (gameObject.activeInHierarchy || SceneManager.GetActiveScene().name.
-                    Equals(GameConfigurationManager.MenuScene))
+                    Equals(ConfigurationManager.MenuScene))
             {
                 CancelScreenRefresh();
                 DisconnectClients();

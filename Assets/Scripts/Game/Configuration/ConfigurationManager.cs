@@ -8,11 +8,11 @@ using UnityEngine;
 namespace Game.Configuration
 {
     /// <summary>
-    /// The class GameConfigurationManager implements the Singleton pattern in order to hold
+    /// The class ConfigurationManager implements the Singleton pattern in order to hold
     /// variables that need to be available during the whole game session. It is capable of accessing a
     /// game configuration file and validate it.
     /// </summary>
-    public class GameConfigurationManager : Singleton<GameConfigurationManager>
+    public class ConfigurationManager : UnitySingleton<ConfigurationManager>
     {
         /// <summary>
         /// Name of the file containing the configuration parameters of the connection to the remote host.
@@ -29,7 +29,7 @@ namespace Game.Configuration
         /// </summary>
         private const string CluesConfigFileName = "Config/clues.json";
         
-        public Regex ipValidation = new Regex(
+        private Regex _ipValidation = new Regex(
             @"\b(?:(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b");
 
         /// <summary>
@@ -49,8 +49,8 @@ namespace Game.Configuration
         /// <summary>
         /// Reference to a ConnectionConfiguration object holding all the variables specified in the user configuration file.
         /// </summary>
-        public static ConnectionConfiguration ConnectionConfig;
-        public static ChallengesConfiguration ChallengesConfig;
+        public ConnectionConfiguration connectionConfig;
+        public ChallengesConfiguration challengesConfig;
 
         /// <summary>
         /// Checks for the existence of a game configuration file and if it exists proceeds to validate it.
@@ -66,8 +66,8 @@ namespace Game.Configuration
             {
                 try
                 {
-                    ConnectionConfig = ConnectionConfiguration.CreateFromJson(File.ReadAllText(connectionPath));
-                    ChallengesConfig = new ChallengesConfiguration
+                    connectionConfig = ConnectionConfiguration.CreateFromJson(File.ReadAllText(connectionPath));
+                    challengesConfig = new ChallengesConfiguration
                     {
                         answers = ChallengesConfiguration.RetrieveAnswersFromJson(File.ReadAllText(answersPath)),
                         clues = ChallengesConfiguration.RetrieveCluesFromJson(File.ReadAllText(cluesPath))
@@ -83,7 +83,7 @@ namespace Game.Configuration
             else
             {
                 IsValid = false;
-                ConnectionConfig = null;
+                connectionConfig = null;
             }
         }
 
@@ -95,12 +95,12 @@ namespace Game.Configuration
         {
             ValidateConnectionFields();
             // Final checks
-            if (ConnectionConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
+            if (connectionConfig.vncConnectionInfo.targetHost.Equals(TextValidator.DefaultValue))
             {
                 IsValid = false;
                 return;
             }
-            if (ConnectionConfig.sshConnectionInfo.username.Equals(TextValidator.DefaultValue))
+            if (connectionConfig.sshConnectionInfo.username.Equals(TextValidator.DefaultValue))
             {
                 IsValid = false;
                 return;
@@ -116,38 +116,38 @@ namespace Game.Configuration
         private void ValidateConnectionFields()
         {
             // Vnc info validation
-            TextValidator ipValidator = new TextValidator(ipValidation);
+            TextValidator ipValidator = new TextValidator(_ipValidation);
             TextValidator textValidator = new TextValidator();
             IntegerValidator vncPortValidator = 
                 new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 5900);
             
-            ConnectionConfig.vncConnectionInfo.targetHost = 
-                ipValidator.Validate(ConnectionConfig.vncConnectionInfo.targetHost);
+            connectionConfig.vncConnectionInfo.targetHost = 
+                ipValidator.Validate(connectionConfig.vncConnectionInfo.targetHost);
             
-            ConnectionConfig.vncConnectionInfo.port =
-                vncPortValidator.Validate(ConnectionConfig.vncConnectionInfo.port);
+            connectionConfig.vncConnectionInfo.port =
+                vncPortValidator.Validate(connectionConfig.vncConnectionInfo.port);
             
-            ConnectionConfig.vncConnectionInfo.vncServerPassword =
-                textValidator.Validate(ConnectionConfig.vncConnectionInfo.vncServerPassword);
+            connectionConfig.vncConnectionInfo.vncServerPassword =
+                textValidator.Validate(connectionConfig.vncConnectionInfo.vncServerPassword);
             
             // Ssh info validation
             
             IntegerValidator sshPortValidator = 
                 new IntegerValidator(MinPortNumberAccepted, MaxPortNumberAccepted, 22);
             
-            ConnectionConfig.sshConnectionInfo.username = 
-                textValidator.Validate(ConnectionConfig.sshConnectionInfo.username);
-            ConnectionConfig.sshConnectionInfo.password = 
-                textValidator.Validate(ConnectionConfig.sshConnectionInfo.password);
+            connectionConfig.sshConnectionInfo.username = 
+                textValidator.Validate(connectionConfig.sshConnectionInfo.username);
+            connectionConfig.sshConnectionInfo.password = 
+                textValidator.Validate(connectionConfig.sshConnectionInfo.password);
             
-            ConnectionConfig.sshConnectionInfo.port = 
-                sshPortValidator.Validate(ConnectionConfig.sshConnectionInfo.port);
+            connectionConfig.sshConnectionInfo.port = 
+                sshPortValidator.Validate(connectionConfig.sshConnectionInfo.port);
             
-            ConnectionConfig.sshConnectionInfo.publicKeyAuth.path = 
-                textValidator.Validate(ConnectionConfig.sshConnectionInfo.publicKeyAuth.path);
+            connectionConfig.sshConnectionInfo.publicKeyAuth.path = 
+                textValidator.Validate(connectionConfig.sshConnectionInfo.publicKeyAuth.path);
             
-            ConnectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase = 
-                textValidator.Validate(ConnectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase);
+            connectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase = 
+                textValidator.Validate(connectionConfig.sshConnectionInfo.publicKeyAuth.passPhrase);
         }
 
         /// <summary>
@@ -172,11 +172,11 @@ namespace Game.Configuration
         /// Represents the information held by the game configuration file in a text chain.
         /// </summary>
         /// <returns>String containing summary of the game configuration</returns>
-        public new static string ToString()
+        public new string ToString()
         {
             string prefix = "Current connection settings...\n";
-            return (ConnectionConfig == null || !IsValid) ? prefix + "Fix your config files to play" : 
-                prefix + ConnectionConfig;
+            return (connectionConfig == null || !IsValid) ? prefix + "Fix your config files to play" : 
+                prefix + connectionConfig;
         }
     }
 }

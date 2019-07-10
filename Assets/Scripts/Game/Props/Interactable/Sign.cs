@@ -59,7 +59,7 @@ namespace Game.Props.Interactable
         {
             try
             {
-                _signText = GameConfigurationManager.ChallengesConfig.GetClues()[dialogId];
+                _signText = ConfigurationManager.Instance.challengesConfig.GetClues()[dialogId];
             }
             catch (ArgumentOutOfRangeException)
             {

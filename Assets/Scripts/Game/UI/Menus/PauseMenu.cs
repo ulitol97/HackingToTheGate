@@ -73,7 +73,7 @@ namespace Game.UI.Menus
         /// </summary>
         public override void QuitMenu()
         {
-            SceneManager.LoadScene(GameConfigurationManager.MenuScene);
+            SceneManager.LoadScene(ConfigurationManager.MenuScene);
             Time.timeScale = 1f;
         }
     }

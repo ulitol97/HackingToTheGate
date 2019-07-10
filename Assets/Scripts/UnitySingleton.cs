@@ -4,15 +4,15 @@
 /// Base class to be inherited in order to create singletons that perform with Unity MonoBehaviour.
 /// It allows singletons to exists between game scenes.
 /// </summary>
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public class UnitySingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     // Check to see if we're about to be destroyed.
-    private static bool _mShuttingDown;
+    private static bool _shuttingDown;
 
     // Hold the current and only simultaneous instance of the GameObject in use by the game.
-    private static T _mInstance;
+    private static T _instance;
     
-    private static object _mLock = new object();
+    private static object _lock = new object();
  
     /// <summary>
     /// Access singleton instance through this propriety.
@@ -20,29 +20,29 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     public static T Instance
     {
         get { return GetInstance(false); }
-        set { _mInstance = value; }
+        set { _instance = value; }
     }
 
     public static T GetInstance(bool ignoreShuttingDown)
     {
-        if (_mShuttingDown )
+        if (_shuttingDown )
         {
-            return ignoreShuttingDown ? _mInstance : null;
+            return ignoreShuttingDown ? _instance : null;
         }
         
-        lock (_mLock)
+        lock (_lock)
         {
-            if (_mInstance == null)
+            if (_instance == null)
             {
                 // Search for existing instance.
-                _mInstance = (T)FindObjectOfType(typeof(T));
+                _instance = (T)FindObjectOfType(typeof(T));
  
                 // Create new instance if one doesn't already exist.
-                if (_mInstance == null)
+                if (_instance == null)
                 {
                     // Need to create a new GameObject to attach the singleton to.
                     var singletonObject = new GameObject();
-                    _mInstance = singletonObject.AddComponent<T>();
+                    _instance = singletonObject.AddComponent<T>();
                     singletonObject.name = typeof(T) + " (Singleton)";
  
                     // Make instance persistent.
@@ -50,7 +50,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 }
             }
  
-            return _mInstance;
+            return _instance;
         }
     }
 
@@ -60,7 +60,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        _mShuttingDown = true;
+        _shuttingDown = true;
     }
  
     /// <summary>
@@ -69,6 +69,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     /// </summary>
     private void OnApplicationQuit()
     {
-        _mShuttingDown = true;
+        _shuttingDown = true;
     }
 }
