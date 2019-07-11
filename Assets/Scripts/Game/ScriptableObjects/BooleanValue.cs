@@ -10,33 +10,8 @@ namespace Game.ScriptableObjects
     /// so it can be left outside the scene so that it survives scene changes.
     /// </remarks>
     [CreateAssetMenu]
-    public class BooleanValue : ScriptableObject, ISerializationCallbackReceiver
+    public class BooleanValue : ScriptableValue<bool>
     {
-        /// <summary>
-        /// Runtime value held by the BooleanValue instance.
-        /// </summary>
-        public bool runtimeValue;
-
-        /// <summary>
-        /// Default value held by the BooleanValue instance.
-        /// Since the value of these objects does not reset each game session,
-        /// it is needed to store a default value for them to reset each session.
-        /// </summary>
-        public bool defaultValue;
-
-        public void OnBeforeSerialize()
-        {}
-
-        /// <summary>
-        /// Reset the runtime value held by the BooleanValue to its initial value when the
-        /// game session begins.
-        /// </summary>
-        public void OnAfterDeserialize()
-        {
-            runtimeValue = defaultValue;
-            
-        }
-
         /// <summary>
         /// Setup in order not to unload this instance from memory when entering a scene
         /// that does not use it.
