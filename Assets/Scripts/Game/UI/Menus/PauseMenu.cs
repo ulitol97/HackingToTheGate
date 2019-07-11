@@ -1,6 +1,7 @@
 ﻿using Game.Audio;
 using Game.Configuration;
 using Game.ScriptableObjects;
+using Game.UnityObserver;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +20,7 @@ namespace Game.UI.Menus
         /// <summary>
         /// Signal raised when the game is paused or un-paused.
         /// </summary>
-        public Signal pauseSignal;
+        public SignalSubject pauseSignal;
         
         /// <summary>
         /// Function running on first frame to ensure the game is not marked as paused when loaded.

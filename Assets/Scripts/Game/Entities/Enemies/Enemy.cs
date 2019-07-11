@@ -1,126 +1,145 @@
-﻿using System.Collections;
-using Game.Audio;
-using Game.ScriptableObjects;
+﻿using Game.ScriptableObjects;
 using UnityEngine;
 
 namespace Game.Entities.Enemies
 {
-    public class Enemy : MonoBehaviour
+    /// <summary>
+    /// The Enemy class is in charge of handling all the logic related to Log enemies
+    /// found in game.
+    /// </summary>
+    public class Enemy : AbstractEnemy
     {
-
         /// <summary>
-        /// Runtime health of the enemy.
+        /// RigidBody containing the enemy's body for physics handling.
         /// </summary>
-        private float _health;
-
-        /// <summary>
-        /// Value storing the max health a certain type of enemy must have.
-        /// The value is a FloatValue in order to be shared across scenes.
-        /// </summary>
-        public FloatValue maxHealth;
-
-        /// <summary>
-        /// Multiplying factor determining the movement speed of the enemy.
-        /// </summary>
-        public float moveSpeed;
-
-        /// <summary>
-        /// Game object instantiated when an enemy dies. Used for visual death effect.
-        /// </summary>
-        public GameObject deathEffect;
-
-        /// <summary>
-        /// Signal used for signal observers to observe enemy elimination events. 
-        /// </summary>
-        public Signal killedSignal;
+        protected Rigidbody2D EnemyRigidBody;
         
         /// <summary>
-        /// Enum structure holding the enemy possible states, like a state machine.
+        /// Transform object containing the coordinates the enemy should follow.
         /// </summary>
-        public enum EnemyState
-        {
-            Idle,
-            Walk,
-            Staggered
-        }
+        public Transform target;
+        
+        /// <summary>
+        /// Transform object containing the coordinates the enemy shall patrol.
+        /// </summary>
+        public Transform homePosition;
 
         /// <summary>
-        /// Current state of the enemy.
+        /// Radius of the terrain area the enemy shall patrol.
         /// </summary>
-        public EnemyState currentState;
-
-        private void Awake()
-        {
-            _health = maxHealth.initialValue;
-        }
+        public float chaseRadius;
 
         /// <summary>
-       /// Reduces the health of an enemy and eliminates it if it goes below 0.
-       /// </summary>
-       /// <param name="damage">Amount of health to be reduced.</param>
-       private void TakeDamage(float damage)
-       {
-           _health -= damage;
-           if (_health <= 0)
-           {
-               OnDeath();
-               gameObject.SetActive(false);
-           }
-       }
+        /// Minimum distance needed for the enemy to attack. A player won't approach the player
+        /// further than its attack radius.
+        /// </summary>
+        public float attackRadius;
+        
+        /// <summary>
+        /// Distance that must be reached between the enemy and a location point for the enemy
+        /// to consider the point as visited.
+        /// </summary>
+        public FloatValue distanceTolerance;
 
         /// <summary>
-        /// Handle the logic events that happen when an enemy dies.
+        /// Unity Animator component in charge of animating the enemy sprite to simulate actions.
         /// </summary>
-        private void OnDeath()
+        /// <remarks>The animator attributes are cached below for quicker access</remarks>
+        protected Animator EnemyAnimator;
+        protected static readonly int AnimatorWakeUp = Animator.StringToHash("wakeUp");
+        private static readonly int AnimatorMoveX = Animator.StringToHash("moveX");
+        private static readonly int AnimatorMoveY = Animator.StringToHash("moveY");
+
+        /// <summary>
+        /// Function called when the Enemy script is loaded into the game.
+        /// Sets up the enemy's current state, target and references to the Unity components modified on runtime.
+        /// </summary>
+        protected virtual void Start()
         {
-            if (killedSignal != null)
-                killedSignal.Notify();
-            AudioManager.Instance.PlayEffectClip(AudioManager.EnemyDead);
+            currentState = EnemyState.Idle;
+            EnemyRigidBody = GetComponent<Rigidbody2D>();
+            EnemyAnimator = GetComponent<Animator>();
             
-            // If a death effect has been defined...
-            if (deathEffect != null)
+            target = GameObject.FindWithTag("Player").transform;
+            
+            // Start awake.
+            EnemyAnimator.SetBool(AnimatorWakeUp, true);
+        }
+
+        /// <summary>
+        /// Function called on each frame the Enemy script is present into the game.
+        /// Checks for the target's position.
+        /// </summary>
+        private void FixedUpdate()
+        {
+            switch (currentState)
             {
-                GameObject enemyDeathEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
-                // Destroy effect after a sec.
-                Destroy(enemyDeathEffect, 1f);
+                case EnemyState.Idle:
+                case EnemyState.Walk:
+                    CheckDistance();
+                    break;
             }
         }
 
         /// <summary>
-        /// Arranges the end of knockback logic.
+        /// Computes the distance between the enemy and its target (<see cref="target"/>)
+        /// and updates the enemy's position in case the target is in the chase radius but not in the
+        /// attack radius and the enemy is not staggered.
         /// </summary>
-        /// <param name="rigidBody"></param>
-        /// <param name="knockTime"></param>
-        /// <param name="damage">Damage inflicted by the knock back.</param>
-        public void Knock(Rigidbody2D rigidBody, float knockTime, float damage)
+        /// <remarks>It also handles the animations in case the enemy wakes up or
+        /// goes to sleep.</remarks>
+        protected virtual void CheckDistance()
         {
-            if (gameObject.activeInHierarchy)
-                StartCoroutine(EndKnock(rigidBody, knockTime));
-            TakeDamage(damage);
-        }
-
-        /// <summary>
-        /// Co routine in charge of stopping the knockback effect on the knocked back game enemies
-        /// after a certain time has passed by.
-        /// </summary>
-        /// <param name="rigidBody">Body of the knocked back element to be managed.</param>
-        /// <param name="knockTime">Time before stopping the knockback force.</param>
-        /// <returns></returns>
-        private IEnumerator EndKnock(Rigidbody2D rigidBody, float knockTime)
-        {
-            if (rigidBody != null && gameObject.activeInHierarchy)
-            {
-                yield return new  WaitForSeconds(knockTime);
-                rigidBody.velocity = Vector2.zero;
+            var position = transform.position;
+            float distanceToTarget = Vector3.Distance(position, target.position);
+            float distanceToHome = Vector3.Distance(position, homePosition.position);
             
-                // Reset enemy state.
-                currentState = EnemyState.Idle;
+            // Approach but never more than attack radius.
+            if (distanceToTarget <= chaseRadius && distanceToTarget > attackRadius)
+            {
+                if ((currentState == EnemyState.Idle || currentState == EnemyState.Walk) 
+                    && currentState != EnemyState.Staggered)
+                {
+                    Vector3 movement = Vector3.MoveTowards(position, 
+                        target.position, moveSpeed * Time.deltaTime);
+                    
+                    ChangeAnim(movement - position);
+                    EnemyRigidBody.MovePosition(movement);
+                
+                    // Walk and wake up animation if needed.
+                    ChangeState(EnemyState.Walk);
+                    EnemyAnimator.SetBool(AnimatorWakeUp, true);
+                }
+            }
+            // If not chasing the payer, check if home.
+            else if (distanceToTarget > attackRadius)
+            {
+                // Move home
+                if (distanceToHome > distanceTolerance.initialValue)
+                {
+                    Vector3 movement = Vector3.MoveTowards(position,
+                        homePosition.position, moveSpeed * Time.deltaTime);
+
+                    ChangeAnim(movement - position);
+                    EnemyRigidBody.MovePosition(movement);
+                }
+                // Sleep
+                else
+                {
+                    EnemyAnimator.SetBool(AnimatorWakeUp, false);
+                }
             }
         }
-
-        public void ChangeState(EnemyState state)
+        /// <summary>
+        /// Function managing the animation the enemy should make regarding it's moving direction.
+        /// </summary>
+        /// <param name="direction"></param>
+        protected void ChangeAnim(Vector2 direction)
         {
-            currentState = state;
+            direction = direction.normalized;
+            EnemyAnimator.SetFloat(AnimatorMoveX, direction.x);
+            EnemyAnimator.SetFloat(AnimatorMoveY, direction.y);
         }
+
     }
 }

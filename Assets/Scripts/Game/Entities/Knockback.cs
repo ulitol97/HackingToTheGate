@@ -1,5 +1,5 @@
 ﻿using Game.Entities.Enemies;
-using Game.Props;
+using Game.Entities.Props;
 using Game.ScriptableObjects;
 using UnityEngine;
 
@@ -51,8 +51,8 @@ namespace Game.Entities
                     if (other.gameObject.CompareTag("Enemy") && other.isTrigger && !CompareTag("Enemy"))
                     {
                         // Update state and end knockback logic.
-                        other.GetComponent<Enemy>().ChangeState(Enemy.EnemyState.Staggered);
-                        other.GetComponent<Enemy>().Knock(hitBody, knockTime, damage.initialValue);
+                        other.GetComponent<AbstractEnemy>().ChangeState(AbstractEnemy.EnemyState.Staggered);
+                        other.GetComponent<AbstractEnemy>().Knock(hitBody, knockTime, damage.initialValue);
                     }
                     // If player not already staggered
                     else if (other.gameObject.CompareTag("Player") && other.isTrigger)

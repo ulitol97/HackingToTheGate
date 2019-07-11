@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
+using Game;
 using Game.Configuration;
 using Game.ScriptableObjects;
+using Game.UnityObserver;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VncSharp4Unity2D;
@@ -115,7 +117,7 @@ namespace Remote_Terminal
         /// <summary>
         /// VNC client managed by the VncSharp API.
         /// </summary>
-        private RemoteDesktop _rd;
+        private RemoteDesktop _client;
 
         /// <summary>
         /// Interval between connection checks.
@@ -159,13 +161,13 @@ namespace Remote_Terminal
         /// <summary>
         /// Signal observing changes in the connection status of the server.
         /// </summary>
-        public Signal serverStatusSignal;
+        public SignalSubject serverStatusSignal;
 
         // Getters / Setters
 
         private RemoteDesktop RemoteDesktop
         {
-            get { return _rd; }
+            get { return _client; }
         }
 
 
@@ -184,7 +186,7 @@ namespace Remote_Terminal
         /// </summary>
         private bool VncConnected
         {
-            get { return _rd != null && _rd.IsConnected; }
+            get { return _client != null && _client.IsConnected; }
         }
 
         /// <summary>
@@ -223,6 +225,8 @@ namespace Remote_Terminal
 
         private void SetUpFromConfiguration()
         {
+            if (ConfigurationManager.Instance == null)
+                return;
             _sshUserName = ConfigurationManager.Instance.connectionConfig.sshConnectionInfo.username;
             _sshPassword = ConfigurationManager.Instance.connectionConfig.sshConnectionInfo.password;
             _sshPort = ConfigurationManager.Instance.connectionConfig.sshConnectionInfo.port;
@@ -248,7 +252,7 @@ namespace Remote_Terminal
             {
                 // Attempt to contact the server both via SSH and VNC.
                 SetUpSshConnection();
-                SetUpRemoteDesktop();
+                SetUpVncConnection();
             }
             catch (Exception) // If the server could not be contacted, periodically try again.
             {
@@ -323,7 +327,7 @@ namespace Remote_Terminal
         /// Initializes a new RemoteDesktop client in charge of logging into the remote server via VNC.
         /// </summary>
         /// <remarks>In case there's already a connected VNC client, this function will return automatically.</remarks>
-        private void SetUpRemoteDesktop()
+        private void SetUpVncConnection()
         {
             // If a VNC client is up and running
             if (VncConnected)
@@ -334,10 +338,10 @@ namespace Remote_Terminal
                 _vncHost = Localhost;
 
             // Not specifying a display, the target tty will depend on the server port of choice
-            _rd = new RemoteDesktop(_vncHost, (int) _vncPort, _vncPassword);
+            _client = new RemoteDesktop(_vncHost, (int) _vncPort, _vncPassword);
 
             // Connect via VNC
-            _rd.Connect();
+            _client.Connect();
         }
 
 
@@ -362,7 +366,7 @@ namespace Remote_Terminal
         {
             if (!_threadRunning)
             {
-                _thread = new Thread(RetrieveBytes);
+                _thread = new Thread(RetrieveScreenBytes);
                 _thread.Start();
             }
             yield return new WaitForFixedUpdate();
@@ -379,7 +383,7 @@ namespace Remote_Terminal
             // Load a texture form the remote image.
             try
             {
-                Texture2D newTexture = BitmapManager.GetInstance().BitmapToTexture2D(_desktop, _desktopBytes);
+                Texture2D newTexture = BitmapManager.BitmapToTexture2D(_desktop, _desktopBytes);
                 Texture2D oldTexture = remoteDesktopSprite.texture;
 
                 remoteDesktopSprite = Sprite.Create(newTexture,
@@ -404,16 +408,16 @@ namespace Remote_Terminal
         /// In charge of querying the VNC client for the remote desktop image representation, retrieving the image bytes
         /// and arranging the transformation of that image into an in-game sprite.
         /// </summary>
-        private void RetrieveBytes()
+        private void RetrieveScreenBytes()
         {
             _threadRunning = true;
             while (VncConnected && _threadRunning)
             {
                 if (!_bytesChanged && _pendingAction == null)
                 {
-                    _desktop = _rd.Desktop.Clone() as Bitmap;
+                    _desktop = _client.Desktop.Clone() as Bitmap;
                     
-                    _desktopBytes = BitmapManager.GetInstance().Bitmap2RawBytes(_desktop);
+                    _desktopBytes = BitmapManager.Bitmap2RawBytes(_desktop);
                     _bytesChanged = true;
                     _pendingAction = () => StartCoroutine(UpdateVncSprite());
                 }
@@ -442,7 +446,7 @@ namespace Remote_Terminal
         /// <see cref="_checkConnectionInterval"/>.</remarks>
         private IEnumerator CheckOnVncConnection()
         {
-            while (_rd != null) // Run as long as there's a remote  desktop component active
+            while (_client != null) // Run as long as there's a remote  desktop component active
             {
                 serverStatusSignal.Notify();
                 if (!ConnectionStatus)
@@ -496,8 +500,8 @@ namespace Remote_Terminal
         {
             if (VncConnected)
             {
-                _rd.Dispose(false);
-                _rd = null;
+                _client.Dispose(false);
+                _client = null;
             }
 
             if (SshConnected)
@@ -508,8 +512,8 @@ namespace Remote_Terminal
         {
             if (VncConnected)
             {
-                _rd.Disconnect();
-                _rd = null;
+                _client.Disconnect();
+                _client = null;
             }
             if (SshConnected)
                 _sshManager.Disconnect();

@@ -8,15 +8,9 @@ namespace Remote_Terminal
     /// handle the authentication process if needed.
     /// It allows to perform port forwarding in order to tunnel the VNC connection made by the game through the SSH
     /// protocol, cyphering the data shared between and server in the process.
-    /// As a singleton, a maximum of one instance of this class will be managed by the game.
     /// </summary>
     public class SshManager
     {
-        /// <summary>
-        /// Holds the current and only simultaneous instance of the SshManager in use by the game.
-        /// </summary>
-        private static SshManager _instance;
-    
         /// <summary>
         /// Ssh client in charge of connecting with the remote host.
         /// </summary>

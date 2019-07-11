@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game;
+using Game.UnityObserver;
 using MEC;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ namespace Remote_Terminal
     /// <summary>
     /// The KeyboardManager class is in charge of handling the keyboard input received by the game and translating and
     /// sending the detected keystrokes to the VNC server.
-    /// As a singleton, a maximum of one instance of this class will be managed by the game.
     /// As an observer object, it has a status <see cref="_statusOnline"/> which is notified by
     /// the observed VncManager if changed.
     /// </summary>
@@ -50,7 +50,7 @@ namespace Remote_Terminal
         /// <summary>
         /// Boolean flag indicating whether the CapsLock is active or not.
         /// </summary>
-        private bool _capsLockModifier;
+        private bool _capsModifier;
         
         /// <summary>
         /// Represents the state of the KeyboardManager and whether it should send
@@ -105,8 +105,8 @@ namespace Remote_Terminal
             }
             
             // Process 1 key up and 1 key down max per frame and avoid Unity AltGr bugging behavior.
-            Timing.RunCoroutine(SendKeyStroke(keyCodeDown, true));
-            Timing.RunCoroutine(SendKeyStroke(keyCodeUp, false));
+            Timing.RunCoroutine(TranslateKeyStroke(keyCodeDown, true));
+            Timing.RunCoroutine(TranslateKeyStroke(keyCodeUp, false));
             
         }
         
@@ -129,10 +129,10 @@ namespace Remote_Terminal
         /// </summary>
         /// <param name="keyCode">Key stroke detected by the game.</param>
         /// <param name="pressed">True if the key stroke is a key press, false if it is a key release.</param>
-        private IEnumerator<float> SendKeyStroke(KeyCode keyCode, bool pressed)
+        private IEnumerator<float> TranslateKeyStroke(KeyCode keyCode, bool pressed)
         {
             // If a modifier key was pressed down or up, update the corresponding modifier.
-            CheckForModifiers(keyCode, pressed);
+            CheckModifiers(keyCode, pressed);
 
             // Translate the received keycode to its byte representation sent to server
             uint virtualKey = VirtualKeyFromKey(keyCode);
@@ -152,11 +152,11 @@ namespace Remote_Terminal
         /// <param name="pressed">True if the key stroke is a key press, false if it is a key release.
         /// This is used to determine the state of the Caps Lock.</param>
         /// <returns>True if the key press/release corresponds to a modifier key, false otherwise.</returns>
-        private void CheckForModifiers(KeyCode keyCode, bool pressed)
+        private void CheckModifiers(KeyCode keyCode, bool pressed)
         {
             if (keyCode == KeyCode.CapsLock && pressed)
             {
-                _capsLockModifier = !_capsLockModifier;
+                _capsModifier = !_capsModifier;
                 return;
             }
 
@@ -187,7 +187,7 @@ namespace Remote_Terminal
             if (_altGrModifier && _altGrTranslationTable.ContainsKey(keyCode))
                 return _altGrTranslationTable[keyCode];
 
-            if (_capsLockModifier && _capsLockTranslationTable.ContainsKey(keyCode))
+            if (_capsModifier && _capsLockTranslationTable.ContainsKey(keyCode))
                 return _capsLockTranslationTable[keyCode];
             
             if (_keyTranslationTable.ContainsKey(keyCode))

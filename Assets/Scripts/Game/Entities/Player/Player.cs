@@ -2,6 +2,7 @@
 using System.Collections;
 using Game.Audio;
 using Game.ScriptableObjects;
+using Game.UnityObserver;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -38,7 +39,7 @@ namespace Game.Entities.Player
 		/// <summary>
 		/// Vector used to store the difference between the player's current position and his/her target position.
 		/// </summary>
-		private Vector2 _change;
+		private Vector2 _positionChange;
 
 		/// <summary>
 		/// Unity Animator component in charge of animating the player sprite to simulate actions.
@@ -113,22 +114,22 @@ namespace Game.Entities.Player
 		/// <summary>
 		/// Signal observing players health.
 		/// </summary>
-		public Signal playerHealthSignal;
+		public SignalSubject playerHealthSignal;
 		
 		/// <summary>
 		/// Signal observing players usage of the remote terminal.
 		/// </summary>
-		public Signal playerRemoteTerminalSignal;
+		public SignalSubject playerRemoteTerminalSignal;
 		
 		/// <summary>
 		/// Signal observing if player's are damaged.
 		/// </summary>
-		public Signal playerDamageSignal;
+		public SignalSubject playerDamageSignal;
 		
 		/// <summary>
 		/// Signal observing players death event.
 		/// </summary>
-		public Signal playerDeathSignal;
+		public SignalSubject playerDeathSignal;
 
 		/// <summary>
 		/// Color used to represent the player has been hurt and is invulnerable.
@@ -204,13 +205,13 @@ namespace Game.Entities.Player
 				return;
 
 			// Check movement input
-			_change.x = Input.GetAxisRaw("Horizontal");
-			if (Math.Abs(_change.x) < JoystickTolerance)
-				_change.x = Input.GetAxisRaw("HorizontalPAD");
+			_positionChange.x = Input.GetAxisRaw("Horizontal");
+			if (Math.Abs(_positionChange.x) < JoystickTolerance)
+				_positionChange.x = Input.GetAxisRaw("HorizontalPAD");
 			
-			_change.y = Input.GetAxisRaw("Vertical");
-			if (Math.Abs(_change.y) < JoystickTolerance)
-				_change.y = Input.GetAxisRaw("VerticalPAD");
+			_positionChange.y = Input.GetAxisRaw("Vertical");
+			if (Math.Abs(_positionChange.y) < JoystickTolerance)
+				_positionChange.y = Input.GetAxisRaw("VerticalPAD");
 			
 			// Check attack input
 			if (Input.GetButtonDown("Attack") && currentState != PlayerState.Attack
@@ -231,7 +232,7 @@ namespace Game.Entities.Player
 		/// </summary>
 		private void FixedUpdate()
 		{
-			_change = Vector2.zero;
+			_positionChange = Vector2.zero;
 			UpdateAnimationAndMove();
 			
 		}
@@ -256,7 +257,7 @@ namespace Game.Entities.Player
 		/// </summary>
 		private void UpdateAnimationAndMove()
 		{
-			if (_change != Vector2.zero)
+			if (_positionChange != Vector2.zero)
 			{
 				MoveCharacter();
 				AnimateCharacter();
@@ -277,7 +278,7 @@ namespace Game.Entities.Player
 		private void  MoveCharacter()
 		{
 			_playerRigidBody.MovePosition(
-				_playerRigidBody.position + speed * Time.fixedDeltaTime * _change.normalized);
+				_playerRigidBody.position + speed * Time.fixedDeltaTime * _positionChange.normalized);
 		}
 
 		/// <summary>
@@ -285,11 +286,11 @@ namespace Game.Entities.Player
 		/// </summary>
 		private void AnimateCharacter()
 		{
-			_change.x = Mathf.Round(_change.x);
-			_change.y = Mathf.Round(_change.y);
-			_change.y = Mathf.Round(_change.y);
-			_playerAnimator.SetFloat(AnimatorMoveX, _change.x);
-			_playerAnimator.SetFloat(AnimatorMoveY, _change.y);
+			_positionChange.x = Mathf.Round(_positionChange.x);
+			_positionChange.y = Mathf.Round(_positionChange.y);
+			_positionChange.y = Mathf.Round(_positionChange.y);
+			_playerAnimator.SetFloat(AnimatorMoveX, _positionChange.x);
+			_playerAnimator.SetFloat(AnimatorMoveY, _positionChange.y);
 		}
 
 
@@ -358,7 +359,7 @@ namespace Game.Entities.Player
 		/// Function handling the player animator when an item is received.
 		/// Sets the player state machine and changes the current item sprite.
 		/// </summary>
-		public void ReceiveItem()
+		private void ReceiveItem()
 		{
 			if (playerInventory.currentItem != null)
 			{

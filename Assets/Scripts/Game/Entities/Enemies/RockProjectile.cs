@@ -1,4 +1,4 @@
-﻿using Game.Props;
+﻿using Game.Entities.Props;
 using UnityEngine;
 
 namespace Game.Entities.Enemies
