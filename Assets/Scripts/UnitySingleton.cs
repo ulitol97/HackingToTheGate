@@ -6,12 +6,20 @@
 /// </summary>
 public class UnitySingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    // Check to see if we're about to be destroyed.
+    /// <summary>
+    /// Boolean flag marking if the instance of the singleton class has been marked for removal by Unity and thus
+    /// should not be accessed.
+    /// </summary>
     private static bool _shuttingDown;
-
-    // Hold the current and only simultaneous instance of the GameObject in use by the game.
+    
+    /// <summary>
+    /// Hold the current and only simultaneous instance of the GameObject in use by the game.
+    /// </summary>
     private static T _instance;
     
+    /// <summary>
+    /// Dummy object to block the specific code in charge of accessing the instance
+    /// </summary>
     private static object _lock = new object();
  
     /// <summary>

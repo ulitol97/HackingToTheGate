@@ -5,10 +5,10 @@ using UnityEngine;
 namespace Game.Entities.Props.Interactable.Door
 {
     /// <summary>
-    /// The Door class inherits from Interactable.
+    /// The Door class inherits from AbstractInteractable.
     /// Serves as a template to any an in-game door the player can interact with.
     /// </summary>
-    public abstract class Door : Interactable, IDoor
+    public abstract class Door : AbstractInteractable, IDoor
     {
         /// <summary>
         /// Boolean representing whether the door is open or not.

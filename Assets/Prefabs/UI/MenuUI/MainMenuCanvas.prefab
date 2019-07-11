@@ -1801,6 +1801,7 @@ MonoBehaviour:
   mainPanel: {fileID: 4066497414656197174}
   manualPanel: {fileID: 3035250748232390579}
   currentSettingText: {fileID: 3930984379908869435}
+  newGameButton: {fileID: 4066497413447741229}
 --- !u!1 &4066497413781017358
 GameObject:
   m_ObjectHideFlags: 0

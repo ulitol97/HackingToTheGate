@@ -237,6 +237,12 @@ namespace Game.Entities.Player
 			
 		}
 
+		/// <summary>
+		/// Co-routine in charge of handling the attack process of the player.
+		/// Triggers the attack animation, changes the player state and waits for the attack animation to finish
+		/// before resetting the player state.
+		/// </summary>
+		/// <returns></returns>
 		private IEnumerator Attack()
 		{
 			_playerAnimator.SetTrigger(AnimatorAttacking);

@@ -5,10 +5,10 @@ using UnityEngine;
 namespace Game.Entities.Props.Interactable
 {
     /// <summary>
-    /// The interactable class acts as a parent to all objects that may trigger an
+    /// The AbstractInteractable class acts as a parent to all objects that may trigger an
     /// interaction with the player.
     /// </summary>
-    public abstract class Interactable : MonoBehaviour, IInteractable
+    public abstract class AbstractInteractable : MonoBehaviour, IInteractable
     {
         
         /// <summary>
@@ -22,7 +22,7 @@ namespace Game.Entities.Props.Interactable
         public SignalSubject context;
         
         /// <summary>
-        /// Checks for collision events between the Interactable object and other objects with collision capabilities.
+        /// Checks for collision events between the AbstractInteractable object and other objects with collision capabilities.
         /// If the object colliding with the object is the player, can mark that the player is in range and signals the
         /// player that an interactive object is close.
         /// </summary>
@@ -39,7 +39,7 @@ namespace Game.Entities.Props.Interactable
         }
 
         /// <summary>
-        /// Checks for end of collision events between the Interactable object and other with objects collision
+        /// Checks for end of collision events between the AbstractInteractable object and other with objects collision
         /// capabilities.
         /// If the object that stopped colliding with the interactable is the player, marks that the player is out
         /// of range and signals the player that no interactive object is close.

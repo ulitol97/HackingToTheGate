@@ -7,10 +7,10 @@ using UnityEngine.UI;
 namespace Game.Entities.Props.Interactable
 {
     /// <summary>
-    /// The Chest class inherits from Interactable.
+    /// The Chest class inherits from AbstractInteractable.
     /// Represents an in-game treasure chest.
     /// </summary>
-    public class Chest : Interactable
+    public class Chest : AbstractInteractable
     {
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Game.Entities.Props.Interactable
     /// The Sign class represents an in-game Sign the player can approach and read.
     /// It holds some text to be shown to the player when interacted with.
     /// </summary>
-    public class Sign : Interactable
+    public class Sign : AbstractInteractable
     {
         /// <summary>
         /// UI element containing the dialog template image.
