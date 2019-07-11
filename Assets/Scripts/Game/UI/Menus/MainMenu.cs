@@ -23,6 +23,7 @@ namespace Game.UI.Menus
         private GameObject _configErrorText;
 
         public Text currentSettingText;
+        public Button newGameButton;
         
         
         /// <summary>
@@ -96,10 +97,14 @@ namespace Game.UI.Menus
         private void UpdateUi()
         {
             if (ConfigurationManager.Instance.isValid)
+            {
                 _configOkText.SetActive(true);
+                newGameButton.interactable = true;
+            }
             else
             {
                 _configErrorText.SetActive(true);
+                newGameButton.interactable = false;
                 AudioManager.Instance.PlayEffectClip(AudioManager.Error);
             }
 
