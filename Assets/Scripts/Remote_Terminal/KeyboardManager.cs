@@ -9,15 +9,14 @@ namespace Remote_Terminal
     /// <summary>
     /// The KeyboardManager class is in charge of handling the keyboard input received by the game and translating and
     /// sending the detected keystrokes to the VNC server.
-    /// As an observer object, it has a status <see cref="_statusOnline"/> which is notified by
+    /// As an observer object, it has a status <see cref="_isOnline"/> which is notified by
     /// the observed VncManager if changed.
     /// </summary>
     /// <remarks>Seems like Unity has an issue detecting the AltGr key, which is interpreted as Ctrl Left.
     /// This issue was solved programatically.</remarks>
     public class KeyboardManager : MonoBehaviour, IObserver
     {
-        private bool _terminalMode;
-        
+     
         /// <summary>
         /// List of valid key codes that the game will listen to (that is, no mouse events or gamepad inputs will
         /// be checked by the KeyboardManager).
@@ -55,13 +54,13 @@ namespace Remote_Terminal
         /// Represents the state of the KeyboardManager and whether it should send
         /// keyboard updates to the VNC server or not.
         /// </summary>
-        private bool _statusOnline;
+        private bool _isOnline;
         
         /// <summary>
         /// Represents the state of the KeyboardManager in-game. If toggled, it should send
         /// keyboard updates to the server.
         /// </summary>
-        private bool _statusOnScreen;
+        private bool _isOnScreen;
         
         /// <summary>
         /// Function called when the KeyboardManager is inserted into the game.
@@ -86,7 +85,7 @@ namespace Remote_Terminal
         /// one key press and one key release per frame</remarks>
         private void Update()
         {
-            if (!_statusOnline || !_statusOnScreen)
+            if (!_isOnline || !_isOnScreen)
                 return;
             
             KeyCode keyCodeDown = KeyCode.None;
@@ -116,8 +115,8 @@ namespace Remote_Terminal
         public void UpdateObserver()
         {
             if (VncManager.GetInstance(true) != null)
-                _statusOnline = VncManager.GetInstance(true).ConnectionStatus;
-            _statusOnScreen = !_statusOnScreen;
+                _isOnline = VncManager.GetInstance(true).ConnectionStatus;
+            _isOnScreen = !_isOnScreen;
         }
 
         

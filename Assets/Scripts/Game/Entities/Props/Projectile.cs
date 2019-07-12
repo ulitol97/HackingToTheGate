@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Entities.Props
 {
@@ -9,12 +10,7 @@ namespace Game.Entities.Props
         /// Multiplying factor to the speed at which the projectile moves.
         /// </summary>
         public int speed;
-        
-        /// <summary>
-        /// Direction in which the projectile moves.
-        /// </summary>
-        public Vector2 direction;
-        
+
         /// <summary>
         /// Seconds that the projectile will remain loaded on screen.
         /// </summary>
@@ -23,7 +19,8 @@ namespace Game.Entities.Props
         /// <summary>
         /// Reference to the projectile's in-game rigid-body
         /// </summary>
-        public Rigidbody2D myRigidBody;
+        [FormerlySerializedAs("myRigidBody")] 
+        public Rigidbody2D rigidBody;
         
         /// <summary>
         /// Function called when the Projectile script is loaded into the game.
@@ -31,7 +28,7 @@ namespace Game.Entities.Props
         /// </summary>
         protected virtual void Start()
         {
-            myRigidBody = GetComponent<Rigidbody2D>();
+            rigidBody = GetComponent<Rigidbody2D>();
             StartCoroutine(DestroyProjectile());
         }
         
@@ -39,9 +36,9 @@ namespace Game.Entities.Props
         /// Sets up the projectile initial velocity in the game world.
         /// </summary>
         /// <param name="initialVelocity"></param>
-        public virtual void LaunchProjectile(Vector2 initialVelocity)
+        public void LaunchProjectile(Vector2 initialVelocity)
         {
-            myRigidBody.velocity = initialVelocity * speed;
+            rigidBody.velocity = initialVelocity * speed;
         }
 
         /// <summary>

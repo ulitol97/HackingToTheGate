@@ -92,7 +92,7 @@ namespace Game.Entities.Player
 		public Inventory playerInventory;
 
 		/// <summary>
-		/// Sprite renderer in charge of rendering an item received by hte player.
+		/// Sprite renderer in charge of rendering an item received by the player.
 		/// </summary>
 		public SpriteRenderer receivedItemSprite;
 

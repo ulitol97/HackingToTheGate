@@ -21,6 +21,11 @@ namespace Game.Entities.Enemies
         private bool _canShoot;
         
         /// <summary>
+        /// Reference to the game object to be spawned when the turret enemy launches a projectile.
+        /// </summary>
+        public GameObject projectile;
+        
+        /// <summary>
         /// Initiates the log but also sets its attack radius, which measures when the enemy is close enough to
         /// the player, to 0, since it won't be used and turrets do not walk towards the player.
         /// </summary>
@@ -30,11 +35,7 @@ namespace Game.Entities.Enemies
             attackRadius = 0;
             _canShoot = true;
         }
-
-        /// <summary>
-        /// Reference to the game object to be spawned when the turret enemy launches a projectile.
-        /// </summary>
-        public GameObject projectile;
+        
         /// <summary>
         /// Checks the current distance from the enemy to the the target. Fire's a projectile <see cref="projectile"/>
         /// if close enough, else makes the enemy go to sleep. 

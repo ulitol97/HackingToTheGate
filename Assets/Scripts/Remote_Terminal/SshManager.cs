@@ -102,10 +102,23 @@ namespace Remote_Terminal
         /// <param name="host">Address of the ssh receiver of the forwarded data</param>
         /// <param name="remotePort">Port number from which the host will receive the data</param>
         /// <returns></returns>
-        public void ForwardPort(string boundHost, uint boundPort, string host, uint remotePort)
+        public void CreateForwardPort(string boundHost, uint boundPort, string host, uint remotePort)
         {
             _forwardedPort = new ForwardedPortLocal (boundHost, boundPort, host, remotePort);
             Forward = true;
+        }
+        
+        /// <summary>
+        /// If port forwarding is taking place in the sshClient, removes the port forwarding capabilities from it.
+        /// </summary>
+        private void RemoveForwardPort()
+        {
+            if (_forwardedPort != null)
+            {
+                if (_client != null)
+                    _client.RemoveForwardedPort(_forwardedPort);
+                _forwardedPort.Dispose();
+            }
         }
 
         /// <summary>
@@ -164,18 +177,8 @@ namespace Remote_Terminal
         {
             if (_client != null)
             {
-                RemovePortForwarding();
+                RemoveForwardPort();
                 _client.Disconnect();
-            }
-        }
-
-        private void RemovePortForwarding()
-        {
-            if (_forwardedPort != null)
-            {
-                if (_client != null)
-                    _client.RemoveForwardedPort(_forwardedPort);
-                _forwardedPort.Dispose();
             }
         }
     }

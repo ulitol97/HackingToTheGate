@@ -7,6 +7,7 @@ using Game.Configuration;
 using Game.UnityObserver;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using VncSharp4Unity2D;
 
 namespace Remote_Terminal
@@ -94,7 +95,6 @@ namespace Remote_Terminal
         /// </summary>
         private uint _vncPort;
         
-
         /// <summary>
         /// Password used in the VNC authentication process.
         /// </summary>
@@ -105,12 +105,12 @@ namespace Remote_Terminal
         /// <summary>
         /// Bitmap object representation of the currently displayed image of the remote host.
         /// </summary>
-        private Bitmap _desktop;
+        private Bitmap _desktopImage;
         
         /// <summary>
         /// Byte array storing the the currently displayed image of the remote host.
         /// </summary>
-        private byte[] _desktopBytes;
+        private byte[] _desktopImageBytes;
         
         /// <summary>
         /// VNC client managed by the VncSharp API.
@@ -140,7 +140,7 @@ namespace Remote_Terminal
         /// Thread object representing an independent thread in charge of operating the BitmapManager to avoid
         /// interrupting the game.
         /// </summary>
-        private Thread _thread;
+        private Thread _imageConversionThread;
         
         /// <summary>
         /// Boolean flag indicating if the image processing separate thread is running or not.
@@ -159,7 +159,7 @@ namespace Remote_Terminal
         /// <summary>
         /// Signal observing changes in the connection status of the server.
         /// </summary>
-        public SignalSubject serverStatusSignal;
+        [FormerlySerializedAs("serverStatusSignal")] public SignalSubject serverStatus;
 
         // Getters / Setters
 
@@ -263,8 +263,8 @@ namespace Remote_Terminal
             if (connect)
             {
                 StartCoroutine(ConfirmVncConnection());
-                StartCoroutine(CheckOnVncConnection());
-                serverStatusSignal.Notify();
+                StartCoroutine(CheckConnectionStatus());
+                serverStatus.Notify();
             }
         }
 
@@ -317,7 +317,7 @@ namespace Remote_Terminal
             else
                 _sshManager.SetUpManager(_vncHost, _sshPort, _sshUserName, _sshPassword);
 
-            _sshManager.ForwardPort(Localhost, _vncPort, _vncHost, _vncPort);
+            _sshManager.CreateForwardPort(Localhost, _vncPort, _vncHost, _vncPort);
             _sshManager.Connect();
         }
 
@@ -353,19 +353,19 @@ namespace Remote_Terminal
             yield return new WaitUntil(() => VncConnected);
             
             // With the VNC client connected, proceed
-            StartCoroutine(ChangeToRemoteDesktop());
+            StartCoroutine(StartVncRequests());
         }
 
         /// <summary>
         /// Co-routine in charge of creating a separate execution thread that will change the initial static Sprite
         /// to the remote desktop image periodically without blocking the game main thread.
         /// </summary>
-        private IEnumerator ChangeToRemoteDesktop()
+        private IEnumerator StartVncRequests()
         {
             if (!_threadRunning)
             {
-                _thread = new Thread(RetrieveScreenBytes);
-                _thread.Start();
+                _imageConversionThread = new Thread(RetrieveScreenBytes);
+                _imageConversionThread.Start();
             }
             yield return new WaitForFixedUpdate();
         }
@@ -381,7 +381,7 @@ namespace Remote_Terminal
             // Load a texture form the remote image.
             try
             {
-                Texture2D newTexture = BitmapManager.BitmapToTexture2D(_desktop, _desktopBytes);
+                Texture2D newTexture = BitmapManager.BitmapToTexture2D(_desktopImage, _desktopImageBytes);
                 Texture2D oldTexture = remoteDesktopSprite.texture;
 
                 remoteDesktopSprite = Sprite.Create(newTexture,
@@ -392,8 +392,8 @@ namespace Remote_Terminal
             }
             finally
             {
-                _desktop.Dispose();
-                _desktop = null;
+                _desktopImage.Dispose();
+                _desktopImage = null;
                 _bytesChanged = false;
                 _pendingAction = null;
             }
@@ -413,9 +413,9 @@ namespace Remote_Terminal
             {
                 if (!_bytesChanged && _pendingAction == null)
                 {
-                    _desktop = _client.Desktop.Clone() as Bitmap;
+                    _desktopImage = _client.Desktop.Clone() as Bitmap;
                     
-                    _desktopBytes = BitmapManager.Bitmap2RawBytes(_desktop);
+                    _desktopImageBytes = BitmapManager.Bitmap2RawBytes(_desktopImage);
                     _bytesChanged = true;
                     _pendingAction = () => StartCoroutine(UpdateVncSprite());
                 }
@@ -442,17 +442,17 @@ namespace Remote_Terminal
         /// </summary>
         /// <remarks>The periodic checks will be run each N number of seconds
         /// <see cref="_checkConnectionInterval"/>.</remarks>
-        private IEnumerator CheckOnVncConnection()
+        private IEnumerator CheckConnectionStatus()
         {
             while (_client != null) // Run as long as there's a remote  desktop component active
             {
-                serverStatusSignal.Notify();
+                serverStatus.Notify();
                 if (!ConnectionStatus)
                 {
                     // Cancel any pending refreshing actions.
                     CancelScreenRefresh();
                     // Notify all observers about the disconnection
-                    serverStatusSignal.Notify();
+                    serverStatus.Notify();
                     // Re-start the connection process
                     ConnectToHost();
                 }
@@ -486,7 +486,7 @@ namespace Remote_Terminal
                 _threadRunning = false;
 
                 // Wait until the thread exits, ensuring any cleanup we do after this is safe. 
-                _thread.Join();
+                _imageConversionThread.Join();
             }
         }
 

@@ -73,7 +73,7 @@ namespace Game.Entities.Props.Interactable.Door
             if (PlayerInRange)
             {
                 if (Input.GetButtonDown("Interact") && !inputField.gameObject.activeInHierarchy)
-                    ToggleInputField();
+                    ShowInputField();
                 else if (Input.GetButtonDown("Submit"))
                     ValidatePassword();
             }
@@ -82,7 +82,7 @@ namespace Game.Entities.Props.Interactable.Door
         /// <summary>
         /// Show the in put field on screen and focus it for players to enter the door password.
         /// </summary>
-        private void ToggleInputField()
+        private void ShowInputField()
         {
             inputField.gameObject.SetActive(true);
             inputField.ActivateInputField();

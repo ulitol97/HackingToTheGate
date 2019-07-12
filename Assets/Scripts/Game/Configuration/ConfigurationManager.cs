@@ -29,8 +29,8 @@ namespace Game.Configuration
         /// </summary>
         private const string CluesConfigFileName = "Config/clues.json";
         
-        private Regex _ipValidation = new Regex(
-            @"\b(?:(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b");
+        private Regex _ipValidation = 
+            new Regex(@"\b(?:(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b");
 
         /// <summary>
         /// The minimum value that the ports used for communication specified in the configuration file can take.
@@ -47,7 +47,8 @@ namespace Game.Configuration
         public bool isValid;
         
         /// <summary>
-        /// Reference to a ConnectionConfiguration object holding all the variables specified in the user configuration file.
+        /// Reference to a ConnectionConfiguration object holding all the variables specified in the user
+        /// configuration file.
         /// </summary>
         public ConnectionConfiguration connectionConfig;
         public ChallengesConfiguration challengesConfig;
