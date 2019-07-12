@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Game.Entities.Props;
+using Game.Entities.Props.Projectiles;
 using UnityEngine;
 
 namespace Game.Entities.Enemies

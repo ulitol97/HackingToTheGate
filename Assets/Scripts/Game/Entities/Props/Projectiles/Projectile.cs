@@ -2,8 +2,12 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Game.Entities.Props
+namespace Game.Entities.Props.Projectiles
 {
+    /// <summary>
+    /// The abstract class Projectile serves as a template class for in game object that behave as projectiles
+    /// and need to be launched in a specific direction and exist for a limited lifetime.
+    /// </summary>
     public abstract class Projectile : MonoBehaviour
     {
         /// <summary>

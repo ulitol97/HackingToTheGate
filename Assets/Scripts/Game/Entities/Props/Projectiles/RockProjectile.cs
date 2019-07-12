@@ -1,8 +1,11 @@
-﻿using Game.Entities.Props;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Game.Entities.Enemies
+namespace Game.Entities.Props.Projectiles
 {
+    /// <summary>
+    /// The RockProjectile class extends the projectile class specifying that it should only react to collisions
+    /// with players, as RockProjectile instances will be used by enemies.
+    /// </summary>
     public class RockProjectile : Projectile
     {
         /// <summary>
