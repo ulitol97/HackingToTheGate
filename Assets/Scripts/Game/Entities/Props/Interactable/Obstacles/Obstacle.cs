@@ -1,10 +1,9 @@
 ﻿using Game.Audio;
-using Game.Entities.Props.Interactable;
 using UnityEngine;
 
-namespace Game.Entities.Props.Obstacles
+namespace Game.Entities.Props.Interactable.Obstacles
 {
-    public class Obstacle : ActionableObstacle
+    public class Obstacle : Actionable
     {
         /// <summary>
         /// In game representation of the obstacle when it is activated.

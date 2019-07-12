@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using Game.Configuration;
-using Game.UnityObserver;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityObserver;
 using VncSharp4Unity2D;
 
 namespace Remote_Terminal

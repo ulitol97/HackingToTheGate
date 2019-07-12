@@ -1,11 +1,12 @@
 ﻿using Game.Audio;
+using Game.Entities.Props.Interactable.Obstacles;
 using UnityEngine;
 
 namespace Game.Entities.Props.Interactable.ToggleItems
 {
     /// <summary>
     /// The class Toggle represents any game object that acts as an ON-OFF mechanism. It is capable
-    /// of communication with any ActionableObstacle, which will be opened by interaction with the Toggle object.
+    /// of communication with any Actionable, which will be opened by interaction with the Toggle object.
     /// </summary>
     public class Toggle : AbstractInteractable
     {
@@ -33,7 +34,7 @@ namespace Game.Entities.Props.Interactable.ToggleItems
         /// The Actionable elements the switch is linked to.
         /// A switch may send an "open" signal to the linked obstacles when activated.
         /// </summary>
-        public ActionableObstacle[] linkedObstacles;
+        public Obstacle[] linkedObstacles;
         
         /// <summary>
         /// Function called when the Toggle is inserted into the game.

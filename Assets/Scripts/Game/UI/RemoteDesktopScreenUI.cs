@@ -1,8 +1,9 @@
-using Game.UnityObserver;
+using Remote_Terminal;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityObserver;
 
-namespace Remote_Terminal
+namespace Game.UI
 {
     /// <summary>
     /// The RemoteDesktopScreenUI watches for changes in the VncManager.

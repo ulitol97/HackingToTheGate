@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Game.UnityObserver
+namespace UnityObserver
 {
     public interface IObservedSubject
     {

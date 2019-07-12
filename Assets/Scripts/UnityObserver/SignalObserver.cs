@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Game.UnityObserver
+namespace UnityObserver
 {
     /// <summary>
     /// The class SignalObserver watches for changes coming from unity events

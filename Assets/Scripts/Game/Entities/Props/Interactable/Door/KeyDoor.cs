@@ -1,7 +1,7 @@
 ﻿using Game.Audio;
 using Game.ScriptableObjects;
-using Game.UnityObserver;
 using UnityEngine;
+using UnityObserver;
 
 namespace Game.Entities.Props.Interactable.Door
 {

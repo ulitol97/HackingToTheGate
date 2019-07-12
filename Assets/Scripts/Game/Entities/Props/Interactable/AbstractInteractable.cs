@@ -1,5 +1,5 @@
-﻿using Game.UnityObserver;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityObserver;
 
 namespace Game.Entities.Props.Interactable
 {

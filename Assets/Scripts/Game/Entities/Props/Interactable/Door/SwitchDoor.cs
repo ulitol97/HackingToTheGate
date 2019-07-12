@@ -1,12 +1,14 @@
-﻿namespace Game.Entities.Props.Interactable.Door
+﻿using Game.Entities.Props.Interactable.Obstacles;
+
+namespace Game.Entities.Props.Interactable.Door
 {
     /// <summary>
-    /// The SwitchDoor class inherits from ActionableObstacle, which also encapsulates the door
+    /// The SwitchDoor class inherits from Actionable, which also encapsulates the door
     /// functionality.
     /// Represents an in-game door the player can open if a number of switches or levers are pressed
     /// in the correct sequence.
     /// </summary>
-    public class SwitchDoor : ActionableObstacle
+    public class SwitchDoor : Obstacle
     {
         /// <summary>
         /// Switch doors must not check for user input each update.

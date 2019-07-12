@@ -1,4 +1,4 @@
-namespace Game.UnityObserver
+namespace UnityObserver
 {
     public interface IObserver
     {

@@ -1,4 +1,4 @@
-﻿namespace Game.Entities.Props.Interactable
+﻿namespace Game.Entities.Props.Interactable.Obstacles
 {
     /// <summary>
     /// THe interface actionable serves as a contract to derived objects that will perform

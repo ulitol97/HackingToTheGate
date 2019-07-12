@@ -1,8 +1,8 @@
 ﻿using Game.Audio;
 using Game.ScriptableObjects;
-using Game.UnityObserver;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityObserver;
 
 namespace Game.Entities.Props.PickUpItems
 {

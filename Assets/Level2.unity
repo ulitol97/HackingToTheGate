@@ -82268,6 +82268,12 @@ PrefabInstance:
       propertyPath: actionableSequence.Array.data[4]
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1742605386468333896, guid: 8c6ea637d2654fe448560588723e6bed,
+        type: 3}
+      propertyPath: obstacleActive
+      value: 
+      objectReference: {fileID: 21300320, guid: 6ece001f1cf6bfa42ba56e1527bbe4c3,
+        type: 3}
     - target: {fileID: 1742605386764556167, guid: 8c6ea637d2654fe448560588723e6bed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -82511,6 +82517,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3889058030337167648, guid: 5b3a4c8b7e67b8448bf00b3bb4381049,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3889058029823168503, guid: 5b3a4c8b7e67b8448bf00b3bb4381049,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -82679,11 +82690,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3889058030337167648, guid: 5b3a4c8b7e67b8448bf00b3bb4381049,
-        type: 3}
-      propertyPath: m_Text
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3889058030560532833, guid: 5b3a4c8b7e67b8448bf00b3bb4381049,
         type: 3}

@@ -2,9 +2,9 @@
 using System.Collections;
 using Game.Audio;
 using Game.ScriptableObjects;
-using Game.UnityObserver;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityObserver;
 
 namespace Game.Entities.Player
 {

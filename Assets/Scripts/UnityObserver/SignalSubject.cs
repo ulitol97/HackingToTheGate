@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.UnityObserver
+namespace UnityObserver
 {
     /// <summary>
     /// The class Signal acts as an implementation of the observer pattern for Unity, precisely acts as

@@ -1,8 +1,8 @@
 ﻿using Game.Audio;
 using Game.Configuration;
-using Game.UnityObserver;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityObserver;
 
 namespace Game.UI.Menus
 {
