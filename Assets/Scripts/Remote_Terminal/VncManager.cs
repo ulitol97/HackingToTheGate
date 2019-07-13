@@ -157,7 +157,7 @@ namespace Remote_Terminal
         // Observer pattern based on signals (observers)
 
         /// <summary>
-        /// Signal observing changes in the connection status of the server.
+        /// Observer subject notifying changes in the connection status of the server.
         /// </summary>
         [FormerlySerializedAs("serverStatusSignal")] public SignalSubject serverStatus;
 
@@ -211,6 +211,11 @@ namespace Remote_Terminal
                 DontDestroyOnLoad(gameObject);
         }
 
+        /// <summary>
+        /// Function called when the VncManager is loaded and after Awake (<see cref="Awake"/>).
+        /// Loads the connection info from the configuration files and orders the beginning of the connection
+        /// process.
+        /// </summary>
         private void Start()
         {
             SetUpFromConfiguration();
@@ -221,6 +226,9 @@ namespace Remote_Terminal
             ConnectToHost();
         }
 
+        /// <summary>
+        /// Retrieves the connection related variables the VncManager needs from the ConfigurationManager.
+        /// </summary>
         private void SetUpFromConfiguration()
         {
             if (ConfigurationManager.Instance == null)
@@ -518,7 +526,8 @@ namespace Remote_Terminal
         }
 
         /// <summary>
-        /// Called when the game is quit (e.g: on game closing) to interrupt the connection to the remote host nicely.
+        /// Called when the game object holding the VncManager is destroyed to interrupt the
+        /// connection to the remote host nicely. 
         /// </summary>
         private void OnDestroy()
         {

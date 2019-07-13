@@ -7,7 +7,7 @@ namespace Remote_Terminal
     /// The SshManager class is in charge of establishing an SHH connection to a remote target host and
     /// handle the authentication process if needed.
     /// It allows to perform port forwarding in order to tunnel the VNC connection made by the game through the SSH
-    /// protocol, cyphering the data shared between and server in the process.
+    /// protocol, cyphering the data shared between client and server in the process.
     /// </summary>
     public class SshManager
     {

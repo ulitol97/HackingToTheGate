@@ -344,6 +344,11 @@ namespace Game.Entities.Player
 		}
 		
 		// ReSharper disable once Unity.InefficientPropertyAccess
+		/// <summary>
+		/// Inits a timer and disables player damage while the timer is active. It also changes the colors of the player
+		/// to reflect damage received.
+		/// </summary>
+		/// <returns></returns>
 		private IEnumerator Invulnerability()
 		{
 			int temp = 0;

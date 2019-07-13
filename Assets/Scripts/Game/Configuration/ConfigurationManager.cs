@@ -51,6 +51,11 @@ namespace Game.Configuration
         /// configuration file.
         /// </summary>
         public ConnectionConfiguration connectionConfig;
+        
+        /// <summary>
+        /// Reference to a ChallengesConfiguration object holding all the variables specified in the user
+        /// configuration file.
+        /// </summary>
         public ChallengesConfiguration challengesConfig;
 
         /// <summary>
