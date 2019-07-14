@@ -27,12 +27,14 @@ namespace Game.UI.Menus
         
         
         /// <summary>
+        /// Ensures the maximum allowed framerate is 60, in order not to waste resources.
         /// When inserted into the game, the main menu will check if a connection
         /// to the remote host is running and will stop it to restart it when a new game session begins.
         /// Then it will load the user connection settings if they are not valid.
         /// </summary>
         protected override void Start()
         {
+            Application.targetFrameRate = 60;
             base.Start();
             Cursor.visible = true;
             SetUpConfigFileText();
