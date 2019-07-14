@@ -30,7 +30,7 @@ namespace Game.Configuration
         private const string CluesConfigFileName = "Config/clues.json";
         
         private Regex _ipValidation = 
-            new Regex(@"\b(?:(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b");
+            new Regex(@"^(?:(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])(\.(?!$)|$)){4}$");
 
         /// <summary>
         /// The minimum value that the ports used for communication specified in the configuration file can take.
