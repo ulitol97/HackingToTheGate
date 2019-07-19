@@ -24,7 +24,7 @@ namespace Game.UI
         /// Unity managed component that handles the sprites shown in game.
         /// </summary>
         private Image _imageRenderer;
-        
+
         /// <summary>
         /// Represents the state of the RemoteDesktopScreenUI and whether it should request Image updates
         /// to the VncManager or not.
@@ -69,8 +69,8 @@ namespace Game.UI
         private void SetUpImageRenderer()
         {
             _imageRenderer = GetComponent<Image>();
-            _imageRenderer.sprite = defaultSprite;
             _imageRenderer.enabled = false;
+            _imageRenderer.overrideSprite = defaultSprite;
         }
         
         /// <summary>
@@ -89,12 +89,13 @@ namespace Game.UI
             // Put placeholder image in case of disconnection.
             if (!_statusOnline)
             {
-                _imageRenderer.sprite = defaultSprite;
-
+                _imageRenderer.overrideSprite = defaultSprite;
             }
             else if (VncManager.GetInstance(true) != null)
+            {
+                _imageRenderer.overrideSprite = null;
                 _imageRenderer.sprite = VncManager.GetInstance(true).remoteDesktopSprite;
-            
+            }
 
             // Deactivate game element if terminal mode is not toggled
             _imageRenderer.enabled = _statusOnScreen;
