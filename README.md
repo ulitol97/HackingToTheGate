@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/ulitol97/TFG-HackingToTheGate.svg?token=UxDmkwz3hDivoWgXEgCh&branch=master)](https://travis-ci.com/ulitol97/TFG-HackingToTheGate)
+[![Build Status](https://travis-ci.com/ulitol97/HackingToTheGate.svg?branch=master)](https://travis-ci.com/ulitol97/HackingToTheGate)
 
 # Hacking to The Gate
 
